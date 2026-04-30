@@ -6,9 +6,9 @@ class LanguageSelector {
     constructor() {
         // Language data with Japanese and local language names, and external links
         this.languages = [
-            { code: 'en', name: '英語', localName: 'English', link: 'https://chronie-shizutoki.github.io/self-info-en' },
+            { code: 'en', name: '英語', localName: 'English', link: 'https://hyalurion.github.io/self-info-en' },
             { code: 'zh-Hans', name: '中国語（簡体字）', localName: '华文（马来西亚/新加坡）', link: 'https://self-info-zh-hans.netlify.app/' },
-            { code: 'zh-TW', name: '中国語（繁体字）', localName: '繁體中文（台灣）', link: 'https://chronie-shizutoki.github.io/self-info-zh-tw/' },
+            { code: 'zh-TW', name: '中国語（繁体字）', localName: '繁體中文（台灣）', link: 'https://hyalurion.github.io/self-info-zh-tw/' },
         ];
         
         // Initialize the language selector

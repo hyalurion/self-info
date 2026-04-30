@@ -116,3 +116,6 @@ a::after{
     background-position: center;;
     pointer-events: none;
 }
+img[src$=".jpg"], img[src$=".jpeg"] {
+    border-radius: 8px;
+}
