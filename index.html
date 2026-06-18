@@ -33,6 +33,9 @@
     <link rel="stylesheet" href="components/birthday.css">
 </head>
 <body>
+    <!-- BGM Audio -->
+    <audio id="bgm-audio" src="bgm/bgm_kokoronashi.mp3" autoplay loop></audio>
+
     <!-- Privacy Consent Popup -->
     <div id="splash-screen" class="splash-screen">
         <div class="splash-content">
@@ -171,7 +174,12 @@
         Pixiv ID | 133337546
     </div>
 
-    <div style="position: fixed; bottom: 10px; transform: translateX(-50%); z-index: 1000;">
+    <!-- BGM Toggle Button -->
+    <div style="position: fixed; bottom: 10px; left: 20px; z-index: 1000;">
+        <button id="bgm-toggle" class="bgm-button" title="BGM ON/OFF">♬</button>
+    </div>
+
+    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">
         <a class="feedback-container" href="https://jyskyp4y.forms.app/untitled-form" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); border-radius: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); text-align: center; font-size: 14px; color: white; font-weight: 500; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.3); transition: all 0.3s ease;">
             <img src="pic/feedback.svg" alt="feedback" class="icon" style="width: 16px; height: 16px; vertical-align: middle;">
         </a>
@@ -181,10 +189,29 @@
         <a href="https://changelog-viewer.netlify.app/" style="color: #ffcc80; text-decoration: none;">
             ✨更新 |
             <img src="pic/changelog.svg" alt="changelog" class="icon" style="width: 16px; height: 16px; vertical-align: middle;">
-            26/04/30
+            26/06/19
             ✨</a>
     </div>
     <style>
+        .bgm-button {
+            padding: 8px 12px;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(3px);
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .bgm-button:hover {
+            background-color: rgba(255, 255, 255, 0.35);
+        }
+        .bgm-button.paused {
+            opacity: 0.5;
+        }
+
         @media (max-width: 450px) {
             .feedback-container {
                 padding: 3px 12px !important;
@@ -216,5 +243,33 @@
     <script src="components/language-selector.js"></script>
     <script type="module" src="anime/sakura.js"></script>
 <script type="module" src="analytics/analytics.js"></script>
+<script>
+    (function() {
+        const bgm = document.getElementById('bgm-audio');
+        const btn = document.getElementById('bgm-toggle');
+        if (!bgm || !btn) return;
+
+        function updateButton() {
+            if (bgm.paused) {
+                btn.textContent = '⏹';
+                btn.classList.add('paused');
+            } else {
+                btn.textContent = '♬';
+                btn.classList.remove('paused');
+            }
+        }
+
+        btn.addEventListener('click', function() {
+            if (bgm.paused) {
+                bgm.play();
+            } else {
+                bgm.pause();
+            }
+            updateButton();
+        });
+
+        updateButton();
+    })();
+</script>
 </body>
 </html>
