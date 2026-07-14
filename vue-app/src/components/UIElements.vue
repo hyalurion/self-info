@@ -6,7 +6,7 @@ import { Soundfont, Reverb, CacheStorage } from 'smplr'
 
 const props = defineProps({
   data: { type: Object, required: true },
-  isKanaPage: { type: Boolean, default: false },
+  showReading: { type: Boolean, default: false },
 })
 
 const bgmPaused = ref(true)
@@ -256,7 +256,7 @@ onUnmounted(() => {
 
 <template>
   <!-- BGM Toggle Button -->
-  <div v-if="data.bgm?.src" style="position: fixed; bottom: 10px; left: 20px; z-index: 1000;">
+  <div v-if="data.bgm?.src" class="ui-bgm-container">
     <button id="bgm-toggle" class="bgm-button" :class="{ paused: bgmPaused }" title="BGM ON/OFF" @click="toggleBGM">
       <span v-if="bgmLoading">⋯</span>
       <span v-else>♬</span>
@@ -264,27 +264,202 @@ onUnmounted(() => {
   </div>
 
   <!-- Feedback -->
-  <div v-if="data.feedback.href" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">
-    <a class="feedback-container" :href="data.feedback.href" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); border-radius: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); text-align: center; font-size: 14px; color: white; font-weight: 500; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.3); transition: all 0.3s ease;">
-      <img :src="data.feedback.img" alt="feedback" class="icon" style="width: 16px; height: 16px; vertical-align: middle;">
+  <div v-if="data.feedback.href" class="ui-feedback-container">
+    <a class="feedback-container" :href="data.feedback.href" target="_blank">
+      <img :src="data.feedback.img" alt="feedback" class="icon" />
     </a>
   </div>
 
   <!-- Changelog -->
-  <div v-if="data.changelog.href" style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); padding: 8px 16px; background-color: rgba(255, 255, 255, 0.15); backdrop-filter: blur(3px); border-radius: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); text-align: center; font-size: 14px; color: #ffcc80; font-weight: 500; z-index: 1000; border: 1px solid rgba(255, 255, 255, 0.2);">
-    <a :href="data.changelog.href" target="_blank" style="color: #ffcc80; text-decoration: none;">
-      <RichText :segments="data.changelog.dateRich" />
-      <img :src="data.changelog.img" alt="changelog" class="icon" style="width: 16px; height: 16px; vertical-align: middle; margin-left: 4px;" />
+  <div v-if="data.changelog.href" class="ui-changelog-container">
+    <a :href="data.changelog.href" target="_blank">
+      <RichText :segments="data.changelog.dateRich" :showReading="showReading" />
+      <img :src="data.changelog.img" alt="changelog" class="icon" />
     </a>
   </div>
-
-  <!-- Kana Button -->
-  <a
-    v-if="data.kanaButton.href"
-    :href="isKanaPage ? '?' : '?kana=1'"
-    id="kana-button"
-    class="kana-button"
-  >
-    <RichText :segments="data.kanaButton.textRich" />
-  </a>
 </template>
+
+<style scoped>
+.ui-bgm-container {
+  position: fixed;
+  bottom: 10px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.ui-feedback-container {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.ui-changelog-container {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.bgm-button {
+  padding: 8px 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(3px);
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bgm-button:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.bgm-button.paused {
+  opacity: 0.5;
+}
+
+.feedback-container {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(3px);
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 14px;
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.feedback-container:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.feedback-container .icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.ui-changelog-container a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(3px);
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 14px;
+  color: #ffcc80;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+  line-height: 1.3;
+  transition: all 0.3s ease;
+}
+
+.ui-changelog-container a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.ui-changelog-container .icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.ui-changelog-container rt {
+  font-size: 0.6em;
+}
+
+@media (max-width: 640px) {
+  .ui-bgm-container {
+    bottom: 8px;
+    left: 10px;
+  }
+
+  .ui-feedback-container {
+    bottom: 8px;
+    right: 8px;
+  }
+
+  .ui-changelog-container {
+    bottom: 8px;
+  }
+
+  .bgm-button {
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 16px;
+  }
+
+  .feedback-container {
+    padding: 6px 12px;
+    border-radius: 16px;
+  }
+
+  .feedback-container .icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .ui-changelog-container a {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 16px;
+    gap: 3px;
+  }
+
+  .ui-changelog-container .icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .ui-bgm-container {
+    bottom: 6px;
+    left: 8px;
+  }
+
+  .ui-feedback-container {
+    bottom: 6px;
+    right: 6px;
+  }
+
+  .bgm-button {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .feedback-container {
+    padding: 5px 10px;
+  }
+
+  .feedback-container .icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .ui-changelog-container a {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .ui-changelog-container .icon {
+    width: 12px;
+    height: 12px;
+  }
+}
+</style>

@@ -164,3 +164,16 @@ img[src$=".jpg"], img[src$=".jpeg"] {
 .bgm-button.paused {
     opacity: 0.5;
 }
+
+/* Ruby reading (rt) animation */
+ruby rt {
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                font-size 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                line-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+ruby.rt-hidden rt {
+    opacity: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+}

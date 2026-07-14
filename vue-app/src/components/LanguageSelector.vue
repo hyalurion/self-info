@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import RichText from './RichText.vue'
 
 defineProps({
-  isKanaPage: { type: Boolean, default: false },
+  showReading: { type: Boolean, default: false },
 })
 
 const popupVisible = ref(false)
@@ -12,7 +12,6 @@ const languages = [
   {
     code: 'en',
     name: [{ type: 'ruby', kanji: '英語', reading: 'えいご' }],
-    namePlain: [{ type: 'text', content: '英語' }],
     localName: 'English',
     link: 'https://hyalurion.github.io/self-info-en',
   },
@@ -24,7 +23,6 @@ const languages = [
       { type: 'ruby', kanji: '簡体字', reading: 'かんたいじ' },
       { type: 'text', content: '）' },
     ],
-    namePlain: [{ type: 'text', content: '中国語（簡体字）' }],
     localName: '华文（马来西亚/新加坡）',
     link: 'https://self-info-zh-hans.netlify.app/',
   },
@@ -36,7 +34,6 @@ const languages = [
       { type: 'ruby', kanji: '繁体字', reading: 'はんたいじ' },
       { type: 'text', content: '）' },
     ],
-    namePlain: [{ type: 'text', content: '中国語（繁体字）' }],
     localName: '繁體中文（台灣）',
     link: 'https://hyalurion.github.io/self-info-zh-tw/',
   },
@@ -62,8 +59,10 @@ function onPopupClick(e) {
     class="language-button"
     @click.stop="togglePopup"
   >
-    <img src="/pic/lang.svg" alt="lang" style="width: 15px; height: 15px;" />
-    日本語
+    <img src="/pic/lang.svg" alt="lang" class="lang-icon" />
+    <span class="lang-text">
+      <ruby :class="{ 'rt-hidden': !showReading }">日<rt>に</rt>本<rt>ほん</rt>語<rt>ご</rt></ruby>
+    </span>
   </button>
 
   <!-- Language Popup -->
@@ -87,7 +86,7 @@ function onPopupClick(e) {
             :style="{ borderTop: index > 0 ? '1px solid rgba(255, 255, 255, 0.15)' : 'none' }"
           >
             <div class="language-name">
-              <RichText :segments="isKanaPage ? lang.name : lang.namePlain" />
+              <RichText :segments="lang.name" :showReading="showReading" />
             </div>
             <div class="language-local">{{ lang.localName }}</div>
           </a>
@@ -102,7 +101,7 @@ function onPopupClick(e) {
   position: fixed;
   top: 20px;
   right: 20px;
-  padding: 10px 18px;
+  padding: 10px 16px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -115,10 +114,28 @@ function onPopupClick(e) {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .language-button:hover {
   background: rgba(255, 255, 255, 0.25);
+}
+
+.lang-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.lang-text {
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+.lang-text rt {
+  font-size: 0.55em;
 }
 
 .language-popup-overlay {
@@ -194,11 +211,45 @@ function onPopupClick(e) {
   opacity: 0.8;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .language-button {
-    padding: 8px 16px;
-    font-size: 13px;
+    padding: 8px 12px;
+    font-size: 12px;
     right: 15px;
+    top: 12px;
+  }
+
+  .lang-icon {
+    width: 13px;
+    height: 13px;
+  }
+
+  .lang-text rt {
+    font-size: 0.5em;
+  }
+
+  .language-popup {
+    top: 55px;
+    right: 15px;
+    width: 180px;
+  }
+}
+
+@media (max-width: 380px) {
+  .language-button {
+    padding: 6px 10px;
+    font-size: 11px;
+    right: 10px;
+    top: 10px;
+  }
+
+  .lang-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .language-popup {
+    width: 160px;
   }
 }
 </style>

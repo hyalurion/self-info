@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import RichText from '../RichText.vue'
 
 defineProps({
-  isKanaPage: { type: Boolean, default: false },
+  showReading: { type: Boolean, default: false },
 })
 
 const days = ref(null)
@@ -73,7 +73,7 @@ function createBubbles() {
 let timer
 onMounted(() => {
   updateCountdown()
-  timer = setInterval(updateCountdown, 1000 * 60 * 60) // Update every hour
+  timer = setInterval(updateCountdown, 1000 * 60 * 60)
   createBubbles()
 })
 
@@ -82,36 +82,24 @@ onUnmounted(() => {
 })
 
 const bdayToday = [
-  { type: 'text', content: '今日は、私の誕生日なんだよ～！(＊´∀｀*)ﾉ' }
-]
-const bdayTodayKana = [
   { type: 'ruby', kanji: '今日', reading: 'きょう' },
   { type: 'text', content: 'は、' },
   { type: 'ruby', kanji: '私', reading: 'わたし' },
   { type: 'text', content: 'の' },
   { type: 'ruby', kanji: '誕生日', reading: 'たんじょうび' },
-  { type: 'text', content: 'なんだよ～！(＊´∀｀*)ﾉ' }
+  { type: 'text', content: 'なんだよ～！(＊´∀｀*)ﾉ' },
 ]
 const cdownBirthday = [
-  { type: 'text', content: 'お誕生日まで' }
-]
-const cdownBirthdayKana = [
   { type: 'text', content: 'お' },
   { type: 'ruby', kanji: '誕生日', reading: 'たんじょうび' },
-  { type: 'text', content: 'まで' }
+  { type: 'text', content: 'まで' },
 ]
 const cdownRemain = [
-  { type: 'text', content: 'あと' }
-]
-const cdownRemainKana = [
-  { type: 'text', content: 'あと' }
+  { type: 'text', content: 'あと' },
 ]
 const cdownSuffix = [
-  { type: 'text', content: '日なの～♡' }
-]
-const cdownSuffixKana = [
   { type: 'ruby', kanji: '日', reading: 'にち' },
-  { type: 'text', content: 'なの～♡' }
+  { type: 'text', content: 'なの～♡' },
 ]
 </script>
 
@@ -120,15 +108,15 @@ const cdownSuffixKana = [
     <template v-if="isBirthday">
       <span class="cake-icon">🎂</span>
       <span class="birthday-today">
-        <RichText :segments="isKanaPage ? bdayTodayKana : bdayToday" />
+        <RichText :segments="bdayToday" :showReading="showReading" />
       </span>
     </template>
     <template v-else>
       <span class="cake-icon">🎂</span>
-      <span><RichText :segments="isKanaPage ? cdownBirthdayKana : cdownBirthday" /></span>
-      <span><RichText :segments="isKanaPage ? cdownRemainKana : cdownRemain" /></span>
+      <span><RichText :segments="cdownBirthday" :showReading="showReading" /></span>
+      <span><RichText :segments="cdownRemain" :showReading="showReading" /></span>
       <span class="days-count" id="days">{{ days }}</span>
-      <span><RichText :segments="isKanaPage ? cdownSuffixKana : cdownSuffix" /></span>
+      <span><RichText :segments="cdownSuffix" :showReading="showReading" /></span>
     </template>
   </div>
 </template>
