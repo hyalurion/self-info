@@ -66,7 +66,8 @@ const GM_INSTRUMENTS = [
 
 function getAudioContext() {
   if (!audioContext) {
-    audioContext = new AudioContext()
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext
+    audioContext = new AudioContextClass()
 
     // Master gain — controls overall volume and fade in/out
     masterGain = audioContext.createGain()
@@ -269,7 +270,10 @@ async function toggleBGM() {
   if (!props.data.bgm?.src || bgmLoading.value) return
 
   const ctx = getAudioContext()
-  if (ctx.state === 'suspended') await ctx.resume()
+  // Resume within the user gesture (required by iOS Safari)
+  if (ctx.state !== 'running') {
+    try { await ctx.resume() } catch (e) { /* ignore */ }
+  }
 
   if (!isLoaded) {
     bgmLoading.value = true
@@ -289,10 +293,16 @@ async function preloadAndTryPlay() {
   if (!props.data.bgm?.src) return
   try {
     getAudioContext()
+    // Preload MIDI + soundfont samples (no audio scheduling needed)
     await loadMidi(props.data.bgm.src)
-    // Attempt autoplay (may be blocked by browser policy)
+    // Attempt autoplay: only works where the AudioContext can run without
+    // a prior user gesture (desktop with media engagement). On iOS Safari
+    // the context stays 'suspended' until a tap — keep bgmPaused = true so
+    // the first BGM button tap correctly starts playback.
     await audioContext.resume()
-    startPlayback()
+    if (audioContext.state === 'running') {
+      startPlayback()
+    }
   } catch (e) {
     // Autoplay blocked or load failed — user can click to start
   }
