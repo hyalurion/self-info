@@ -33,10 +33,10 @@ body::before {
     /* Add a semi-transparent black mask to ensure light text is clearly readable */
     background: 
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-        url('/pic/background.jpeg');
+        url('/pic/bg.avif');
         
     background-size: cover;
-    background-position: center 20%;
+    background-position: 52.5% center;
     /* Remove fixed background attachment to prevent wallpaper from scrolling with the page */
     background-attachment: scroll;
 

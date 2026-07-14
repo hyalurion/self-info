@@ -1594,7 +1594,7 @@
   },
   "ui": {
     "bgm": {
-      "src": "bgm/bgm_kokoronashi.mp3"
+      "src": "bgm/心做し.mid"
     },
     "kanaButton": {
       "href": "index.html",
@@ -1613,7 +1613,7 @@
     },
     "changelog": {
       "href": "https://changelog-viewer.netlify.app/",
-      "date": "✨更新|26/06/19 ✨",
+      "date": "✨更新|26/07/15 ✨",
       "dateRich": [
         {
           "type": "text",
@@ -1630,7 +1630,7 @@
         },
         {
           "type": "text",
-          "content": "26/06/19 ✨"
+          "content": "26/07/15 ✨"
         }
       ],
       "img": "pic/changelog.svg"
