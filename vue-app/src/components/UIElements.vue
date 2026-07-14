@@ -23,6 +23,9 @@ let pauseOffset = 0
 let nextNoteIndex = 0
 let schedulerId = null
 let storage = null
+let masterGain = null
+let compressor = null
+let stopTimer = null
 
 const LOOKAHEAD = 0.2
 const SCHEDULE_INTERVAL = 25
@@ -63,6 +66,22 @@ const GM_INSTRUMENTS = [
 function getAudioContext() {
   if (!audioContext) {
     audioContext = new AudioContext()
+
+    // Master gain — controls overall volume and fade in/out
+    masterGain = audioContext.createGain()
+    masterGain.gain.value = 0
+
+    // Compressor as a limiter to prevent clipping when notes stack up
+    compressor = audioContext.createDynamicsCompressor()
+    compressor.threshold.value = -3
+    compressor.knee.value = 2
+    compressor.ratio.value = 12
+    compressor.attack.value = 0.003
+    compressor.release.value = 0.12
+
+    masterGain.connect(compressor)
+    compressor.connect(audioContext.destination)
+
     try { storage = CacheStorage() } catch (e) { /* use default HttpStorage */ }
   }
   return audioContext
@@ -123,7 +142,7 @@ async function loadMidi(url) {
     instruments = {}
     const loadPromises = []
     for (const instName of instrumentMap.keys()) {
-      const options = { instrument: instName, volume: 90 }
+      const options = { instrument: instName, volume: 50, destination: masterGain }
       if (storage) options.storage = storage
       const sf = Soundfont(ctx, options)
       if (reverb) {
@@ -173,15 +192,17 @@ function scheduler() {
     nextNoteIndex++
   }
 
-  // Loop back to start
+  // Loop: add 0.3s gap between loops to let tail notes ring out
   if (currentTransportTime >= midiDuration) {
-    startContextTime = audioContext.currentTime
+    startContextTime = audioContext.currentTime + 0.3
     nextNoteIndex = 0
   }
 }
 
 function startPlayback() {
   if (!audioContext || !isLoaded) return
+
+  if (stopTimer) { clearTimeout(stopTimer); stopTimer = null }
 
   if (pauseOffset >= midiDuration) pauseOffset = 0
 
@@ -192,6 +213,13 @@ function startPlayback() {
   }
 
   isPlaying = true
+
+  // Fade in to prevent click on start
+  const now = audioContext.currentTime
+  masterGain.gain.cancelScheduledValues(now)
+  masterGain.gain.setValueAtTime(0, now)
+  masterGain.gain.linearRampToValueAtTime(0.5, now + 0.15)
+
   schedulerId = setInterval(scheduler, SCHEDULE_INTERVAL)
   bgmPaused.value = false
 }
@@ -200,9 +228,26 @@ function pausePlayback() {
   isPlaying = false
   if (audioContext) pauseOffset = audioContext.currentTime - startContextTime
   if (schedulerId) { clearInterval(schedulerId); schedulerId = null }
-  Object.values(instruments).forEach(inst => {
-    try { inst.stop() } catch (e) { /* ignore */ }
-  })
+
+  // Fade out quickly to prevent click, then stop notes
+  if (audioContext && masterGain) {
+    const now = audioContext.currentTime
+    masterGain.gain.cancelScheduledValues(now)
+    masterGain.gain.setValueAtTime(masterGain.gain.value, now)
+    masterGain.gain.linearRampToValueAtTime(0, now + 0.08)
+
+    stopTimer = setTimeout(() => {
+      Object.values(instruments).forEach(inst => {
+        try { inst.stop() } catch (e) { /* ignore */ }
+      })
+      stopTimer = null
+    }, 100)
+  } else {
+    Object.values(instruments).forEach(inst => {
+      try { inst.stop() } catch (e) { /* ignore */ }
+    })
+  }
+
   bgmPaused.value = true
 }
 
@@ -245,11 +290,14 @@ onMounted(() => {
 
 onUnmounted(() => {
   isPlaying = false
+  if (stopTimer) { clearTimeout(stopTimer); stopTimer = null }
   if (schedulerId) { clearInterval(schedulerId); schedulerId = null }
   Object.values(instruments).forEach(inst => {
     try { inst.dispose() } catch (e) { /* ignore */ }
   })
   instruments = {}
+  if (masterGain) { try { masterGain.disconnect() } catch (e) {} }
+  if (compressor) { try { compressor.disconnect() } catch (e) {} }
   if (audioContext) audioContext.close().catch(() => {})
 })
 </script>
