@@ -47,10 +47,10 @@ class Petal {
         this.y = Math.random() * -this.canvasHeight;
         this.z = Math.random() * 0.5 + 0.5; 
         this.size = this.z * 20 + 10;
-        this.speedY = this.z * 1.5 + 0.5;
-        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = this.z * 1.05 + 0.35;
+        this.speedX = Math.random() * 0.7 - 0.35;
         this.angle = Math.random() * 360;
-        this.rotateSpeed = (Math.random() - 0.5) * 2;
+        this.rotateSpeed = (Math.random() - 0.5) * 1.4;
         this.swing = Math.random() * 100 + 50;
     }
 
