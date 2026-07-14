@@ -67,13 +67,14 @@ function onPopupClick(e) {
 
   <!-- Language Popup -->
   <Teleport to="body">
-    <Transition name="popup">
-      <div
-        v-if="popupVisible"
-        class="language-popup-overlay"
-        @click="hidePopup"
-      >
+    <div
+      class="language-popup-overlay"
+      :class="{ visible: popupVisible }"
+      @click="hidePopup"
+    >
+      <Transition name="popup">
         <div
+          v-if="popupVisible"
           class="language-popup"
           @click="onPopupClick"
         >
@@ -91,8 +92,8 @@ function onPopupClick(e) {
             <div class="language-local">{{ lang.localName }}</div>
           </a>
         </div>
-      </div>
-    </Transition>
+      </Transition>
+    </div>
   </Teleport>
 </template>
 
@@ -102,16 +103,21 @@ function onPopupClick(e) {
   top: 20px;
   right: 20px;
   padding: 10px 16px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(2px) saturate(110%);
+  -webkit-backdrop-filter: blur(2px) saturate(110%);
+  border: none;
   color: #ffffff;
   font-family: 'KleeOne-Regular', system-ui, sans-serif;
   font-size: 13px;
   cursor: pointer;
   z-index: 1000;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow:
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.35),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.08),
+    0 2px 12px rgba(0, 0, 0, 0.1);
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   display: flex;
@@ -120,7 +126,18 @@ function onPopupClick(e) {
 }
 
 .language-button:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.45),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.12),
+    0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.language-button:active {
+  transform: translateY(0) scale(0.97);
 }
 
 .lang-icon {
@@ -143,6 +160,11 @@ function onPopupClick(e) {
   inset: 0;
   z-index: 1001;
   background: transparent;
+  pointer-events: none;
+}
+
+.language-popup-overlay.visible {
+  pointer-events: auto;
 }
 
 .language-popup {
@@ -154,9 +176,14 @@ function onPopupClick(e) {
   max-height: 80vh;
   padding: 10px;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(2px) saturate(110%);
+  -webkit-backdrop-filter: blur(2px) saturate(110%);
+  box-shadow:
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.4),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    0 16px 48px rgba(0, 0, 0, 0.08);
   z-index: 1001;
   display: flex;
   flex-direction: column;
@@ -164,24 +191,30 @@ function onPopupClick(e) {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  transform-origin: calc(100% - 10px) -28px;
+  will-change: transform, opacity;
 }
 
-/* Transition: enter */
+/* Transition: enter (scale + fade, emerging from the button) */
 .popup-enter-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+    transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
 }
 .popup-enter-from {
   opacity: 0;
-  transform: translateY(-10px);
+  transform: scale(0.3) translateY(-8px);
 }
 
-/* Transition: leave */
+/* Transition: leave (scale + fade, collapsing back into the button) */
 .popup-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.28s cubic-bezier(0.4, 0, 0.6, 1),
+    transform 0.28s cubic-bezier(0.4, 0, 0.6, 1);
 }
 .popup-leave-to {
   opacity: 0;
-  transform: translateY(-10px);
+  transform: scale(0.3) translateY(-8px);
 }
 
 .language-item {
@@ -197,6 +230,9 @@ function onPopupClick(e) {
 
 .language-item:hover {
   background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border-radius: 12px;
   transform: translateX(3px);
 }
 

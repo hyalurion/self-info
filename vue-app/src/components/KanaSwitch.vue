@@ -140,7 +140,7 @@ const textKanaOff = [
     <span class="kana-switch-text">
       <RichText :segments="modelValue ? textKanaOn : textKanaOff" :showReading="showReading" />
     </span>
-    <div ref="trackRef" class="kana-switch-track">
+    <div ref="trackRef" class="kana-switch-track" :class="{ active: modelValue }">
       <div
         class="kana-switch-thumb"
         :class="{ active: modelValue, dragging: isDragging }"
@@ -170,33 +170,39 @@ const textKanaOff = [
   width: 56px;
   height: 30px;
   border-radius: 15px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(3px) saturate(120%);
-  -webkit-backdrop-filter: blur(3px) saturate(120%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(2px) saturate(110%);
+  -webkit-backdrop-filter: blur(2px) saturate(110%);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-    0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.45),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.25),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.08),
+    0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
 }
 
 .kana-switch-track::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  background: radial-gradient(circle at 30% 30%,
-    rgba(100, 150, 255, 0.2),
-    rgba(255, 200, 220, 0.15),
-    transparent 40%);
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle 150% at 30% 30%,
+    rgba(255, 255, 255, 0.06) 0%,
+    transparent 50%
+  );
   pointer-events: none;
   z-index: 0;
+}
+
+.kana-switch-track.active {
+  box-shadow:
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.55),
+    inset 0 0 0 0.5px rgba(255, 200, 230, 0.45),
+    inset 0 -1px 1px rgba(255, 200, 230, 0.18),
+    0 0 8px rgba(255, 180, 210, 0.25),
+    0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .kana-switch-thumb {
@@ -206,29 +212,39 @@ const textKanaOff = [
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(4px) saturate(130%);
-  -webkit-backdrop-filter: blur(4px) saturate(130%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
-    0 2px 8px rgba(0, 0, 0, 0.15);
+    inset 0 1px 1px rgba(255, 255, 255, 0.55),
+    inset 0 -0.5px 0.5px rgba(255, 255, 255, 0.1),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.25),
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    0 0 6px rgba(255, 255, 255, 0.12);
   z-index: 1;
   will-change: transform;
 }
 
 .kana-switch-thumb.active {
-  background: rgba(255, 220, 240, 0.35);
+  background: rgba(255, 220, 240, 0.22);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
-    0 2px 12px rgba(255, 150, 200, 0.3);
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    inset 0 -0.5px 0.5px rgba(255, 255, 255, 0.12),
+    inset 0 0 0 0.5px rgba(255, 200, 230, 0.55),
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    0 2px 10px rgba(255, 150, 200, 0.3),
+    0 0 12px rgba(255, 180, 210, 0.45);
 }
 
 .kana-switch-text {
-  color: rgba(255, 255, 255, 0.85);
+  color: #ffffff;
   font-size: 12px;
+  font-weight: 500;
   font-family: 'KleeOne-Regular', system-ui, sans-serif;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  text-shadow:
+    0 0 1px rgba(255, 255, 255, 0.6),
+    0 1px 3px rgba(0, 0, 0, 0.5);
   white-space: nowrap;
   line-height: 1.3;
 }
@@ -238,14 +254,31 @@ const textKanaOff = [
 }
 
 .kana-switch-container:hover .kana-switch-track {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(2px) saturate(110%);
+  -webkit-backdrop-filter: blur(2px) saturate(110%);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-    0 6px 16px rgba(0, 0, 0, 0.2);
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.55),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.35),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.12),
+    0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.kana-switch-container:hover .kana-switch-track.active {
+  box-shadow:
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.65),
+    inset 0 0 0 0.5px rgba(255, 200, 230, 0.55),
+    inset 0 -1px 1px rgba(255, 200, 230, 0.25),
+    0 0 12px rgba(255, 180, 210, 0.35),
+    0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .kana-switch-container:hover .kana-switch-track::before {
-  opacity: 0.8;
+  background: radial-gradient(
+    circle 150% at 30% 30%,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 50%
+  );
 }
 
 @media (max-width: 640px) {

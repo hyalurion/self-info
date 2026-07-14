@@ -12,67 +12,61 @@
 
 /* 1. Basic and Background Settings */
 body {
-    margin: 0; /* Remove the default margin of the body */
+    margin: 0;
     font-family: 'KleeOne-Regular', sans-serif;
     line-height: 1.6;
     user-select: none;
-    /* Provide some vertical space for the content container */
-    padding: 60px 20px; 
+    padding: 60px 20px;
     width: 70%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Background layer: only responsible for providing a blurred background image */
+/* Background layer: raw image, no dark overlay — glass effect comes from backdrop-filter */
 body::before {
     content: '';
-    position: fixed; /* Fixed on the viewport */
-    inset: 0; /* Equivalent to top/right/bottom/left: 0 */
-    z-index: -1; /* Placed at the bottom layer */
-
-    /* Add a semi-transparent black mask to ensure light text is clearly readable */
+    position: fixed;
+    inset: 0;
+    z-index: -1;
     background: 
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
         url('/pic/bg.avif');
-        
     background-size: cover;
     background-position: 52.5% center;
-    /* Remove fixed background attachment to prevent wallpaper from scrolling with the page */
     background-attachment: scroll;
-
-    /* Remove unnecessary styles, which will be applied to the content container */
-    /* background-color, box-shadow, backdrop-filter, border-radius, border are all removed */
 }
 
-/* 2. Content Glass Container */
+/* 2. Content Glass Container — Liquid Glass */
 .content-wrapper {
     width: 75%;
     max-width: 800px;
-    margin: 0 auto; /* Center */
-    padding: 30px; /* Increase padding to let the text breathe */
-
-    /* Apply the previously optimized Apple-style glass effect */
+    margin: 0 auto;
+    padding: 30px;
     position: relative;
     overflow: hidden;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.2); /* Increase opacity since blur is removed */
-    box-shadow: 
-        inset 0 0 0 1px rgba(255, 255, 255, 0.2), /* Inner highlight border */
-        0 8px 32px rgba(0, 0, 0, 0.25); /* Soft outer shadow */
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(2px) saturate(110%);
+    -webkit-backdrop-filter: blur(2px) saturate(110%);
+    box-shadow:
+        inset 0 1px 0.5px rgba(255, 255, 255, 0.25),
+        inset 0 -1px 0.5px rgba(255, 255, 255, 0.04),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+        0 4px 16px rgba(0, 0, 0, 0.06),
+        0 16px 48px rgba(0, 0, 0, 0.04);
 }
 
-/* 3. Scrollbar Style Fine-tuning (Suggestion) */
-/* Hide scrollbar but keep scrolling functionality */
+/* 3. Scrollbar */
 html::-webkit-scrollbar {
     display: none;
 }
 
 html {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-/* 4. Smooth Scrolling and Content Styles (keep unchanged) */
+/* 4. Smooth Scrolling and Content Styles */
 html {
     scroll-behavior: smooth;
 }
@@ -103,33 +97,23 @@ li {
     margin-bottom: 8px;
     color: white;
 }
-a::after{
-    content:"";
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 0.7em;
-    height: 0.7em;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffa6d3'%3E%3Cpath d='M3 13L13 3M13 3H8M13 3V8' stroke='%23ffa6d3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-size: contain; 
-    background-repeat: no-repeat;
-    background-position: center;;
-    pointer-events: none;
-}
 img[src$=".jpg"], img[src$=".jpeg"] {
     border-radius: 8px;
 }
 
-/* Game Card Styles */
+/* Game Card — Mini Liquid Glass */
 .game-card {
     display: inline-flex;
     align-items: center;
     padding: 4px 8px;
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(3px);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
     border-radius: 12px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        inset 0 0.5px 0.5px rgba(255, 255, 255, 0.3),
+        inset 0 0 0 0.5px rgba(255, 255, 255, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.08);
     margin: 0 5px;
     vertical-align: middle;
 }
@@ -145,21 +129,35 @@ img[src$=".jpg"], img[src$=".jpeg"] {
     font-weight: 500;
 }
 
-/* BGM Toggle Button */
+/* BGM Toggle Button — Liquid Glass Pill */
 .bgm-button {
     padding: 8px 12px;
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(3px);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(2px) saturate(110%);
+    -webkit-backdrop-filter: blur(2px) saturate(110%);
     border-radius: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow:
+        inset 0 0.5px 0.5px rgba(255, 255, 255, 0.35),
+        inset 0 0 0 0.5px rgba(255, 255, 255, 0.08),
+        0 2px 12px rgba(0, 0, 0, 0.1);
     font-size: 16px;
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .bgm-button:hover {
-    background-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px) saturate(110%);
+    -webkit-backdrop-filter: blur(2px) saturate(110%);
+    transform: translateY(-1px);
+    box-shadow:
+        inset 0 0.5px 0.5px rgba(255, 255, 255, 0.45),
+        inset 0 0 0 0.5px rgba(255, 255, 255, 0.12),
+        0 4px 20px rgba(0, 0, 0, 0.12);
+}
+.bgm-button:active {
+    transform: translateY(0) scale(0.97);
 }
 .bgm-button.paused {
     opacity: 0.5;

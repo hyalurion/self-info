@@ -352,19 +352,34 @@ onUnmounted(() => {
 
 .bgm-button {
   padding: 8px 12px;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(3px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(2px) saturate(110%);
+  -webkit-backdrop-filter: blur(2px) saturate(110%);
   border-radius: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.35),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.08),
+    0 2px 12px rgba(0, 0, 0, 0.1);
   font-size: 16px;
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .bgm-button:hover {
-  background-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.45),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.12),
+    0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.bgm-button:active {
+  transform: translateY(0) scale(0.97);
 }
 
 .bgm-button.paused {
@@ -374,21 +389,32 @@ onUnmounted(() => {
 .feedback-container {
   display: inline-block;
   padding: 8px 16px;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(3px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(2px) saturate(110%);
+  -webkit-backdrop-filter: blur(2px) saturate(110%);
   border-radius: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.35),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.08),
+    0 2px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
   font-size: 14px;
   color: white;
   font-weight: 500;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
+  border: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .feedback-container:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.45),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.12),
+    0 4px 20px rgba(0, 0, 0, 0.12);
 }
 
 .feedback-container .icon {
@@ -402,23 +428,34 @@ onUnmounted(() => {
   align-items: center;
   gap: 4px;
   padding: 8px 16px;
-  background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(3px);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(2px) saturate(110%);
+  -webkit-backdrop-filter: blur(2px) saturate(110%);
   border-radius: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.3),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.06),
+    0 2px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
   font-size: 14px;
   color: #ffcc80;
   font-weight: 500;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: none;
   white-space: nowrap;
   line-height: 1.3;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ui-changelog-container a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.4),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.1),
+    0 4px 20px rgba(0, 0, 0, 0.12);
 }
 
 .ui-changelog-container .icon {
