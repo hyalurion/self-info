@@ -24,6 +24,7 @@ let nextNoteIndex = 0
 let schedulerId = null
 let storage = null
 let masterGain = null
+let toneFilter = null
 let compressor = null
 let stopTimer = null
 
@@ -71,15 +72,24 @@ function getAudioContext() {
     masterGain = audioContext.createGain()
     masterGain.gain.value = 0
 
-    // Compressor as a limiter to prevent clipping when notes stack up
-    compressor = audioContext.createDynamicsCompressor()
-    compressor.threshold.value = -3
-    compressor.knee.value = 2
-    compressor.ratio.value = 12
-    compressor.attack.value = 0.003
-    compressor.release.value = 0.12
+    // Gentle lowpass to tame harsh transients → clearer, purer tone 
+    toneFilter = audioContext.createBiquadFilter()
+    toneFilter.type = 'lowpass'
+    toneFilter.frequency.value = 11000
+    toneFilter.Q.value = 0.7
 
-    masterGain.connect(compressor)
+    // Soft compressor: gentle ratio + soft knee + long release to avoid
+    // pumping/distortion (the previous 12:1 hard knee was the source of the harsh clipping)
+    compressor = audioContext.createDynamicsCompressor()
+    compressor.threshold.value = -10
+    compressor.knee.value = 8
+    compressor.ratio.value = 3
+    compressor.attack.value = 0.006
+    compressor.release.value = 0.3
+
+    // Chain: masterGain → lowpass → compressor → destination
+    masterGain.connect(toneFilter)
+    toneFilter.connect(compressor)
     compressor.connect(audioContext.destination)
 
     try { storage = CacheStorage() } catch (e) { /* use default HttpStorage */ }
@@ -142,11 +152,11 @@ async function loadMidi(url) {
     instruments = {}
     const loadPromises = []
     for (const instName of instrumentMap.keys()) {
-      const options = { instrument: instName, volume: 50, destination: masterGain }
+      const options = { instrument: instName, volume: 42, destination: masterGain }
       if (storage) options.storage = storage
       const sf = Soundfont(ctx, options)
       if (reverb) {
-        try { sf.output.addEffect('reverb', reverb, 0.3) } catch (e) { /* skip */ }
+        try { sf.output.addEffect('reverb', reverb, 0.42) } catch (e) { /* skip */ }
       }
       instruments[instName] = sf
       loadPromises.push(sf.ready)
@@ -214,11 +224,11 @@ function startPlayback() {
 
   isPlaying = true
 
-  // Fade in to prevent click on start
+  // Fade in smoothly (exponential curve = natural, graceful entrance)
   const now = audioContext.currentTime
   masterGain.gain.cancelScheduledValues(now)
-  masterGain.gain.setValueAtTime(0, now)
-  masterGain.gain.linearRampToValueAtTime(0.5, now + 0.15)
+  masterGain.gain.setValueAtTime(0.0001, now)
+  masterGain.gain.exponentialRampToValueAtTime(0.42, now + 0.3)
 
   schedulerId = setInterval(scheduler, SCHEDULE_INTERVAL)
   bgmPaused.value = false
@@ -229,19 +239,23 @@ function pausePlayback() {
   if (audioContext) pauseOffset = audioContext.currentTime - startContextTime
   if (schedulerId) { clearInterval(schedulerId); schedulerId = null }
 
-  // Fade out quickly to prevent click, then stop notes
+  // Fade out smoothly (exponential, never to literal 0), then stop notes
   if (audioContext && masterGain) {
     const now = audioContext.currentTime
+    const currentGain = Math.max(masterGain.gain.value, 0.0001)
     masterGain.gain.cancelScheduledValues(now)
-    masterGain.gain.setValueAtTime(masterGain.gain.value, now)
-    masterGain.gain.linearRampToValueAtTime(0, now + 0.08)
+    masterGain.gain.setValueAtTime(currentGain, now)
+    masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18)
 
     stopTimer = setTimeout(() => {
       Object.values(instruments).forEach(inst => {
         try { inst.stop() } catch (e) { /* ignore */ }
       })
+      if (masterGain && audioContext) {
+        try { masterGain.gain.setValueAtTime(0, audioContext.currentTime) } catch (e) {}
+      }
       stopTimer = null
-    }, 100)
+    }, 220)
   } else {
     Object.values(instruments).forEach(inst => {
       try { inst.stop() } catch (e) { /* ignore */ }
@@ -297,6 +311,7 @@ onUnmounted(() => {
   })
   instruments = {}
   if (masterGain) { try { masterGain.disconnect() } catch (e) {} }
+  if (toneFilter) { try { toneFilter.disconnect() } catch (e) {} }
   if (compressor) { try { compressor.disconnect() } catch (e) {} }
   if (audioContext) audioContext.close().catch(() => {})
 })
