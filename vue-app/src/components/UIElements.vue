@@ -150,10 +150,19 @@ async function loadMidi(url) {
     }
 
     // Load a Soundfont per unique instrument (parallel)
+    // Force mp3 format via instrumentUrl: smplr's isSafari() UA detection fails in
+    // iOS in-app webviews (WeChat, etc.) whose UA lacks "Safari", so it would pick
+    // OGG → WebKit can't decode OGG → empty sample buffers → silent playback.
+    // mp3 is natively decodable on all WebKit/iOS, so we bypass format auto-detection.
+    const SOUNDFONT_BASE = 'https://gleitz.github.io/midi-js-soundfonts/MusyngKite'
     instruments = {}
     const loadPromises = []
     for (const instName of instrumentMap.keys()) {
-      const options = { instrument: instName, volume: 42, destination: masterGain }
+      const options = {
+        instrumentUrl: `${SOUNDFONT_BASE}/${instName}-mp3.js`,
+        volume: 42,
+        destination: masterGain,
+      }
       if (storage) options.storage = storage
       const sf = Soundfont(ctx, options)
       if (reverb) {
