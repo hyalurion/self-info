@@ -1601,12 +1601,23 @@
           "type": "text",
           "content": "Pixiv ID | 143355054"
         }
+      ],
+      [
+        {
+          "type": "text",
+          "content": "BGM | "
+        },
+        {
+          "type": "ruby",
+          "kanji": "心做し",
+          "reading": "こころなし"
+        }
       ]
     ]
   },
   "ui": {
     "bgm": {
-      "src": "bgm/心做し.mid"
+      "src": "bgm/bgm_kokoronashi.opus"
     },
     "feedback": {
       "href": "https://jyskyp4y.forms.app/untitled-form",
