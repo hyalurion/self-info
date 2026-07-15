@@ -213,8 +213,8 @@ const textKanaOff = [
   height: 24px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(12px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(2px) saturate(110%);
+  -webkit-backdrop-filter: blur(2px) saturate(110%);
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.55),
     inset 0 -0.5px 0.5px rgba(255, 255, 255, 0.1),

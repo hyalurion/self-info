@@ -1549,45 +1549,57 @@
       [
         {
           "type": "ruby",
-          "kanji": "月",
-          "reading": "つき"
-        },
-        {
-          "type": "text",
-          "content": "に"
+          "kanji": "精",
+          "reading": "せい"
         },
         {
           "type": "ruby",
-          "kanji": "寄",
-          "reading": "よ"
-        },
-        {
-          "type": "text",
-          "content": "りそう"
+          "kanji": "霊",
+          "reading": "れい"
         },
         {
           "type": "ruby",
-          "kanji": "乙女",
-          "reading": "おとめ"
-        },
-        {
-          "type": "text",
-          "content": "の"
+          "kanji": "公",
+          "reading": "こう"
         },
         {
           "type": "ruby",
-          "kanji": "作法",
-          "reading": "さほう"
+          "kanji": "主",
+          "reading": "しゅ"
         },
         {
           "type": "text",
-          "content": "ルナちょむ"
+          "content": "-"
+        },
+        {
+          "type": "ruby",
+          "kanji": "星",
+          "reading": "せい"
+        },
+        {
+          "type": "ruby",
+          "kanji": "雨",
+          "reading": "う"
+        },
+        {
+          "type": "text",
+          "content": " | "
+        },
+        {
+          "type": "ruby",
+          "kanji": "梅原",
+          "reading": "うめはら"
+        },
+        {
+          "type": "ruby",
+          "kanji": "生",
+          "reading": "せい"
         }
       ],
       [
         {
           "type": "text",
-          "content": "Pixiv ID | 133337546"
+          "content": "Pixiv ID | 143355054"
         }
       ]
     ]

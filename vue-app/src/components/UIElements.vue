@@ -442,8 +442,8 @@ onUnmounted(() => {
 
 .feedback-container:hover {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(2px) saturate(110%);
+  -webkit-backdrop-filter: blur(2px) saturate(110%);
   transform: translateY(-1px);
   box-shadow:
     inset 0 0.5px 0.5px rgba(255, 255, 255, 0.45),
@@ -483,8 +483,8 @@ onUnmounted(() => {
 
 .ui-changelog-container a:hover {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(2px) saturate(110%);
+  -webkit-backdrop-filter: blur(2px) saturate(110%);
   transform: translateY(-1px);
   box-shadow:
     inset 0 0.5px 0.5px rgba(255, 255, 255, 0.4),
