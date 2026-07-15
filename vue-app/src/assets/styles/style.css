@@ -90,6 +90,10 @@ html {
     color: #ffa6d3;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
+.note-text {
+    color: #ffeebf;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
 ul {
     padding-left: 20px;
 }

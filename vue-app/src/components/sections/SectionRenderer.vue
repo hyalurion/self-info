@@ -37,7 +37,7 @@ const props = defineProps({
       <li v-for="(item, i) in section.items" :key="i">
         <span class="highlight"><RichText :segments="item.label" :showReading="showReading" /></span>
         <span class="info-text"><RichText :segments="item.value" :showReading="showReading" /></span>
-        <RichText v-if="item.note && item.note.length > 0" :segments="item.note" :showReading="showReading" />
+        <RichText v-if="item.note && item.note.length > 0" class="note-text" :segments="item.note" :showReading="showReading" />
       </li>
     </ul>
   </div>
