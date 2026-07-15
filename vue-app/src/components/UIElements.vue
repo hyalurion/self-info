@@ -416,6 +416,7 @@ onUnmounted(() => {
     <a :href="data.changelog.href" target="_blank">
       <RichText :segments="data.changelog.dateRich" :showReading="showReading" />
       <img :src="data.changelog.img" alt="changelog" class="icon" />
+      <RichText :segments="data.changelog.dateAfterImg" :showReading="showReading" />
     </a>
   </div>
 </template>

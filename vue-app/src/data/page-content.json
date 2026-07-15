@@ -1614,7 +1614,7 @@
     },
     "changelog": {
       "href": "https://changelog-viewer.netlify.app/",
-      "date": "✨更新|26/07/15 ✨",
+      "date": "✨更新|2026年07月15日 ✨",
       "dateRich": [
         {
           "type": "text",
@@ -1628,13 +1628,42 @@
         {
           "type": "text",
           "content": "|"
+        }
+      ],
+      "img": "pic/changelog.svg",
+      "dateAfterImg": [
+        {
+          "type": "text",
+          "content": "2026"
+        },
+        {
+          "type": "ruby",
+          "kanji": "年",
+          "reading": "ねん"
         },
         {
           "type": "text",
-          "content": "26/07/15 ✨"
+          "content": "07"
+        },
+        {
+          "type": "ruby",
+          "kanji": "月",
+          "reading": "がつ"
+        },
+        {
+          "type": "text",
+          "content": "15"
+        },
+        {
+          "type": "ruby",
+          "kanji": "日",
+          "reading": "にち"
+        },
+        {
+          "type": "text",
+          "content": "✨"
         }
-      ],
-      "img": "pic/changelog.svg"
+      ]
     }
   }
 }
