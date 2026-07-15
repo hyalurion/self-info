@@ -159,6 +159,16 @@ async function loadMidi(url) {
       console.warn('Reverb unavailable:', e)
     }
 
+    // Pre-initialize vorbis decoder before any decodeAudioData calls (race condition fix)
+    try {
+      if (!vorbisDecoder) {
+        vorbisDecoder = new OggVorbisDecoder()
+        await vorbisDecoder.ready
+      }
+    } catch (e) {
+      console.warn('Failed to pre-initialize vorbis decoder:', e)
+    }
+
     // Group notes by instrument, skip drum tracks (channel 9)
     const instrumentMap = new Map()
     midi.tracks.forEach(track => {
@@ -195,13 +205,19 @@ async function loadMidi(url) {
     }
 
     // Load a Soundfont per unique instrument (parallel)
-    // smplr auto-detects format (ogg/mp3) based on browser support. On iOS in-app
-    // webviews, isSafari() fails so OGG may be selected. libvorbis.js fallback
-    // in decodeAudioData handles OGG decoding when native WebKit fails.
+    // Force MP3 format via instrumentUrl: smplr's isSafari() UA detection fails in
+    // iOS in-app webviews whose UA lacks "Safari", so it would pick OGG → WebKit
+    // can't decode OGG natively. MP3 is natively decodable on all WebKit/iOS.
+    // The vorbis decoder (pre-initialized above) serves as a safety net fallback.
+    const SOUNDFONT_BASE = 'https://gleitz.github.io/midi-js-soundfonts/MusyngKite'
     instruments = {}
     const loadPromises = []
     for (const instName of instrumentMap.keys()) {
-      const options = { instrument: instName, volume: 42, destination: masterGain }
+      const options = {
+        instrumentUrl: `${SOUNDFONT_BASE}/${instName}-mp3.js`,
+        volume: 42,
+        destination: masterGain,
+      }
       if (storage) options.storage = storage
       const sf = Soundfont(ctx, options)
       if (reverb) {
