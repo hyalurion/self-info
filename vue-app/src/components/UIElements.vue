@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import RichText from './RichText.vue'
 import { Midi } from '@tonejs/midi'
 import { Soundfont, Reverb, CacheStorage } from 'smplr'
+import { OggVorbisDecoder } from '@wasm-audio-decoders/ogg-vorbis'
 
 const props = defineProps({
   data: { type: Object, required: true },
@@ -64,10 +65,54 @@ const GM_INSTRUMENTS = [
   'telephone_ring', 'helicopter', 'applause', 'gunshot'
 ]
 
+function isOggData(arrayBuffer) {
+  const view = new Uint8Array(arrayBuffer)
+  return view.length >= 4 &&
+    view[0] === 0x4f && view[1] === 0x67 && view[2] === 0x67 && view[3] === 0x53
+}
+
+let vorbisDecoder = null
+
+async function decodeAudioDataWithVorbisFallback(originalDecode, context, arrayBuffer) {
+  const bufCopy = arrayBuffer.slice(0)
+  try {
+    return await originalDecode(bufCopy)
+  } catch (nativeError) {
+    console.warn('Native decodeAudioData failed:', nativeError?.message || nativeError)
+    if (isOggData(arrayBuffer)) {
+      try {
+        if (!vorbisDecoder) {
+          vorbisDecoder = new OggVorbisDecoder()
+          await vorbisDecoder.ready
+        }
+        const result = await vorbisDecoder.decode(new Uint8Array(arrayBuffer))
+        const audioBuffer = context.createBuffer(
+          result.channelData.length,
+          result.samplesDecoded,
+          result.sampleRate
+        )
+        for (let i = 0; i < result.channelData.length; i++) {
+          audioBuffer.getChannelData(i).set(result.channelData[i])
+        }
+        return audioBuffer
+      } catch (vorbisError) {
+        console.error('@wasm-audio-decoders/ogg-vorbis decode failed:', vorbisError?.message || vorbisError)
+        throw nativeError
+      }
+    }
+    throw nativeError
+  }
+}
+
 function getAudioContext() {
   if (!audioContext) {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext
     audioContext = new AudioContextClass()
+
+    const originalDecode = audioContext.decodeAudioData.bind(audioContext)
+    audioContext.decodeAudioData = function(arrayBuffer) {
+      return decodeAudioDataWithVorbisFallback(originalDecode, audioContext, arrayBuffer)
+    }
 
     // Master gain — controls overall volume and fade in/out
     masterGain = audioContext.createGain()
@@ -150,19 +195,13 @@ async function loadMidi(url) {
     }
 
     // Load a Soundfont per unique instrument (parallel)
-    // Force mp3 format via instrumentUrl: smplr's isSafari() UA detection fails in
-    // iOS in-app webviews (WeChat, etc.) whose UA lacks "Safari", so it would pick
-    // OGG → WebKit can't decode OGG → empty sample buffers → silent playback.
-    // mp3 is natively decodable on all WebKit/iOS, so we bypass format auto-detection.
-    const SOUNDFONT_BASE = 'https://gleitz.github.io/midi-js-soundfonts/MusyngKite'
+    // smplr auto-detects format (ogg/mp3) based on browser support. On iOS in-app
+    // webviews, isSafari() fails so OGG may be selected. libvorbis.js fallback
+    // in decodeAudioData handles OGG decoding when native WebKit fails.
     instruments = {}
     const loadPromises = []
     for (const instName of instrumentMap.keys()) {
-      const options = {
-        instrumentUrl: `${SOUNDFONT_BASE}/${instName}-mp3.js`,
-        volume: 42,
-        destination: masterGain,
-      }
+      const options = { instrument: instName, volume: 42, destination: masterGain }
       if (storage) options.storage = storage
       const sf = Soundfont(ctx, options)
       if (reverb) {
@@ -329,6 +368,10 @@ onUnmounted(() => {
     try { inst.dispose() } catch (e) { /* ignore */ }
   })
   instruments = {}
+  if (vorbisDecoder) {
+    try { vorbisDecoder.free() } catch (e) {}
+    vorbisDecoder = null
+  }
   if (masterGain) { try { masterGain.disconnect() } catch (e) {} }
   if (toneFilter) { try { toneFilter.disconnect() } catch (e) {} }
   if (compressor) { try { compressor.disconnect() } catch (e) {} }
