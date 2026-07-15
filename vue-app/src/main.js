@@ -1,11 +1,10 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+// Browser compatibility check — must run before the Vue app mounts.
+// If the browser/OS is too old, redirects to outdate.html and stops here.
+import './compat-check.js'
 
-// Global styles
-import './assets/styles/style.css'
-import './assets/styles/liquid-glass-block.css'
-import './assets/styles/splash-screen.css'
-import './assets/styles/birthday.css'
-import './assets/styles/kana.css'
-
-createApp(App).mount('#app')
+if (!window.__checkBrowserCompat()) {
+  // Redirecting to outdate.html — do not mount the app.
+} else {
+  // Dynamically import the app so that static imports don't run before the check.
+  import('./app-bootstrap.js')
+}
