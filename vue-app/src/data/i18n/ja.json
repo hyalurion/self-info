@@ -1678,7 +1678,7 @@
       "img": "pic/feedback.svg"
     },
     "changelog": {
-      "href": "https://changelog-viewer.netlify.app/",
+      "href": "?page=changelog",
       "date": "✨更新|2026年07月22日 ✨",
       "dateRich": [
         {
