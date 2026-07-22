@@ -19,745 +19,179 @@
   ],
   "scripts": [],
   "splashScreen": {
-    "title": "隱私政策同意",
+    "title": "貓貓糖的悄悄話（隱私政策）",
     "titleRich": [
       {
-        "type": "ruby",
-        "kanji": "隱",
-        "reading": "ㄧㄣˇ"
+        "type": "text",
+        "content": "貓貓糖的悄悄話"
       },
       {
-        "type": "ruby",
-        "kanji": "私",
-        "reading": "ㄙ"
-      },
-      {
-        "type": "ruby",
-        "kanji": "政",
-        "reading": "ㄓㄥˋ"
-      },
-      {
-        "type": "ruby",
-        "kanji": "策",
-        "reading": "ㄘㄜˋ"
-      },
-      {
-        "type": "ruby",
-        "kanji": "同",
-        "reading": "ㄊㄨㄥˊ"
-      },
-      {
-        "type": "ruby",
-        "kanji": "意",
-        "reading": "ㄧˋ"
+        "type": "text",
+        "content": "（隱私政策）"
       }
     ],
     "texts": [
       [
-        {
-          "type": "ruby",
-          "kanji": "本",
-          "reading": "ㄅㄣˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "網",
-          "reading": "ㄨㄤˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "站",
-          "reading": "ㄓㄢˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "使",
-          "reading": "ㄕˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "用",
-          "reading": "ㄩㄥˋ"
-        },
-        {
-          "type": "text",
-          "content": "Google Analytics 4（GA4）"
-        },
-        {
-          "type": "ruby",
-          "kanji": "進",
-          "reading": "ㄐㄧㄣˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "行",
-          "reading": "ㄒㄧㄥˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "分",
-          "reading": "ㄈㄣ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "析",
-          "reading": "ㄒㄧ"
-        },
-        {
-          "type": "text",
-          "content": "，"
-        },
-        {
-          "type": "ruby",
-          "kanji": "以",
-          "reading": "ㄧˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "改",
-          "reading": "ㄍㄞˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "善",
-          "reading": "ㄕㄢˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "使",
-          "reading": "ㄕˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "用",
-          "reading": "ㄩㄥˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "者",
-          "reading": "ㄓㄜˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "體",
-          "reading": "ㄊㄧˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "驗",
-          "reading": "ㄧㄢˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "和",
-          "reading": "ㄏㄢˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "網",
-          "reading": "ㄨㄤˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "站",
-          "reading": "ㄓㄢˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "效",
-          "reading": "ㄒㄧㄠˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "能",
-          "reading": "ㄋㄥˊ"
-        },
-        {
-          "type": "text",
-          "content": "。"
-        }
+        { "type": "ruby", "kanji": "喵", "reading": "ㄇㄧㄠ" },
+        { "type": "text", "content": "～" },
+        { "type": "ruby", "kanji": "這", "reading": "ㄓㄜˋ" },
+        { "type": "ruby", "kanji": "個", "reading": "˙ㄍㄜ" },
+        { "type": "ruby", "kanji": "網", "reading": "ㄨㄤˇ" },
+        { "type": "ruby", "kanji": "站", "reading": "ㄓㄢˋ" },
+        { "type": "ruby", "kanji": "用", "reading": "ㄩㄥˋ" },
+        { "type": "ruby", "kanji": "了", "reading": "˙ㄌㄜ" },
+        { "type": "text", "content": " Google Analytics 4 (GA4) " },
+        { "type": "ruby", "kanji": "小", "reading": "ㄒㄧㄠˇ" },
+        { "type": "ruby", "kanji": "幫", "reading": "ㄅㄤ" },
+        { "type": "ruby", "kanji": "手", "reading": "ㄕㄡˇ" },
+        { "type": "text", "content": "，" },
+        { "type": "ruby", "kanji": "偷", "reading": "ㄊㄡ" },
+        { "type": "ruby", "kanji": "偷", "reading": "ㄊㄡ" },
+        { "type": "ruby", "kanji": "看", "reading": "ㄎㄢˋ" },
+        { "type": "ruby", "kanji": "大", "reading": "ㄉㄚˋ" },
+        { "type": "ruby", "kanji": "家", "reading": "ㄐㄧㄚ" },
+        { "type": "ruby", "kanji": "喜", "reading": "ㄒㄧˇ" },
+        { "type": "ruby", "kanji": "歡", "reading": "ㄏㄨㄢ" },
+        { "type": "ruby", "kanji": "什", "reading": "ㄕㄣˊ" },
+        { "type": "ruby", "kanji": "麼", "reading": "˙ㄇㄜ" },
+        { "type": "text", "content": "，" },
+        { "type": "ruby", "kanji": "想", "reading": "ㄒㄧㄤˇ" },
+        { "type": "ruby", "kanji": "把", "reading": "ㄅㄚˇ" },
+        { "type": "ruby", "kanji": "這", "reading": "ㄓㄜˋ" },
+        { "type": "ruby", "kanji": "裡", "reading": "ㄌㄧˇ" },
+        { "type": "ruby", "kanji": "變", "reading": "ㄅㄧㄢˋ" },
+        { "type": "ruby", "kanji": "得", "reading": "˙ㄉㄜ" },
+        { "type": "ruby", "kanji": "更", "reading": "ㄍㄥˋ" },
+        { "type": "text", "content": "～" },
+        { "type": "ruby", "kanji": "好", "reading": "ㄏㄠˇ" },
+        { "type": "ruby", "kanji": "玩", "reading": "ㄨㄢˊ" },
+        { "type": "ruby", "kanji": "唷", "reading": "ㄧㄛ" },
+        { "type": "text", "content": " ♡" }
       ],
       [
-        {
-          "type": "ruby",
-          "kanji": "在",
-          "reading": "ㄗㄞˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "您",
-          "reading": "ㄋㄧㄣˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "訪",
-          "reading": "ㄈㄤˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "問",
-          "reading": "ㄨㄣˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "時",
-          "reading": "ㄕˊ"
-        },
-        {
-          "type": "text",
-          "content": "，"
-        },
-        {
-          "type": "ruby",
-          "kanji": "我",
-          "reading": "ㄨㄛˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "們",
-          "reading": "˙ㄇㄣ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "會",
-          "reading": "ㄏㄨㄟˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "收",
-          "reading": "ㄕㄡ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "集",
-          "reading": "ㄐㄧˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "您",
-          "reading": "ㄋㄧㄣˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "的",
-          "reading": "˙ㄉㄜ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "個",
-          "reading": "ㄍㄜˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "人",
-          "reading": "ㄖㄣˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "資",
-          "reading": "ㄗ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "料",
-          "reading": "ㄌㄧㄠˋ"
-        },
-        {
-          "type": "text",
-          "content": "（"
-        },
-        {
-          "type": "ruby",
-          "kanji": "如",
-          "reading": "ㄖㄨˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "裝",
-          "reading": "ㄓㄨㄤ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "置",
-          "reading": "ㄓˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "資",
-          "reading": "ㄗ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "訊",
-          "reading": "ㄒㄩㄣˋ"
-        },
-        {
-          "type": "text",
-          "content": "、IP"
-        },
-        {
-          "type": "ruby",
-          "kanji": "位",
-          "reading": "ㄨㄟˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "址",
-          "reading": "ㄓˇ"
-        },
-        {
-          "type": "text",
-          "content": "、Cookie、"
-        },
-        {
-          "type": "ruby",
-          "kanji": "精",
-          "reading": "ㄐㄧㄥ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "確",
-          "reading": "ㄑㄩㄝˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "位",
-          "reading": "ㄨㄟˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "置",
-          "reading": "ㄓˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "資",
-          "reading": "ㄗ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "訊",
-          "reading": "ㄒㄩㄣˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "等",
-          "reading": "ㄉㄥˇ"
-        },
-        {
-          "type": "text",
-          "content": "），"
-        },
-        {
-          "type": "ruby",
-          "kanji": "並",
-          "reading": "ㄅㄧㄥˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "將",
-          "reading": "ㄐㄧㄤ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "其",
-          "reading": "ㄑㄧˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "分",
-          "reading": "ㄈㄣ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "享",
-          "reading": "ㄒㄧㄤˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "給",
-          "reading": "ㄍㄟˇ"
-        },
-        {
-          "type": "text",
-          "content": "Google"
-        },
-        {
-          "type": "ruby",
-          "kanji": "海",
-          "reading": "ㄏㄞˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "外",
-          "reading": "ㄨㄞˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "伺",
-          "reading": "ㄘˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "服",
-          "reading": "ㄈㄨˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "器",
-          "reading": "ㄑㄧˋ"
-        },
-        {
-          "type": "text",
-          "content": "。"
-        }
+        { "type": "ruby", "kanji": "你", "reading": "ㄋㄧˇ" },
+        { "type": "ruby", "kanji": "來", "reading": "ㄌㄞˊ" },
+        { "type": "ruby", "kanji": "玩", "reading": "ㄨㄢˊ" },
+        { "type": "ruby", "kanji": "的", "reading": "˙ㄉㄜ" },
+        { "type": "ruby", "kanji": "時", "reading": "ㄕˊ" },
+        { "type": "ruby", "kanji": "候", "reading": "ㄏㄡˋ" },
+        { "type": "text", "content": "，" },
+        { "type": "ruby", "kanji": "會", "reading": "ㄏㄨㄟˋ" },
+        { "type": "ruby", "kanji": "收", "reading": "ㄕㄡ" },
+        { "type": "ruby", "kanji": "集", "reading": "ㄐㄧˊ" },
+        { "type": "ruby", "kanji": "一", "reading": "ㄧ" },
+        { "type": "ruby", "kanji": "點", "reading": "ㄉㄧㄢˇ" },
+        { "type": "ruby", "kanji": "點", "reading": "ㄉㄧㄢˇ" },
+        { "type": "ruby", "kanji": "小", "reading": "ㄒㄧㄠˇ" },
+        { "type": "ruby", "kanji": "資", "reading": "ㄗ" },
+        { "type": "ruby", "kanji": "訊", "reading": "ㄒㄩㄣˋ" },
+        { "type": "text", "content": "（像是裝置、IP 位址、Cookie、你在哪裡唷），然後分享給 Google 海外伺服器，" },
+        { "type": "ruby", "kanji": "請", "reading": "ㄑㄧㄥˇ" },
+        { "type": "ruby", "kanji": "它", "reading": "ㄊㄚ" },
+        { "type": "ruby", "kanji": "幫", "reading": "ㄅㄤ" },
+        { "type": "ruby", "kanji": "忙", "reading": "ㄇㄤˊ" },
+        { "type": "ruby", "kanji": "分", "reading": "ㄈㄣ" },
+        { "type": "ruby", "kanji": "析", "reading": "ㄒㄧ" },
+        { "type": "text", "content": "～ (｡･ω･｡)ﾉ♡" }
       ],
       [
-        {
-          "type": "ruby",
-          "kanji": "為",
-          "reading": "ㄨㄟˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "了",
-          "reading": "˙ㄌㄜ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "保",
-          "reading": "ㄅㄠˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "護",
-          "reading": "ㄏㄨˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "您",
-          "reading": "ㄋㄧㄣˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "的",
-          "reading": "˙ㄉㄜ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "隱",
-          "reading": "ㄧㄣˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "私",
-          "reading": "ㄙ"
-        },
-        {
-          "type": "text",
-          "content": "，"
-        },
-        {
-          "type": "ruby",
-          "kanji": "我",
-          "reading": "ㄨㄛˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "們",
-          "reading": "˙ㄇㄣ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "會",
-          "reading": "ㄏㄨㄟˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "盡",
-          "reading": "ㄐㄧㄣˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "力",
-          "reading": "ㄌㄧˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "將",
-          "reading": "ㄐㄧㄤ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "您",
-          "reading": "ㄋㄧㄣˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "的",
-          "reading": "˙ㄉㄜ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "資",
-          "reading": "ㄗ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "料",
-          "reading": "ㄌㄧㄠˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "匿",
-          "reading": "ㄋㄧˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "名",
-          "reading": "ㄇㄧㄥˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "化",
-          "reading": "ㄏㄨㄚˋ"
-        },
-        {
-          "type": "text",
-          "content": "/"
-        },
-        {
-          "type": "ruby",
-          "kanji": "假",
-          "reading": "ㄐㄧㄚˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "名",
-          "reading": "ㄇㄧㄥˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "化",
-          "reading": "ㄏㄨㄚˋ"
-        },
-        {
-          "type": "text",
-          "content": "。"
-        }
+        { "type": "ruby", "kanji": "但", "reading": "ㄉㄢˋ" },
+        { "type": "ruby", "kanji": "是", "reading": "ㄕˋ" },
+        { "type": "ruby", "kanji": "別", "reading": "ㄅㄧㄝˊ" },
+        { "type": "ruby", "kanji": "擔", "reading": "ㄉㄢ" },
+        { "type": "ruby", "kanji": "心", "reading": "ㄒㄧㄣ" },
+        { "type": "text", "content": "！" },
+        { "type": "ruby", "kanji": "我", "reading": "ㄨㄛˇ" },
+        { "type": "ruby", "kanji": "們", "reading": "˙ㄇㄣ" },
+        { "type": "ruby", "kanji": "會", "reading": "ㄏㄨㄟˋ" },
+        { "type": "ruby", "kanji": "用", "reading": "ㄩㄥˋ" },
+        { "type": "ruby", "kanji": "匿", "reading": "ㄋㄧˋ" },
+        { "type": "ruby", "kanji": "名", "reading": "ㄇㄧㄥˊ" },
+        { "type": "ruby", "kanji": "化", "reading": "ㄏㄨㄚˋ" },
+        { "type": "ruby", "kanji": "和", "reading": "ㄏㄢˋ" },
+        { "type": "ruby", "kanji": "假", "reading": "ㄐㄧㄚˇ" },
+        { "type": "ruby", "kanji": "名", "reading": "ㄇㄧㄥˊ" },
+        { "type": "ruby", "kanji": "化", "reading": "ㄏㄨㄚˋ" },
+        { "type": "ruby", "kanji": "的", "reading": "˙ㄉㄜ" },
+        { "type": "ruby", "kanji": "魔", "reading": "ㄇㄛˊ" },
+        { "type": "ruby", "kanji": "法", "reading": "ㄈㄚˇ" },
+        { "type": "text", "content": "，" },
+        { "type": "ruby", "kanji": "把", "reading": "ㄅㄚˇ" },
+        { "type": "ruby", "kanji": "你", "reading": "ㄋㄧˇ" },
+        { "type": "ruby", "kanji": "的", "reading": "˙ㄉㄜ" },
+        { "type": "ruby", "kanji": "資", "reading": "ㄗ" },
+        { "type": "ruby", "kanji": "料", "reading": "ㄌㄧㄠˋ" },
+        { "type": "ruby", "kanji": "變", "reading": "ㄅㄧㄢˋ" },
+        { "type": "ruby", "kanji": "成", "reading": "ㄔㄥˊ" },
+        { "type": "ruby", "kanji": "小", "reading": "ㄒㄧㄠˇ" },
+        { "type": "ruby", "kanji": "秘", "reading": "ㄇㄧˋ" },
+        { "type": "ruby", "kanji": "密", "reading": "ㄇㄧˋ" },
+        { "type": "ruby", "kanji": "藏", "reading": "ㄘㄤˊ" },
+        { "type": "ruby", "kanji": "好", "reading": "ㄏㄠˇ" },
+        { "type": "ruby", "kanji": "唷", "reading": "ㄧㄛ" },
+        { "type": "text", "content": " ★" }
       ],
       [
-        {
-          "type": "ruby",
-          "kanji": "繼",
-          "reading": "ㄐㄧˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "續",
-          "reading": "ㄒㄩˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "訪",
-          "reading": "ㄈㄤˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "問",
-          "reading": "ㄨㄣˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "可",
-          "reading": "ㄎㄜˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "能",
-          "reading": "ㄋㄥˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "會",
-          "reading": "ㄏㄨㄟˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "將",
-          "reading": "ㄐㄧㄤ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "您",
-          "reading": "ㄋㄧㄣˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "的",
-          "reading": "˙ㄉㄜ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "資",
-          "reading": "ㄗ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "料",
-          "reading": "ㄌㄧㄠˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "傳",
-          "reading": "ㄔㄨㄢˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "送",
-          "reading": "ㄙㄨㄥˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "至",
-          "reading": "ㄓˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "美",
-          "reading": "ㄇㄟˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "國",
-          "reading": "ㄍㄨㄛˊ"
-        },
-        {
-          "type": "text",
-          "content": "。"
-        },
-        {
-          "type": "ruby",
-          "kanji": "可",
-          "reading": "ㄎㄜˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "能",
-          "reading": "ㄋㄥˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "受",
-          "reading": "ㄕㄡˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "到",
-          "reading": "ㄉㄠˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "美",
-          "reading": "ㄇㄟˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "國",
-          "reading": "ㄍㄨㄛˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "法",
-          "reading": "ㄈㄚˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "律",
-          "reading": "ㄌㄩˋ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "管",
-          "reading": "ㄍㄨㄢˇ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "轄",
-          "reading": "ㄒㄧㄚˊ"
-        },
-        {
-          "type": "text",
-          "content": "。"
-        }
+        { "type": "ruby", "kanji": "繼", "reading": "ㄐㄧˋ" },
+        { "type": "ruby", "kanji": "續", "reading": "ㄒㄩˋ" },
+        { "type": "ruby", "kanji": "逛", "reading": "ㄍㄨㄤˋ" },
+        { "type": "ruby", "kanji": "的", "reading": "˙ㄉㄜ" },
+        { "type": "ruby", "kanji": "話", "reading": "ㄏㄨㄚˋ" },
+        { "type": "text", "content": "，" },
+        { "type": "ruby", "kanji": "你", "reading": "ㄋㄧˇ" },
+        { "type": "ruby", "kanji": "的", "reading": "˙ㄉㄜ" },
+        { "type": "ruby", "kanji": "資", "reading": "ㄗ" },
+        { "type": "ruby", "kanji": "料", "reading": "ㄌㄧㄠˋ" },
+        { "type": "ruby", "kanji": "可", "reading": "ㄎㄜˇ" },
+        { "type": "ruby", "kanji": "能", "reading": "ㄋㄥˊ" },
+        { "type": "ruby", "kanji": "會", "reading": "ㄏㄨㄟˋ" },
+        { "type": "ruby", "kanji": "飄", "reading": "ㄆㄧㄠ" },
+        { "type": "ruby", "kanji": "洋", "reading": "ㄧㄤˊ" },
+        { "type": "ruby", "kanji": "過", "reading": "ㄍㄨㄛˋ" },
+        { "type": "ruby", "kanji": "海", "reading": "ㄏㄞˇ" },
+        { "type": "ruby", "kanji": "去", "reading": "ㄑㄩˋ" },
+        { "type": "ruby", "kanji": "美", "reading": "ㄇㄟˇ" },
+        { "type": "ruby", "kanji": "國", "reading": "ㄍㄨㄛˊ" },
+        { "type": "ruby", "kanji": "旅", "reading": "ㄌㄩˇ" },
+        { "type": "ruby", "kanji": "行", "reading": "ㄒㄧㄥˊ" },
+        { "type": "text", "content": "，" },
+        { "type": "ruby", "kanji": "那", "reading": "ㄋㄚˋ" },
+        { "type": "ruby", "kanji": "裡", "reading": "ㄌㄧˇ" },
+        { "type": "ruby", "kanji": "有", "reading": "ㄧㄡˇ" },
+        { "type": "ruby", "kanji": "不", "reading": "ㄅㄨˊ" },
+        { "type": "ruby", "kanji": "一", "reading": "ㄧˊ" },
+        { "type": "ruby", "kanji": "樣", "reading": "ㄧㄤˋ" },
+        { "type": "ruby", "kanji": "的", "reading": "˙ㄉㄜ" },
+        { "type": "ruby", "kanji": "法", "reading": "ㄈㄚˇ" },
+        { "type": "ruby", "kanji": "律", "reading": "ㄌㄩˋ" },
+        { "type": "ruby", "kanji": "保", "reading": "ㄅㄠˇ" },
+        { "type": "ruby", "kanji": "護", "reading": "ㄏㄨˋ" },
+        { "type": "ruby", "kanji": "它", "reading": "ㄊㄚ" },
+        { "type": "ruby", "kanji": "們", "reading": "˙ㄇㄣ" },
+        { "type": "text", "content": "，" },
+        { "type": "ruby", "kanji": "就", "reading": "ㄐㄧㄡˋ" },
+        { "type": "ruby", "kanji": "像", "reading": "ㄒㄧㄤˋ" },
+        { "type": "ruby", "kanji": "看", "reading": "ㄎㄢ" },
+        { "type": "ruby", "kanji": "守", "reading": "ㄕㄡˇ" },
+        { "type": "ruby", "kanji": "小", "reading": "ㄒㄧㄠˇ" },
+        { "type": "ruby", "kanji": "魚", "reading": "ㄩˊ" },
+        { "type": "ruby", "kanji": "乾", "reading": "ㄍㄢ" },
+        { "type": "ruby", "kanji": "一", "reading": "ㄧˊ" },
+        { "type": "ruby", "kanji": "樣", "reading": "ㄧㄤˋ" },
+        { "type": "ruby", "kanji": "唷", "reading": "ㄧㄛ" },
+        { "type": "text", "content": "～嗚～ (´•ω•｀)♡" }
       ]
     ],
     "links": [
       {
         "text": [
-          {
-            "type": "ruby",
-            "kanji": "瞭",
-            "reading": "ㄌㄧㄠˇ"
-          },
-          {
-            "type": "ruby",
-            "kanji": "解",
-            "reading": "ㄐㄧㄝˇ"
-          },
-          {
-            "type": "ruby",
-            "kanji": "更",
-            "reading": "ㄍㄥˋ"
-          },
-          {
-            "type": "ruby",
-            "kanji": "多",
-            "reading": "ㄉㄨㄛ"
-          },
-          {
-            "type": "text",
-            "content": "（"
-          },
-          {
-            "type": "ruby",
-            "kanji": "英",
-            "reading": "ㄧㄥ"
-          },
-          {
-            "type": "ruby",
-            "kanji": "文",
-            "reading": "ㄨㄣˊ"
-          },
-          {
-            "type": "text",
-            "content": "）"
-          }
+          { "type": "text", "content": "想知道更多喵？（英文）" }
         ],
         "href": "https://storage.googleapis.com/support-kms-prod/KYaKZ5CAhIQ4rjgEFWIy6qKRzRSJjdGjrYFW"
       },
       {
         "text": [
-          {
-            "type": "ruby",
-            "kanji": "隱",
-            "reading": "ㄧㄣˇ"
-          },
-          {
-            "type": "ruby",
-            "kanji": "私",
-            "reading": "ㄙ"
-          },
-          {
-            "type": "ruby",
-            "kanji": "政",
-            "reading": "ㄓㄥˋ"
-          },
-          {
-            "type": "ruby",
-            "kanji": "策",
-            "reading": "ㄘㄜˋ"
-          }
+          { "type": "text", "content": "隱私政策～" }
         ],
         "href": "document.html"
       }
@@ -765,75 +199,27 @@
     "buttons": [
       {
         "text": [
-          {
-            "type": "ruby",
-            "kanji": "繼",
-            "reading": "ㄐㄧˋ"
-          },
-          {
-            "type": "ruby",
-            "kanji": "續",
-            "reading": "ㄒㄩˋ"
-          },
-          {
-            "type": "text",
-            "content": "..."
-          },
-          {
-            "type": "ruby",
-            "kanji": "訪",
-            "reading": "ㄈㄤˇ"
-          },
-          {
-            "type": "ruby",
-            "kanji": "問",
-            "reading": "ㄨㄣˋ"
-          },
-          {
-            "type": "text",
-            "content": "？"
-          }
+          { "type": "text", "content": "好唷，一起玩吧！(≧∇≦)ﾉ" }
         ],
         "id": "consent-accept"
       },
       {
         "text": [
-          {
-            "type": "ruby",
-            "kanji": "拒",
-            "reading": "ㄐㄩˋ"
-          },
-          {
-            "type": "ruby",
-            "kanji": "絕",
-            "reading": "ㄐㄩㄝˊ"
-          },
-          {
-            "type": "text",
-            "content": "..."
-          },
-          {
-            "type": "ruby",
-            "kanji": "退",
-            "reading": "ㄊㄨㄟˋ"
-          },
-          {
-            "type": "ruby",
-            "kanji": "出",
-            "reading": "ㄔㄨ"
-          },
-          {
-            "type": "text",
-            "content": "？"
-          }
+          { "type": "text", "content": "還是不要了喵... (´･ω･`)" }
         ],
         "id": "consent-reject"
       }
     ],
     "rejection": {
-      "title": [],
-      "text1": [],
-      "text2": []
+      "title": [
+        { "type": "text", "content": "嗚...進不去惹 (´；ω；`)" }
+      ],
+      "text1": [
+        { "type": "text", "content": "如果不同意，貓貓糖就不能讓你進來玩囉... (｡•́︿•̀｡)" }
+      ],
+      "text2": [
+        { "type": "text", "content": "5秒後帶你回首頁～掰掰～" }
+      ]
     }
   },
   "loadingScreen": {
