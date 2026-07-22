@@ -802,14 +802,28 @@
     ]
   },
   "legal": {
-    "title": "Google Analytics 隐私同意声明",
-    "subtitle": "依据相关个人数据保护法律的数据收集声明",
-    "established": "2025-08-16",
-    "updated": "2026-07-22",
-    "version": "v1.1",
-    "author": "琉璃",
-    "policyName": "隐私保护方针",
-    "email": "quiettimejsg@gmail.com",
-    "back": "返回"
+    "back": "返回",
+    "variants": {
+      "MY": {
+        "title": "Google Analytics 隐私同意声明",
+        "subtitle": "依据马来西亚《2010年个人数据保护法》(PDPA) 的数据收集声明",
+        "established": "2025-08-17",
+        "updated": "2026-07-22",
+        "version": "v.1.1",
+        "author": "琉璃",
+        "policyName": "隐私同意声明（马来西亚）",
+        "email": "quiettimejsg@gmail.com"
+      },
+      "SG": {
+        "title": "Google Analytics 隐私同意声明",
+        "subtitle": "依据新加坡《个人数据保护法》(PDPA) 的数据收集声明",
+        "established": "2025-08-19",
+        "updated": "2026-07-22",
+        "version": "v.1.1",
+        "author": "琉璃",
+        "policyName": "隐私同意声明（新加坡）",
+        "email": "quiettimejsg@gmail.com"
+      }
+    }
   }
 }

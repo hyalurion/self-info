@@ -6,7 +6,7 @@ import zhTW from '../data/i18n/zh-TW.json'
 
 export const SUPPORTED = [
   { code: 'ja', native: '日本語', local: '日本語' },
-  { code: 'en', native: 'English', local: 'English' },
+  { code: 'en', native: 'Meow', local: 'English' },
   { code: 'zh-Hans', native: '华文', local: '简体中文（马来西亚/新加坡）' },
   { code: 'zh-TW', native: '繁體中文', local: '繁體中文（台灣）' },
 ]
@@ -88,6 +88,24 @@ syncLangUrl(currentLang.value)
 
 const content = computed(() => CONTENT[currentLang.value] || ja)
 
+// Legal jurisdiction selector for languages that ship multiple regional privacy
+// documents. zh-Hans (Simplified Chinese) targets both Malaysia and Singapore,
+// which have different PDPA frameworks — showing the wrong one is a real legal
+// risk, so the user can pick, defaulting to their timezone.
+function detectLegalRegion() {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+    if (tz.includes('Kuala_Lumpur')) return 'MY'
+    if (tz.includes('Singapore')) return 'SG'
+  } catch (e) { /* ignore */ }
+  return 'MY'
+}
+
+const legalRegion = ref(detectLegalRegion())
+function setLegalRegion(code) {
+  if (code === 'MY' || code === 'SG') legalRegion.value = code
+}
+
 // Format an ISO date string into a long, language-appropriate format so every
 // language shows a consistent full date (e.g. 2025年8月16日 / August 16, 2025).
 const MONTHS_EN = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -125,5 +143,5 @@ export function useI18n() {
     syncLangUrl(code)
   }
 
-  return { currentLang, content, setLang, SUPPORTED, formatLongDate }
+  return { currentLang, content, setLang, SUPPORTED, formatLongDate, legalRegion, setLegalRegion }
 }

@@ -4,28 +4,47 @@ import MarkdownRenderer from './MarkdownRenderer.vue'
 import { useI18n } from '../composables/useI18n.js'
 import { useNav } from '../composables/useNav.js'
 
-const { currentLang, content, formatLongDate } = useI18n()
+const { currentLang, content, formatLongDate, legalRegion, setLegalRegion } = useI18n()
 const { back } = useNav()
 
 import jaMd from '../data/legal/ja.md?raw'
 import enMd from '../data/legal/en.md?raw'
 import zhHansMd from '../data/legal/zh-Hans.md?raw'
+import zhHansSgMd from '../data/legal/zh-Hans-sg.md?raw'
 import zhTWMd from '../data/legal/zh-TW.md?raw'
 
 const DOCS = {
   ja: jaMd,
   en: enMd,
   'zh-Hans': zhHansMd,
+  'zh-Hans-MY': zhHansMd,
+  'zh-Hans-SG': zhHansSgMd,
   'zh-TW': zhTWMd,
 }
 
-const legal = computed(() => content.value.legal || {})
-const source = computed(() => DOCS[currentLang.value] || jaMd)
+// zh-Hans ships two regional privacy docs (Malaysia / Singapore PDPA). Other
+// languages use a single flat legal object. Resolve the active variant here.
+const hasVariants = computed(() => !!(content.value.legal && content.value.legal.variants))
+const legal = computed(() => {
+  const base = content.value.legal || {}
+  const v = base.variants ? base.variants[legalRegion.value] : null
+  return v ? { ...base, ...v } : base
+})
+const source = computed(() => {
+  const key = hasVariants.value ? `${currentLang.value}-${legalRegion.value}` : currentLang.value
+  return DOCS[key] || DOCS[currentLang.value] || jaMd
+})
 </script>
 
 <template>
   <div class="document-page">
     <button class="back-button" @click="back()">← {{ legal.back || (currentLang === 'ja' ? '戻る' : 'Back') }}</button>
+
+    <div v-if="hasVariants" class="region-toggle">
+      <button :class="{ active: legalRegion === 'MY' }" @click="setLegalRegion('MY')">马来西亚</button>
+      <button :class="{ active: legalRegion === 'SG' }" @click="setLegalRegion('SG')">新加坡</button>
+    </div>
+
     <div class="doc-container">
       <header>
         <h1>{{ legal.title }}</h1>
@@ -49,6 +68,19 @@ const source = computed(() => DOCS[currentLang.value] || jaMd)
 </template>
 
 <style scoped>
+.document-page::-webkit-scrollbar {
+    display: none;
+}
+
+.document-page {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.document-page {
+    scroll-behavior: smooth;
+}
+
 .document-page {
   position: fixed;
   inset: 0;
@@ -159,6 +191,39 @@ const source = computed(() => DOCS[currentLang.value] || jaMd)
 .back-button:hover {
   background: rgba(255, 255, 255, 0.16);
   transform: translateY(-1px);
+}
+
+.region-toggle {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto 16px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+.region-toggle button {
+  padding: 8px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e8dcff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--app-font);
+  transition: all 0.25s ease;
+}
+.region-toggle button + button {
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+.region-toggle button.active {
+  background: linear-gradient(135deg, rgba(179, 136, 255, 0.55), rgba(155, 107, 255, 0.5));
+  color: #fff;
+}
+.region-toggle button:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 768px) {

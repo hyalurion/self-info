@@ -1,13 +1,25 @@
 <script setup>
-defineProps({
-  segments: { type: Array, required: true },
+import { computed } from 'vue'
+
+const props = defineProps({
+  // A rich-text value may be either an array of segments (ja schema) or a
+  // single segment object (some other-language schemas). Normalize so we
+  // always iterate an array regardless of which language fed it in.
+  segments: { type: [Array, Object], required: true },
   showReading: { type: Boolean, default: false },
+})
+
+const segs = computed(() => {
+  const s = props.segments
+  if (Array.isArray(s)) return s
+  if (s && typeof s === 'object') return [s]
+  return []
 })
 </script>
 
 <template>
   <span>
-    <template v-for="(seg, i) in segments" :key="i">
+    <template v-for="(seg, i) in segs" :key="i">
       <template v-if="seg.type === 'text'">{{ seg.content }}</template>
       <ruby v-else-if="seg.type === 'ruby'" :class="{ 'rt-hidden': !showReading }">
         {{ seg.kanji }}<rt>{{ seg.reading }}</rt>
