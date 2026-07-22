@@ -11,36 +11,36 @@
     "themeColor": "#ffffff"
   },
   "splashScreen": {
-    "title": "隐私政策同意",
+    "title": "猫猫糖の悄悄话（隐私政策）",
     "titleRich": [
       {
         "type": "text",
-        "content": "隐私政策同意"
+        "content": "猫猫糖の悄悄话（隐私政策）"
       }
     ],
     "texts": [
       [
         {
           "type": "text",
-          "content": "本网站使用Google Analytics 4（GA4）进行分析，以改进用户体验和网站性能。"
+          "content": "猫猫糖请来了 Google Analytics 4（GA4）小管家，想看看大家喜欢什么，把这里变得更好玩呢～"
         }
       ],
       [
         {
           "type": "text",
-          "content": "访问时，会收集您的个人数据（如设备信息、IP地址、Cookie、精确位置信息等），并将其分享给Google海外服务器。"
+          "content": "每次来玩，会收集一些信息（比如设备、IP、Cookie，可能知道在哪儿哦），并告诉 Google 海外的服务器，请它帮忙分析～"
         }
       ],
       [
         {
           "type": "text",
-          "content": "为了保护您的隐私，我们会尽力匿名化/假名化您的数据。"
+          "content": "不过别担心，猫猫糖会努力把数据伪装成谁也认不出的样子，好好保护小秘密喵～ (◕‿◕✿)"
         }
       ],
       [
         {
           "type": "text",
-          "content": "继续访问可能会将您的数据流向美国，也许会受到美国法律管辖哦~"
+          "content": "继续的话，数据可能会漂洋过海去美国旅行，那边会有不一样的法律像看守小鱼干一样管着它们哦～"
         }
       ]
     ],
@@ -49,7 +49,7 @@
         "text": [
           {
             "type": "text",
-            "content": "了解更多（英文）"
+            "content": "想了解更多喵？（英文）"
           }
         ],
         "href": "https://storage.googleapis.com/support-kms-prod/KYaKZ5CAhIQ4rjgEFWIy6qKRzRSJjdGjrYFW"
@@ -58,7 +58,7 @@
         "text": [
           {
             "type": "text",
-            "content": "隐私政策"
+            "content": "隐私政策～"
           }
         ],
         "href": "document.html"
@@ -69,7 +69,7 @@
         "text": [
           {
             "type": "text",
-            "content": "继续...访问？"
+            "content": "一起玩吧！(≧∇≦)ﾉ"
           }
         ],
         "id": "consent-accept"
@@ -78,7 +78,7 @@
         "text": [
           {
             "type": "text",
-            "content": "拒绝...退出？"
+            "content": "还是不了喵… (´･ω･`)"
           }
         ],
         "id": "consent-reject"
@@ -88,19 +88,19 @@
       "title": [
         {
           "type": "text",
-          "content": "访问受限"
+          "content": "唔…被挡在门外了 (´；ω；`)"
         }
       ],
       "text1": [
         {
           "type": "text",
-          "content": "如不同意隐私政策，将无法访问本网站。"
+          "content": "如果不答应，不能进来啦… (｡•́︿•̀｡)"
         }
       ],
       "text2": [
         {
           "type": "text",
-          "content": "5秒后重定向至首页..."
+          "content": "5秒后送你回首页哦，拜拜～"
         }
       ]
     }

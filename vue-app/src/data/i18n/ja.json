@@ -19,23 +19,22 @@
   ],
   "scripts": [],
   "splashScreen": {
-    "title": "プライバシーポリシー同意",
+    "title": "ねこたんからのおねがい（プライバシーポリシー）",
     "titleRich": [
       {
         "type": "text",
-        "content": "プライバシーポリシー"
+        "content": "ねこたんからのおねがい"
       },
       {
-        "type": "ruby",
-        "kanji": "同意",
-        "reading": "どうい"
+        "type": "text",
+        "content": "（プライバシーポリシー）"
       }
     ],
     "texts": [
       [
         {
           "type": "text",
-          "content": "サイトは"
+          "content": "このサイトでは、"
         },
         {
           "type": "ruby",
@@ -53,7 +52,25 @@
         },
         {
           "type": "text",
-          "content": "っています♡"
+          "content": "って、みんながどんなところを"
+        },
+        {
+          "type": "ruby",
+          "kanji": "楽",
+          "reading": "たの"
+        },
+        {
+          "type": "text",
+          "content": "しんでくれてるかこっそり"
+        },
+        {
+          "type": "ruby",
+          "kanji": "観察",
+          "reading": "かんさつ"
+        },
+        {
+          "type": "text",
+          "content": "してるにゃ♡"
         }
       ],
       [
@@ -68,16 +85,7 @@
         },
         {
           "type": "text",
-          "content": "に、あなたの"
-        },
-        {
-          "type": "ruby",
-          "kanji": "大切",
-          "reading": "たいせつ"
-        },
-        {
-          "type": "text",
-          "content": "なデータ（"
+          "content": "に、あなたのデバイスや"
         },
         {
           "type": "ruby",
@@ -86,16 +94,25 @@
         },
         {
           "type": "text",
-          "content": "アドレス・クッキー・"
+          "content": "アドレス、クッキー、だいたいの"
         },
         {
           "type": "ruby",
-          "kanji": "位置情報",
-          "reading": "いちじょうほう"
+          "kanji": "場所",
+          "reading": "ばしょ"
         },
         {
           "type": "text",
-          "content": "など）を"
+          "content": "といった"
+        },
+        {
+          "type": "ruby",
+          "kanji": "情報",
+          "reading": "じょうほう"
+        },
+        {
+          "type": "text",
+          "content": "をちょっぴりいただきます。それを"
         },
         {
           "type": "ruby",
@@ -104,7 +121,7 @@
         },
         {
           "type": "text",
-          "content": "とシェアしたり"
+          "content": "の"
         },
         {
           "type": "ruby",
@@ -113,49 +130,67 @@
         },
         {
           "type": "text",
-          "content": "に"
+          "content": "サーバーまでお"
         },
         {
           "type": "ruby",
-          "kanji": "送",
-          "reading": "おく"
+          "kanji": "届",
+          "reading": "とど"
         },
         {
           "type": "text",
-          "content": "ったりすることに"
+          "content": "けして、"
         },
         {
           "type": "ruby",
-          "kanji": "同意",
-          "reading": "どうい"
+          "kanji": "分析",
+          "reading": "ぶんせき"
         },
         {
           "type": "text",
-          "content": "したことになりますね～"
+          "content": "をお"
+        },
+        {
+          "type": "ruby",
+          "kanji": "手伝",
+          "reading": "てつだ"
+        },
+        {
+          "type": "text",
+          "content": "ってもらうんだにゃ〜(｡･ω･｡)ﾉ♡"
         }
       ],
       [
         {
           "type": "text",
-          "content": "プライバシー"
+          "content": "でもでも、"
         },
         {
           "type": "ruby",
-          "kanji": "保護",
-          "reading": "ほご"
+          "kanji": "安心",
+          "reading": "あんしん"
         },
         {
           "type": "text",
-          "content": "のために"
+          "content": "して！もらったデータは、"
         },
         {
           "type": "ruby",
-          "kanji": "全力",
-          "reading": "ぜんりょく"
+          "kanji": "誰",
+          "reading": "だれ"
         },
         {
           "type": "text",
-          "content": "で"
+          "content": "のかわからなくする"
+        },
+        {
+          "type": "ruby",
+          "kanji": "魔法",
+          "reading": "まほう"
+        },
+        {
+          "type": "text",
+          "content": "（"
         },
         {
           "type": "ruby",
@@ -164,10 +199,32 @@
         },
         {
           "type": "text",
-          "content": "してるよ！★"
+          "content": "・"
+        },
+        {
+          "type": "ruby",
+          "kanji": "仮名化",
+          "reading": "かめいか"
+        },
+        {
+          "type": "text",
+          "content": "）でしっかり"
+        },
+        {
+          "type": "ruby",
+          "kanji": "隠",
+          "reading": "かく"
+        },
+        {
+          "type": "text",
+          "content": "してるからねっ★"
         }
       ],
       [
+        {
+          "type": "text",
+          "content": "このまま"
+        },
         {
           "type": "ruby",
           "kanji": "訪問",
@@ -184,25 +241,25 @@
         },
         {
           "type": "text",
-          "content": "けると、データがアメリカに"
+          "content": "けると、データがアメリカまで"
         },
         {
           "type": "ruby",
-          "kanji": "送",
-          "reading": "おく"
+          "kanji": "旅",
+          "reading": "たび"
         },
         {
           "type": "text",
-          "content": "られちゃうことに"
+          "content": "に"
         },
         {
           "type": "ruby",
-          "kanji": "同意",
-          "reading": "どうい"
+          "kanji": "出",
+          "reading": "で"
         },
         {
           "type": "text",
-          "content": "したことになるよ～！アメリカの"
+          "content": "ちゃうよ。アメリカの"
         },
         {
           "type": "ruby",
@@ -211,16 +268,16 @@
         },
         {
           "type": "text",
-          "content": "が"
+          "content": "に"
         },
         {
           "type": "ruby",
-          "kanji": "適用",
-          "reading": "てきよう"
+          "kanji": "守",
+          "reading": "まも"
         },
         {
           "type": "text",
-          "content": "されるかもだよ～うぅ～(´•ω•｀)♡"
+          "content": "られながらね〜うぅ…(´•ω•｀)♡"
         }
       ]
     ],
@@ -233,12 +290,12 @@
           },
           {
             "type": "ruby",
-            "kanji": "知",
-            "reading": "し"
+            "kanji": "詳",
+            "reading": "くわ"
           },
           {
             "type": "text",
-            "content": "りたい？（English）"
+            "content": "しく（English）"
           }
         ],
         "href": "https://storage.googleapis.com/support-kms-prod/KYaKZ5CAhIQ4rjgEFWIy6qKRzRSJjdGjrYFW"
@@ -247,12 +304,7 @@
         "text": [
           {
             "type": "text",
-            "content": "プライバシー"
-          },
-          {
-            "type": "ruby",
-            "kanji": "同意書",
-            "reading": "どういしょ"
+            "content": "プライバシーポリシー♡"
           }
         ],
         "href": "document.html"
@@ -263,16 +315,7 @@
         "text": [
           {
             "type": "text",
-            "content": "ぽちっと"
-          },
-          {
-            "type": "ruby",
-            "kanji": "続",
-            "reading": "つづ"
-          },
-          {
-            "type": "text",
-            "content": "ける？"
+            "content": "もっと見るにゃ！(≧∇≦)ﾉ"
           }
         ],
         "id": "consent-accept"
@@ -281,21 +324,32 @@
         "text": [
           {
             "type": "text",
-            "content": "それとも…すぐに"
-          },
-          {
-            "type": "ruby",
-            "kanji": "出",
-            "reading": "で"
-          },
-          {
-            "type": "text",
-            "content": "る？"
+            "content": "やっぱり遠慮する…(´･ω･`)"
           }
         ],
         "id": "consent-reject"
       }
-    ]
+    ],
+    "rejection": {
+      "title": [
+        {
+          "type": "text",
+          "content": "えっ…お断りされちゃった (´；ω；`)"
+        }
+      ],
+      "text1": [
+        {
+          "type": "text",
+          "content": "同意してくれないと、ねこたんと遊べないにゃ…(｡•́︿•̀｡)"
+        }
+      ],
+      "text2": [
+        {
+          "type": "text",
+          "content": "5秒後にホームページへ戻っちゃうよ〜バイバイ〜"
+        }
+      ]
+    }
   },
   "loadingScreen": {
     "text": "少女が願いを祈ってるよ…",
