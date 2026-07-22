@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import RichText from './RichText.vue'
 
 const props = defineProps({
+  data: { type: Object, default: null },
   showReading: { type: Boolean, default: false },
 })
 
@@ -10,7 +11,7 @@ const emit = defineEmits(['complete'])
 
 const visible = ref(true)
 
-const loadingText = [
+const defaultText = [
   { type: 'ruby', kanji: '少女', reading: 'しょうじょ' },
   { type: 'text', content: 'がお' },
   { type: 'ruby', kanji: '願', reading: 'ねが' },
@@ -18,6 +19,8 @@ const loadingText = [
   { type: 'ruby', kanji: '祈', reading: 'いの' },
   { type: 'text', content: 'ってるよ…' },
 ]
+
+const loadingText = (props.data && props.data.textRich) ? props.data.textRich : defaultText
 
 onMounted(() => {
   setTimeout(() => {

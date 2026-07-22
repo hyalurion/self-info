@@ -1,0 +1,815 @@
+{
+  "meta": {
+    "title": "自介 (华文)",
+    "description": "自介 (华文)",
+    "keywords": "自介,个人简介,华文,中文,马来西亚,新加坡,zh-Hans,self-intro,个人介绍,自我介绍,琉璃猫猫糖,Hyalurion",
+    "author": "琉璃猫猫糖",
+    "ogTitle": "自介 (华文)",
+    "ogDescription": "自介 (华文)",
+    "ogLocale": "zh-Hans",
+    "favicon": "pic/kawai_neko_icon.svg",
+    "themeColor": "#ffffff"
+  },
+  "splashScreen": {
+    "title": "隐私政策同意",
+    "titleRich": [
+      {
+        "type": "text",
+        "content": "隐私政策同意"
+      }
+    ],
+    "texts": [
+      [
+        {
+          "type": "text",
+          "content": "本网站使用Google Analytics 4（GA4）进行分析，以改进用户体验和网站性能。"
+        }
+      ],
+      [
+        {
+          "type": "text",
+          "content": "访问时，会收集您的个人数据（如设备信息、IP地址、Cookie、精确位置信息等），并将其分享给Google海外服务器。"
+        }
+      ],
+      [
+        {
+          "type": "text",
+          "content": "为了保护您的隐私，我们会尽力匿名化/假名化您的数据。"
+        }
+      ],
+      [
+        {
+          "type": "text",
+          "content": "继续访问可能会将您的数据流向美国，也许会受到美国法律管辖哦~"
+        }
+      ]
+    ],
+    "links": [
+      {
+        "text": [
+          {
+            "type": "text",
+            "content": "了解更多（英文）"
+          }
+        ],
+        "href": "https://storage.googleapis.com/support-kms-prod/KYaKZ5CAhIQ4rjgEFWIy6qKRzRSJjdGjrYFW"
+      },
+      {
+        "text": [
+          {
+            "type": "text",
+            "content": "隐私政策"
+          }
+        ],
+        "href": "document.html"
+      }
+    ],
+    "buttons": [
+      {
+        "text": [
+          {
+            "type": "text",
+            "content": "继续...访问？"
+          }
+        ],
+        "id": "consent-accept"
+      },
+      {
+        "text": [
+          {
+            "type": "text",
+            "content": "拒绝...退出？"
+          }
+        ],
+        "id": "consent-reject"
+      }
+    ],
+    "rejection": {
+      "title": [
+        {
+          "type": "text",
+          "content": "访问受限"
+        }
+      ],
+      "text1": [
+        {
+          "type": "text",
+          "content": "如不同意隐私政策，将无法访问本网站。"
+        }
+      ],
+      "text2": [
+        {
+          "type": "text",
+          "content": "5秒后重定向至首页..."
+        }
+      ]
+    }
+  },
+  "loadingScreen": {
+    "text": "少女祈祷中…",
+    "textRich": [
+      {
+        "type": "text",
+        "content": "少女祈祷中…"
+      }
+    ]
+  },
+  "header": {
+    "lines": [
+      [
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "你好呀，初次见面～ (◕‿◕✿)"
+            }
+          ],
+          "class": "info-text"
+        }
+      ],
+      [
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "可以叫我 "
+            }
+          ],
+          "class": "info-text"
+        },
+        {
+          "type": "highlight",
+          "content": [
+            {
+              "type": "text",
+              "content": "琉璃猫猫糖（ゆりねこたん yuri nekotan）"
+            }
+          ],
+          "class": "highlight"
+        }
+      ],
+      [
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "或者像星星一样闪亮的名字 "
+            }
+          ],
+          "class": "info-text"
+        },
+        {
+          "type": "highlight",
+          "content": [
+            {
+              "type": "text",
+              "content": "Hyalurion"
+            }
+          ],
+          "class": "highlight"
+        },
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": " 也可以哦！✨ "
+            }
+          ],
+          "class": "info-text"
+        }
+      ]
+    ]
+  },
+  "sections": [
+    {
+      "type": "birthday",
+      "title": "🎂 诞生小秘密",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "🎂 诞生小秘密"
+        }
+      ],
+      "countdown": {
+        "cakeIcon": "🎂",
+        "todayText": "今天、就是生日哦！(＊´∀｀*)ﾉ"
+      },
+      "items": [
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "在"
+              }
+            ],
+            "class": "info-text"
+          },
+          {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "处女座"
+              }
+            ],
+            "class": "highlight"
+          },
+          {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "魔法绽放的第一天"
+              }
+            ],
+            "class": "highlight"
+          },
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "降临世间～"
+              }
+            ],
+            "class": "info-text"
+          }
+        ],
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "（"
+              }
+            ],
+            "class": "info-text"
+          },
+          {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "农历七月十一"
+              }
+            ],
+            "class": "highlight"
+          },
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "的月光是我的摇篮曲哟！🌙） "
+              }
+            ],
+            "class": "info-text"
+          }
+        ]
+      ]
+    },
+    {
+      "type": "language",
+      "title": "🗣️语言小口袋",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "🗣️语言小口袋"
+        }
+      ],
+      "items": [
+        [
+          {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "日语、英语、简体中文、繁体中文"
+              }
+            ],
+            "class": "highlight"
+          },
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "都可以哦～"
+              }
+            ],
+            "class": "info-text"
+          }
+        ],
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "（切换语言就像换小帽子一样有趣呢！(◕‿◕✿)） "
+              }
+            ],
+            "class": "info-text"
+          }
+        ]
+      ]
+    },
+    {
+      "type": "acgn",
+      "title": "🌈 ACGN 能量体",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "🌈 ACGN 能量体"
+        }
+      ],
+      "items": [
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "没错！"
+              }
+            ],
+            "class": "info-text"
+          }
+        ],
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "动漫、漫画、游戏、小说是构成小宇宙的基本粒子～★~(◠‿◕✿) "
+              }
+            ],
+            "class": "info-text"
+          }
+        ]
+      ]
+    },
+    {
+      "type": "personality",
+      "title": "💖 心灵小拼图 (INFJ-T 版)",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "💖 心灵小拼图 (INFJ-T 版)"
+        }
+      ],
+      "items": [
+        {
+          "label": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "充电能量站： "
+              }
+            ],
+            "class": "highlight"
+          },
+          "value": {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "83%需要安静的独处时光"
+              }
+            ],
+            "class": "info-text"
+          },
+          "note": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "（躲在小被窝里看书最幸福啦～(｡>ㅅ<｡)）"
+              }
+            ],
+            "class": "highlight"
+          }
+        },
+        {
+          "label": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "脑内小剧场："
+              }
+            ],
+            "class": "highlight"
+          },
+          "value": {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": " 74%天马行空ing"
+              }
+            ],
+            "class": "info-text"
+          },
+          "note": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "（幻想世界的大门永远敞开！🚪✨） "
+              }
+            ],
+            "class": "highlight"
+          }
+        },
+        {
+          "label": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "感受力天线： "
+              }
+            ],
+            "class": "highlight"
+          },
+          "value": {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "82%超敏感接收中"
+              }
+            ],
+            "class": "info-text"
+          },
+          "note": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "（小情绪也许能悄悄感应到哦 (｡･ω･｡)） "
+              }
+            ],
+            "class": "highlight"
+          }
+        },
+        {
+          "label": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "行动小策略："
+              }
+            ],
+            "class": "highlight"
+          },
+          "value": {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": " 83%计划型喵"
+              }
+            ],
+            "class": "info-text"
+          },
+          "note": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "（列清单是小爱好✓） "
+              }
+            ],
+            "class": "highlight"
+          }
+        },
+        {
+          "label": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "心情小云朵： "
+              }
+            ],
+            "class": "highlight"
+          },
+          "value": {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "82%容易飘小雨☁️➡️🌧️ "
+              }
+            ],
+            "class": "info-text"
+          },
+          "note": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "（一道彩虹就能马上放晴啦！(๑>◡<๑)） "
+              }
+            ],
+            "class": "highlight"
+          }
+        }
+      ]
+    },
+    {
+      "type": "lucky",
+      "title": "🍀 幸运小雷达",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "🍀 幸运小雷达"
+        }
+      ],
+      "content": [
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "信号微弱中……（"
+            }
+          ],
+          "class": "info-text"
+        },
+        {
+          "type": "highlight",
+          "content": [
+            {
+              "type": "text",
+              "content": "捡到四叶草会开心一整天！"
+            }
+          ],
+          "class": "highlight"
+        },
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "(⁄ ⁄•⁄ω⁄•⁄ ⁄)）"
+            }
+          ],
+          "class": "info-text"
+        }
+      ]
+    },
+    {
+      "type": "games",
+      "title": "🎮 游戏小星球",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "🎮 游戏小星球"
+        }
+      ],
+      "content": [
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "目前只绕着"
+            }
+          ],
+          "class": "info-text"
+        },
+        {
+          "type": "highlight",
+          "content": [
+            {
+              "type": "text",
+              "content": "《原神》"
+            }
+          ],
+          "class": "highlight"
+        },
+        {
+          "type": "game-card",
+          "img": "pic/geshin.jpg",
+          "imgAlt": "原神",
+          "uid": "887948106"
+        },
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "和"
+            }
+          ],
+          "class": "info-text"
+        },
+        {
+          "type": "highlight",
+          "content": [
+            {
+              "type": "text",
+              "content": "《崩坏：星穹铁道》"
+            }
+          ],
+          "class": "highlight"
+        },
+        {
+          "type": "game-card",
+          "img": "pic/hsr.jpg",
+          "imgAlt": "崩坏：星穹铁道",
+          "uid": "800035446"
+        },
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "转圈圈～☆ﾐ(o･ω･)ﾉ）"
+            }
+          ],
+          "class": "info-text"
+        }
+      ]
+    },
+    {
+      "type": "sns",
+      "title": "🔗 社交媒体",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "🔗 社交媒体"
+        }
+      ],
+      "link": {
+        "href": "https://m.hoyolab.com/#/accountCenter/postList?id=317761459",
+        "img": "pic/hyl_icon.jpg",
+        "imgAlt": "HoYoLAB",
+        "text": [
+          {
+            "type": "text",
+            "content": "@琉璃 Hyalurion（ID | 317761459）"
+          }
+        ]
+      }
+    },
+    {
+      "type": "closing",
+      "lines": [
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "请多关照～ "
+              }
+            ],
+            "class": "info-text"
+          }
+        ],
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "希望和你成为好朋友！一起分享快乐的小宇宙吧～ (ฅ^•ﻌ•^ฅ) ♡ "
+              }
+            ],
+            "class": "info-text"
+          }
+        ],
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "(๑˃ᴗ˂)ﻭ ✧ "
+              }
+            ],
+            "class": "info-text"
+          }
+        ]
+      ]
+    }
+  ],
+  "footer": {
+    "lines": [
+      [
+        {
+          "type": "text",
+          "content": "精灵公主 - 星雨 | 梅原生"
+        }
+      ],
+      [
+        {
+          "type": "text",
+          "content": "Pixiv ID | 143355054"
+        }
+      ],
+      [
+        {
+          "type": "text",
+          "content": "BGM | 心做し (Kokoronashi)"
+        }
+      ]
+    ]
+  },
+  "ui": {
+    "bgm": {
+      "src": "bgm/bgm_kokoronashi.opus"
+    },
+    "feedback": {
+      "href": "https://jyskyp4y.forms.app/untitled-form",
+      "img": "pic/feedback.svg"
+    },
+    "changelog": {
+      "href": "?page=changelog",
+      "date": "✨更新 | 2026年07月22日 ✨", 
+      "dateRich": [
+        {
+          "type": "text",
+          "content": "✨"
+        },
+        {
+          "type": "text",
+          "content": "更新"
+        },
+        {
+          "type": "text",
+          "content": " | "
+        }
+      ],
+      "img": "pic/changelog.svg",
+      "dateAfterImg": [
+        {
+          "type": "text",
+          "content": "2026年"
+        },
+        {
+          "type": "text",
+          "content": "07月"
+        },
+        {
+          "type": "text",
+          "content": "22日"
+        },
+        {
+          "type": "text",
+          "content": "✨"
+        }
+      ]
+    }
+  },
+  "birthday": {
+    "today": [
+      {
+        "type": "text",
+        "content": "今天、就是生日哦！(＊´∀｀*)ﾉ"
+      }
+    ],
+    "prefix": [
+      {
+        "type": "text",
+        "content": "离生日"
+      },
+      {
+        "type": "text",
+        "content": "还有"
+      }
+    ],
+    "remain": [],
+    "suffix": [
+      {
+        "type": "text",
+        "content": "天～♡"
+      }
+    ]
+  },
+  "legal": {
+    "title": "Google Analytics 隐私同意声明",
+    "subtitle": "依据相关个人数据保护法律的数据收集声明",
+    "established": "2025-08-16",
+    "updated": "2026-07-22",
+    "version": "v1.1",
+    "author": "琉璃",
+    "policyName": "隐私保护方针",
+    "email": "quiettimejsg@gmail.com",
+    "back": "返回"
+  }
+}

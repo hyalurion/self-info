@@ -1,0 +1,830 @@
+{
+  "meta": {
+    "title": "All About Meow",
+    "description": "Self-introduction – English",
+    "keywords": "self-intro,personal-intro,english,global,en,selfintroduction",
+    "author": "Yuri Nekotan",
+    "ogTitle": "All About Meow",
+    "ogDescription": "Self-introduction – English",
+    "ogLocale": "en",
+    "favicon": "pic/kawai_neko_icon.svg",
+    "themeColor": "#ffffff"
+  },
+  "splashScreen": {
+    "title": "Privacy Policy Consent",
+    "titleRich": [
+      {
+        "type": "text",
+        "content": "Privacy Policy Consent"
+      }
+    ],
+    "texts": [
+      [
+        {
+          "type": "text",
+          "content": "This site uses Google Analytics 4 (GA4) ♡"
+        }
+      ],
+      [
+        {
+          "type": "text",
+          "content": "When you visit, you agree to share your stuff (like IP address, cookies, location info) with Google and send it far away~"
+        }
+      ],
+      [
+        {
+          "type": "text",
+          "content": "But we try super hard to keep you anonymous and secret! ★"
+        }
+      ],
+      [
+        {
+          "type": "text",
+          "content": "If you stay, your stuff goes to 'Merica! They might have 'Merica laws~ O noes~ (´•ω•｀)♡"
+        }
+      ]
+    ],
+    "links": [
+      {
+        "text": [
+          {
+            "type": "text",
+            "content": "Wanna know more? (in human speak)"
+          }
+        ],
+        "href": "https://storage.googleapis.com/support-kms-prod/KYaKZ5CAhIQ4rjgEFWIy6qKRzRSJjdGjrYFW"
+      },
+      {
+        "text": [
+          {
+            "type": "text",
+            "content": "The Rules Paper"
+          }
+        ],
+        "href": "document.html"
+      }
+    ],
+    "buttons": [
+      {
+        "text": [
+          {
+            "type": "text",
+            "content": "Boop to continue?"
+          }
+        ],
+        "id": "consent-accept"
+      },
+      {
+        "text": [
+          {
+            "type": "text",
+            "content": "Or... you go meowt?"
+          }
+        ],
+        "id": "consent-reject"
+      }
+    ],
+    "rejection": {
+      "title": [
+        {
+          "type": "text",
+          "content": "Access Restricted"
+        }
+      ],
+      "text1": [
+        {
+          "type": "text",
+          "content": "If you do not agree to the privacy policy, you cannot access the site."
+        }
+      ],
+      "text2": [
+        {
+          "type": "text",
+          "content": "Redirecting to the top page in 5 seconds..."
+        }
+      ]
+    }
+  },
+  "loadingScreen": {
+    "text": "A girl is making a wish...",
+    "textRich": [
+      {
+        "type": "text",
+        "content": "A girl is making a wish..."
+      }
+    ]
+  },
+  "header": {
+    "lines": [
+      [
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "Haiiii, nice to meet yu, meow! (◕‿◕✿)"
+            }
+          ],
+          "class": "info-text"
+        }
+      ],
+      [
+        {
+          "type": "highlight",
+          "content": [
+            {
+              "type": "text",
+              "content": "Yuri Nekotan"
+            }
+          ],
+          "class": "highlight"
+        },
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": " iz mai name~"
+            }
+          ],
+          "class": "info-text"
+        }
+      ],
+      [
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "Yu can call me "
+            }
+          ],
+          "class": "info-text"
+        },
+        {
+          "type": "highlight",
+          "content": [
+            {
+              "type": "text",
+              "content": "Hyalurion"
+            }
+          ],
+          "class": "highlight"
+        },
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": ", liek a shiny star! ✨ "
+            }
+          ],
+          "class": "info-text"
+        }
+      ]
+    ]
+  },
+  "sections": [
+    {
+      "type": "birthday",
+      "title": "🎂 Mai Secret Birfday Story",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "🎂 Mai Secret Birfday Story"
+        }
+      ],
+      "countdown": {
+        "cakeIcon": "🎂",
+        "todayText": "Today is mai birfday! YAY! (＊´∀｀*)ﾉ"
+      },
+      "items": [
+        [
+          {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "I landed on Earth"
+              }
+            ],
+            "class": "highlight"
+          },
+          {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": " on teh furst day"
+              }
+            ],
+            "class": "highlight"
+          },
+          {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": " of Virgo majik~"
+              }
+            ],
+            "class": "highlight"
+          }
+        ],
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "(Teh moon on teh "
+              }
+            ],
+            "class": "info-text"
+          },
+          {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "11th day of teh 7th old calendar"
+              }
+            ],
+            "class": "highlight"
+          },
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": " sang me to sleep, meow! 🌙) "
+              }
+            ],
+            "class": "info-text"
+          }
+        ]
+      ]
+    },
+    {
+      "type": "language",
+      "title": "🗣️ Mai Speeky Pocket",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "🗣️ Mai Speeky Pocket"
+        }
+      ],
+      "items": [
+        [
+          {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "Japanese, English, Simple Chinese, and BIG Chinese"
+              }
+            ],
+            "class": "highlight"
+          },
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "... I can speek all of dem!"
+              }
+            ],
+            "class": "info-text"
+          }
+        ],
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "(Changin langwage is fun, liek changin a Pokemon type~ (◠‿◠✿)) "
+              }
+            ],
+            "class": "info-text"
+          }
+        ]
+      ]
+    },
+    {
+      "type": "acgn",
+      "title": "🌈 Mai ACGN Atoms",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "🌈 Mai ACGN Atoms"
+        }
+      ],
+      "items": [
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "Check it! Anime, Manga, Gamez, and Novelz are... "
+              }
+            ],
+            "class": "info-text"
+          }
+        ],
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "teh tiny shiny bits dat make"
+              }
+            ],
+            "class": "info-text"
+          },
+          {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": " mai universe"
+              }
+            ],
+            "class": "highlight"
+          },
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "~ ★~(◠‿◕✿) "
+              }
+            ],
+            "class": "info-text"
+          }
+        ]
+      ]
+    },
+    {
+      "type": "personality",
+      "title": "💖 Mai Heart Puzzle (INFJ-T only!)",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "💖 Mai Heart Puzzle (INFJ-T only!)"
+        }
+      ],
+      "items": [
+        {
+          "label": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "Chargin Mode: "
+              }
+            ],
+            "class": "highlight"
+          },
+          "value": {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "83% needz alone time "
+              }
+            ],
+            "class": "info-text"
+          },
+          "note": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "(Readin book in bed iz bestest bliss~ (｡>ㅅ<｡))"
+              }
+            ],
+            "class": "highlight"
+          }
+        },
+        {
+          "label": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "Brain Cinema:"
+              }
+            ],
+            "class": "highlight"
+          },
+          "value": {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": " 74% daydreamin like crazy "
+              }
+            ],
+            "class": "info-text"
+          },
+          "note": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "(Door to other worldz alwayz open! 🚪✨) "
+              }
+            ],
+            "class": "highlight"
+          }
+        },
+        {
+          "label": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "Feelin Antenna: "
+              }
+            ],
+            "class": "highlight"
+          },
+          "value": {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "82% super sensitive "
+              }
+            ],
+            "class": "info-text"
+          },
+          "note": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "(I can maybe feelz ur little sads? (｡･ω･｡)) "
+              }
+            ],
+            "class": "highlight"
+          }
+        },
+        {
+          "label": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "How I Do Stuffs:"
+              }
+            ],
+            "class": "highlight"
+          },
+          "value": {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": " 83% iz a planner kitteh "
+              }
+            ],
+            "class": "info-text"
+          },
+          "note": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "(Makin To-Do lists is fun ✓) "
+              }
+            ],
+            "class": "highlight"
+          }
+        },
+        {
+          "label": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "Heart Weather: "
+              }
+            ],
+            "class": "highlight"
+          },
+          "value": {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "82% chance of sudden rainz ☁️➡️🌧️ "
+              }
+            ],
+            "class": "info-text"
+          },
+          "note": {
+            "type": "highlight",
+            "content": [
+              {
+                "type": "text",
+                "content": "(But a rainbow makez it sunny again! (๑´ڡ`๑)) "
+              }
+            ],
+            "class": "highlight"
+          }
+        }
+      ]
+    },
+    {
+      "type": "lucky",
+      "title": "🍀 Lucky Sensor",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "🍀 Lucky Sensor"
+        }
+      ],
+      "content": [
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "Signal is weak... (but if "
+            }
+          ],
+          "class": "info-text"
+        },
+        {
+          "type": "highlight",
+          "content": [
+            {
+              "type": "text",
+              "content": "I findz a four-leaf clover I is happy all day!"
+            }
+          ],
+          "class": "highlight"
+        },
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "(⁄ ⁄•⁄ω⁄•⁄ ⁄)）"
+            }
+          ],
+          "class": "info-text"
+        }
+      ]
+    },
+    {
+      "type": "games",
+      "title": "🎮 Game Planet",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "🎮 Game Planet"
+        }
+      ],
+      "content": [
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": "Right meow I is trapped by teh gravity of "
+            }
+          ],
+          "class": "info-text"
+        },
+        {
+          "type": "highlight",
+          "content": [
+            {
+              "type": "text",
+              "content": "\"Genshin Impact\""
+            }
+          ],
+          "class": "highlight"
+        },
+        {
+          "type": "game-card",
+          "img": "pic/geshin.jpg",
+          "imgAlt": "Genshin Impact",
+          "uid": "887948106"
+        },
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": " and "
+            }
+          ],
+          "class": "info-text"
+        },
+        {
+          "type": "highlight",
+          "content": [
+            {
+              "type": "text",
+              "content": "\"Honkai: Star Rail\""
+            }
+          ],
+          "class": "highlight"
+        },
+        {
+          "type": "game-card",
+          "img": "pic/hsr.jpg",
+          "imgAlt": "Honkai: Star Rail",
+          "uid": "800035446"
+        },
+        {
+          "type": "info",
+          "content": [
+            {
+              "type": "text",
+              "content": " Halp meeee ☆ミ(o･ω･)ﾉ"
+            }
+          ],
+          "class": "info-text"
+        }
+      ]
+    },
+    {
+      "type": "sns",
+      "title": "🔗 Social Media",
+      "titleRich": [
+        {
+          "type": "text",
+          "content": "🔗 Social Media"
+        }
+      ],
+      "link": {
+        "href": "https://m.hoyolab.com/#/accountCenter/postList?id=317761459",
+        "img": "pic/hyl_icon.jpg",
+        "imgAlt": "HoYoLAB",
+        "text": [
+          {
+            "type": "text",
+            "content": "@琉璃 Hyalurion（ID | 317761459）"
+          }
+        ]
+      }
+    },
+    {
+      "type": "closing",
+      "lines": [
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "Be nice to me pleez~ "
+              }
+            ],
+            "class": "info-text"
+          }
+        ],
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "Lets share a happy floaty universe together! "
+              }
+            ],
+            "class": "info-text"
+          }
+        ],
+        [
+          {
+            "type": "info",
+            "content": [
+              {
+                "type": "text",
+                "content": "(♡´౪`♡) Meow♪ "
+              }
+            ],
+            "class": "info-text"
+          }
+        ]
+      ]
+    }
+  ],
+  "footer": {
+    "lines": [
+      [
+        {
+          "type": "text",
+          "content": "Princess of Spirits – Starry Rain | by Umehara Sei"
+        }
+      ],
+      [
+        {
+          "type": "text",
+          "content": "Pixiv ID | 143355054"
+        }
+      ],
+      [
+        {
+          "type": "text",
+          "content": "BGM | Kokoronashi (心做し)"
+        }
+      ]
+    ]
+  },
+  "ui": {
+    "bgm": {
+      "src": "bgm/bgm_kokoronashi.opus"
+    },
+    "feedback": {
+      "href": "https://jyskyp4y.forms.app/untitled-form",
+      "img": "pic/feedback.svg"
+    },
+    "changelog": {
+      "href": "?page=changelog",
+      "date": "✨Updated | July 22th, 2026 ✨",
+      "dateRich": [
+        {
+          "type": "text",
+          "content": "✨"
+        },
+        {
+          "type": "text",
+          "content": "Updated"
+        },
+        {
+          "type": "text",
+          "content": " | "
+        }
+      ],
+      "img": "pic/changelog.svg",
+      "dateAfterImg": [
+        {
+          "type": "text",
+          "content": "July "
+        },
+        {
+          "type": "text",
+          "content": "22th, "
+        },
+        {
+          "type": "text",
+          "content": "2026"
+        },
+        {
+          "type": "text",
+          "content": "✨"
+        }
+      ]
+    }
+  },
+  "birthday": {
+    "today": [
+      {
+        "type": "text",
+        "content": "Today is mai birfday! YAY! (＊´∀｀*)ﾉ"
+      }
+    ],
+    "prefix": [
+      {
+        "type": "text",
+        "content": "Til mai birfday "
+      },
+      {
+        "type": "text",
+        "content": "onlee"
+      }
+    ],
+    "remain": [
+      {
+        "type": "text",
+        "content": ""
+      }
+    ],
+    "suffix": [
+      {
+        "type": "text",
+        "content": "dayz left~♡"
+      }
+    ]
+  },
+  "legal": {
+    "title": "Google Anality-Cats Privasee Agreemint",
+    "subtitle": "We Steal Ur Data But Iz Legul In 'MURICA",
+    "established": "2025-08-16",
+    "updated": "2026-07-22",
+    "version": "v.1.1 (Iz Nu)",
+    "author": "Yuri Nekotan",
+    "policyName": "Privasee Stuff",
+    "email": "quiettimejsg@gmail.com",
+    "back": "Back"
+  }
+}

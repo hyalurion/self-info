@@ -1,19 +1,50 @@
-/* Import font (keep unchanged) */
+/* Per-language fonts. KleeOne is shared by ja + en; Chinese uses LXGW WenKai. */
 @font-face {
     font-family: 'KleeOne-Regular';
     src: url('/fonts/KleeOne-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'NOTOSERIFJP-VF';
+    src: url('/fonts/NOTOSERIFJP-VF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LXGWWenKaiGB';
+    src: url('/fonts/zh-Hans/LXGWWenKaiGB-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LXGWWenKaiTC';
+    src: url('/fonts/zh-TW/LXGWWenKaiTC-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* App font switches by selected language (set on <html data-lang>) */
+:root {
+    --app-font: 'KleeOne-Regular', system-ui, sans-serif;
+    /* Purple theme */
+    --accent: #b388ff;
+    --accent-strong: #9d6bff;
+    --accent-soft: #c9a6ff;
+}
+:root[data-lang='ja'] { --app-font: 'KleeOne-Regular', system-ui, sans-serif; }
+:root[data-lang='en'] { --app-font: 'KleeOne-Regular', system-ui, sans-serif; }
+:root[data-lang='zh-Hans'] { --app-font: 'LXGWWenKaiGB', 'KleeOne-Regular', system-ui, sans-serif; }
+:root[data-lang='zh-TW'] { --app-font: 'LXGWWenKaiTC', 'KleeOne-Regular', system-ui, sans-serif; }
 
 * {
-    font-family: 'KleeOne-Regular', system-ui, sans-serif;
+    font-family: var(--app-font);
 }
 
 /* 1. Basic and Background Settings */
 body {
     margin: 0;
-    font-family: 'KleeOne-Regular', sans-serif;
+    font-family: var(--app-font);
     line-height: 1.6;
     user-select: none;
     padding: 60px 20px;

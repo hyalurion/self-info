@@ -1,43 +1,17 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import RichText from './RichText.vue'
+import { useI18n } from '../composables/useI18n.js'
 
 defineProps({
   showReading: { type: Boolean, default: false },
 })
 
+const { currentLang, setLang, SUPPORTED } = useI18n()
+
 const popupVisible = ref(false)
 
-const languages = [
-  {
-    code: 'en',
-    name: [{ type: 'ruby', kanji: '英語', reading: 'えいご' }],
-    localName: 'English',
-    link: 'https://hyalurion.github.io/self-info-en',
-  },
-  {
-    code: 'zh-Hans',
-    name: [
-      { type: 'ruby', kanji: '中国語', reading: 'ちゅうごくご' },
-      { type: 'text', content: '（' },
-      { type: 'ruby', kanji: '簡体字', reading: 'かんたいじ' },
-      { type: 'text', content: '）' },
-    ],
-    localName: '华文（马来西亚/新加坡）',
-    link: 'https://self-info-zh-hans.netlify.app/',
-  },
-  {
-    code: 'zh-TW',
-    name: [
-      { type: 'ruby', kanji: '中国語', reading: 'ちゅうごくご' },
-      { type: 'text', content: '（' },
-      { type: 'ruby', kanji: '繁体字', reading: 'はんたいじ' },
-      { type: 'text', content: '）' },
-    ],
-    localName: '繁體中文（台灣）',
-    link: 'https://hyalurion.github.io/self-info-zh-tw/',
-  },
-]
+const current = computed(() => SUPPORTED.find((l) => l.code === currentLang.value) || SUPPORTED[0])
 
 function togglePopup() {
   popupVisible.value = !popupVisible.value
@@ -50,6 +24,11 @@ function hidePopup() {
 function onPopupClick(e) {
   e.stopPropagation()
 }
+
+function choose(code) {
+  setLang(code)
+  hidePopup()
+}
 </script>
 
 <template>
@@ -60,9 +39,7 @@ function onPopupClick(e) {
     @click.stop="togglePopup"
   >
     <img src="/pic/lang.svg" alt="lang" class="lang-icon" />
-    <span class="lang-text">
-      <ruby :class="{ 'rt-hidden': !showReading }">日<rt>に</rt>本<rt>ほん</rt>語<rt>ご</rt></ruby>
-    </span>
+    <span class="lang-text">{{ current.native }}</span>
   </button>
 
   <!-- Language Popup -->
@@ -78,19 +55,16 @@ function onPopupClick(e) {
           class="language-popup"
           @click="onPopupClick"
         >
-          <a
-            v-for="(lang, index) in languages"
+          <button
+            v-for="(lang, index) in SUPPORTED"
             :key="lang.code"
-            :href="lang.link"
-            target="_blank"
             class="language-item"
             :style="{ borderTop: index > 0 ? '1px solid rgba(255, 255, 255, 0.15)' : 'none' }"
+            @click="choose(lang.code)"
           >
-            <div class="language-name">
-              <RichText :segments="lang.name" :showReading="showReading" />
-            </div>
-            <div class="language-local">{{ lang.localName }}</div>
-          </a>
+            <div class="language-name">{{ lang.native }}</div>
+            <div class="language-local">{{ lang.local }}</div>
+          </button>
         </div>
       </Transition>
     </div>
@@ -109,7 +83,7 @@ function onPopupClick(e) {
   -webkit-backdrop-filter: blur(2px) saturate(110%);
   border: none;
   color: #ffffff;
-  font-family: 'KleeOne-Regular', system-ui, sans-serif;
+  font-family: var(--app-font);
   font-size: 13px;
   cursor: pointer;
   z-index: 1000;
@@ -151,14 +125,10 @@ function onPopupClick(e) {
   line-height: 1.3;
 }
 
-.lang-text rt {
-  font-size: 0.55em;
-}
-
 .language-popup-overlay {
   position: fixed;
   inset: 0;
-  z-index: 1001;
+  z-index: 10002;
   background: transparent;
   pointer-events: none;
 }
@@ -177,6 +147,7 @@ function onPopupClick(e) {
   padding: 10px;
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.05);
+  z-index: 10002;
   backdrop-filter: blur(2px) saturate(110%);
   -webkit-backdrop-filter: blur(2px) saturate(110%);
   box-shadow:
@@ -184,7 +155,6 @@ function onPopupClick(e) {
     inset 0 0 0 0.5px rgba(255, 255, 255, 0.08),
     0 4px 16px rgba(0, 0, 0, 0.1),
     0 16px 48px rgba(0, 0, 0, 0.08);
-  z-index: 1001;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -219,20 +189,26 @@ function onPopupClick(e) {
 
 .language-item {
   display: block;
+  width: 100%;
+  text-align: left;
   padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
   color: #ffffff;
   text-decoration: none;
+  cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: var(--app-font);
 }
 
 .language-item:hover {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(2px) saturate(110%);
   -webkit-backdrop-filter: blur(2px) saturate(110%);
-  border-radius: 12px;
   transform: translateX(3px);
 }
 
@@ -258,10 +234,6 @@ function onPopupClick(e) {
   .lang-icon {
     width: 13px;
     height: 13px;
-  }
-
-  .lang-text rt {
-    font-size: 0.5em;
   }
 
   .language-popup {

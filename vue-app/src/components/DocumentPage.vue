@@ -1,240 +1,87 @@
 <script setup>
-const emit = defineEmits(['back'])
+import { computed } from 'vue'
+import MarkdownRenderer from './MarkdownRenderer.vue'
+import { useI18n } from '../composables/useI18n.js'
+import { useNav } from '../composables/useNav.js'
+
+const { currentLang, content, formatLongDate } = useI18n()
+const { back } = useNav()
+
+import jaMd from '../data/legal/ja.md?raw'
+import enMd from '../data/legal/en.md?raw'
+import zhHansMd from '../data/legal/zh-Hans.md?raw'
+import zhTWMd from '../data/legal/zh-TW.md?raw'
+
+const DOCS = {
+  ja: jaMd,
+  en: enMd,
+  'zh-Hans': zhHansMd,
+  'zh-TW': zhTWMd,
+}
+
+const legal = computed(() => content.value.legal || {})
+const source = computed(() => DOCS[currentLang.value] || jaMd)
 </script>
 
 <template>
   <div class="document-page">
-    <button class="back-button" @click="emit('back')">← 戻る</button>
+    <button class="back-button" @click="back()">← {{ legal.back || (currentLang === 'ja' ? '戻る' : 'Back') }}</button>
     <div class="doc-container">
       <header>
-        <h1>Google Analytics利用に関するプライバシー同意書</h1>
-        <div class="subtitle">個人情報保護法（APPI）準拠のデータ収集について</div>
+        <h1>{{ legal.title }}</h1>
+        <div class="subtitle">{{ legal.subtitle }}</div>
       </header>
 
       <div class="meta-info">
-        <div>制定日: 2025年8月16日</div>
-        <div>最終更新: 2026年4月30日</div>
-        <div>v.1.1</div>
+        <div>{{ formatLongDate(legal.established, currentLang) }}</div>
+        <div>{{ formatLongDate(legal.updated, currentLang) }}</div>
+        <div>{{ legal.version }}</div>
       </div>
 
-      <div class="doc-content">
-        <h2>版本更新機制</h2>
-        <p>本同意書の改定時、当サイトは変更内容をウェブサイト上でご通知しない場合があります。ただし、実質的な内容変更がある場合は、必ずご通知いたします。</p>
+      <MarkdownRenderer class="doc-content" :source="source" />
 
-        <h2>基本方針</h2>
-        <p>当サービスは、Google Analyticsを利用するにあたり、日本の個人情報保護法（以下「APPI」）及び関連法令を遵守します。本同意書は、Google Analyticsを通じて収集する情報の種類、利用目的、管理方法について説明し、ユーザーの明確な同意を得ることを目的としています。</p>
-
-        <h2>定義条項</h2>
-        <ul>
-          <li><strong>当サービス</strong>: 琉璃ねこたんが提供するすべてのウェブサービス及び関連機能を指します。</li>
-          <li><strong>ユーザー</strong>: 当サービスを利用するすべての個人を指します。</li>
-          <li><strong>匿名ID</strong>: 個人を特定できないように処理された一意の識別子で、復号することが不可能な形式です。</li>
-          <li><strong>Google Analytics</strong>: Google LLCが提供するウェブアナリティクスサービスを指します。</li>
-        </ul>
-
-        <div class="notice-box">
-          <strong>重要なお知らせ:</strong> 当サービスは広告目的の追跡を行わないGoogle Analytics設定を採用しています。収集データはサービス改善のみに利用され、個人を特定する目的では使用しません。
-        </div>
-
-        <h2>第1条 収集するデータの種類</h2>
-        <p>当サービスで利用するGoogle Analyticsは以下のデータを収集します:</p>
-
-        <h3>A. 個人関連情報</h3>
-        <ul>
-          <li><strong>ユーザー識別子</strong>: ランダムに生成された匿名ID（復号不可能な匿名化処理を施した形式）</li>
-          <li><strong>デバイス情報</strong>: 端末タイプ、OSバージョン、ブラウザ種類</li>
-          <li><strong>ネットワーク情報</strong>: IPアドレス（匿名化処理済み）、ネットワークプロバイダー</li>
-        </ul>
-
-        <h3>B. 行動データ</h3>
-        <ul>
-          <li><strong>利用状況</strong>: ページビュー数、セッション時間、離脱率</li>
-          <li><strong>操作データ</strong>: クリックイベント、スクロール深度、インタラクション時間</li>
-          <li><strong>参照元</strong>: アクセス元サイト・プラットフォーム（個人を特定しない集計レベル）</li>
-        </ul>
-
-        <h3>C. 位置情報</h3>
-        <ul>
-          <li><strong>地域データ</strong>: 国、都道府県レベルの位置情報（GPSデータではなくIPアドレスから推測）</li>
-          <li><strong>精密位置情報</strong>: 特定機能利用時に限り収集（利用前に別途同意取得）</li>
-        </ul>
-
-        <h2>第2条 データ利用目的</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>データ種類</th>
-              <th>利用目的</th>
-              <th>法的根拠</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>ユーザー識別子</td>
-              <td>ユーザー体験の継続性提供（例：設定保存）</td>
-              <td>契約履行（APPI第23条1項1号）</td>
-            </tr>
-            <tr>
-              <td>デバイス情報</td>
-              <td>端末最適化、障害分析</td>
-              <td>正当な利益（APPI第23条1項3号）</td>
-            </tr>
-            <tr>
-              <td>利用状況データ</td>
-              <td>サービス改善、新機能開発</td>
-              <td>明示的同意（APPI第23条1項4号）</td>
-            </tr>
-            <tr>
-              <td>地域データ</td>
-              <td>地域別利用傾向分析</td>
-              <td>明示的同意（APPI第23条1項4号）</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h2>第3条 データの第三者提供</h2>
-        <p>収集データは以下の場合を除き第三者に提供されません:</p>
-        <ul>
-          <li><strong>Google LLC</strong>: データ処理委託先として、当社との間でAPPI第28条に基づく委託契約を締結</li>
-          <li><strong>法的要請時</strong>: 裁判所命令等の法的強制力のある要請による提供</li>
-        </ul>
-
-        <div class="notice-box">
-          <strong>国際データ転送に関する注意:</strong> Googleへのデータ提供は、個人情報保護委員会が認定する十分性認定（APPI第28条）及び標準契約条項（SCCs）に基づいて行われます。
-        </div>
-
-        <h2>第4条 データ保護措置</h2>
-        <ul>
-          <li><strong>匿名化</strong>: IPアドレスに基づく地域推測情報のみを記録し</li>
-          <li><strong>暗号化</strong>: 転送時(TLS 1.3以上)、保存時(AES-256)</li>
-          <li><strong>保存期間</strong>: 最大14ヶ月（ユーザーが削除要求した場合は即時削除）</li>
-          <li><strong>アクセス制限</strong>: データアクセスは最小権限の原則に基づく</li>
-        </ul>
-
-        <h2>第5条 ユーザーの権利</h2>
-        <p>日本居住者は以下の権利を行使できます（APPI第3章）:</p>
-
-        <table>
-          <thead>
-            <tr>
-              <th>権利</th>
-              <th>内容</th>
-              <th>行使方法</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>開示請求</td>
-              <td>保有個人データの開示</td>
-              <td>問い合わせ窓口へ請求</td>
-            </tr>
-            <tr>
-              <td>訂正請求</td>
-              <td>内容訂正・追加・削除</td>
-              <td>同上</td>
-            </tr>
-            <tr>
-              <td>利用停止</td>
-              <td>収集・利用・提供の停止</td>
-              <td>設定画面または問い合わせ</td>
-            </tr>
-            <tr>
-              <td>消去請求</td>
-              <td>データの完全消去</td>
-              <td>問い合わせ窓口へ請求</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <p>権利行使窓口: </p>
-        <p>
-          <a href="mailto:quiettimejsg@gmail.com">
-            quiettimejsg@gmail.com
-          </a>
-        </p>
-
-        <div class="notice-box">
-          <strong>重要:</strong> データ消去要求はGoogle Analytics上で処理されますが、バックアップシステムから完全に削除されるまで最大30日を要します（APPI第33条）。
-        </div>
-
-        <h2>第6条 児童データ処理</h2>
-        <p>当サービスは、16歳未満のユーザー（児童）から個人情報を収集する場合、予め保護者の同意を取得します。保護者は、児童の個人情報に関する開示、訂正、利用停止、消去を請求することができます。</p>
-
-        <h2>第7条 同意管理プロセス</h2>
-        <ol>
-          <li>初回アクセス時に本同意書を提示</li>
-          <li>同意撤回時は直ちにデータ収集を停止</li>
-          <li>同意撤回後、当サイトはGoogle AnalyticsのCookieを無効化し、新規データ収集を停止します</li>
-        </ol>
-        <h2>第8条 Cookie政策</h2>
-        <p>当サービスは、以下に記載する目的でCookieを使用します。Cookieとは、ウェブサイトの利用状況を記録するためにユーザーの端末に保存される小さなデータファイルです。</p>
-
-        <h3>A. 使用するCookieの種類と目的</h3>
-        <ul>
-          <li><strong>分析用Cookie</strong>: Google Analyticsを通じて収集されるCookieで、サイト利用状況の分析、サービス改善に使用されます。</li>
-          <li><strong>機能性Cookie</strong>: ユーザー設定の記憶、サービスの円滑な提供に必要なCookieです。</li>
-          <li><strong>必須Cookie</strong>: サービスの基本的な機能を提供するために必要なCookieで、これらを無効にすると一部機能が利用できなくなる場合があります。</li>
-        </ul>
-
-        <h3>B. Cookieの保存期限</h3>
-        <p>当サービスが使用するCookieの保存期限は、その種類によって異なります:</p>
-        <ul>
-          <li>分析用Cookie: 最長2年</li>
-          <li>機能性Cookie: 最長14月</li>
-          <li>必須Cookie: セッション期間（ブラウザを閉じると削除）</li>
-        </ul>
-
-        <h3>C. Cookieの管理方法</h3>
-        <p>ユーザーは、以下の方法でCookieを管理または無効にすることができます:</p>
-        <ul>
-          <li><strong>ブラウザ設定</strong>: 各ブラウザの設定からCookieの保存を拒否したり、既存のCookieを削除したりすることができます。</li>
-          <li><strong>Google Analyticsのオプトアウト</strong>: Googleが提供するブラウザ拡張機能を使用して、Google Analyticsによるデータ収集を無効にすることができます（<a href="https://tools.google.com/dlpage/gaoptout">https://tools.google.com/dlpage/gaoptout</a>）。</li>
-        </ul>
-
-        <h3>D. 第三者Cookie</h3>
-        <p>当サービスでは、Google Analyticsなどの第三者サービスによるCookieが使用される場合があります。これらのCookieの使用については、各第三者のプライバシーポリシーをご確認ください。</p>
-
-        <h3>E. Cookie同意の撤回</h3>
-        <p>ユーザーはいつでもCookieの使用に同意することを撤回することができます。撤回方法については、上記の「Cookieの管理方法」をご参照ください。</p>
-      </div>
       <footer>
-        <p>© 2026 琉璃ねこたん | 個人情報保護方針</p>
-        <p>お問い合わせ: quiettimejsg@gmail.com</p>
+        <p>© 2026 {{ legal.author }} | {{ legal.policyName }}</p>
+        <p>{{ legal.email }}</p>
       </footer>
     </div>
   </div>
 </template>
 
-<style>
-@font-face {
-  font-family: 'Noto Serif JP';
-  src: url('../../../fonts/NOTOSERIFJP-VF.woff2') format('woff2');
-}
-
+<style scoped>
 .document-page {
-  --doc-text: #333333;
-  --doc-light-text: #555555;
-  --doc-background: #ffffff;
-  --doc-light-bg: #f5f5f5;
-  --doc-border: #cccccc;
-
   position: fixed;
   inset: 0;
   z-index: 10000;
   overflow-y: auto;
-  font-family: 'Noto Serif JP', 'Times New Roman', serif !important;
+  font-family: var(--app-font);
   line-height: 1.7;
-  color: var(--doc-text);
-  background: var(--doc-light-bg);
-  padding: 20px;
+  color: #f3eeff;
+  background:
+    linear-gradient(rgba(18, 10, 32, 0.62), rgba(18, 10, 32, 0.62)),
+    url('/pic/bg.avif');
+  background-size: cover;
+  background-position: 52.5% center;
+  background-attachment: fixed;
+  padding: 24px 16px 48px;
   box-sizing: border-box;
 }
 
 .document-page * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: inherit !important;
+}
+
+.doc-container {
+  max-width: 880px;
+  margin: 0 auto;
+  backdrop-filter: blur(3px) saturate(100%);
+  -webkit-backdrop-filter: blur(3px) saturate(100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.25),
+    0 8px 40px rgba(0, 0, 0, 0.35);
+  border-radius: 24px;
+  overflow: hidden;
 }
 
 .document-page h1,
@@ -248,150 +95,76 @@ const emit = defineEmits(['back'])
 .document-page strong,
 .document-page a,
 .document-page span {
-  color: var(--doc-text);
-}
-
-.back-button {
-  display: block;
-  margin: 0 auto 20px;
-  padding: 10px 24px;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #333333;
-  color: white;
-  border: 1px solid var(--doc-border);
-  cursor: pointer;
-}
-
-.back-button:hover {
-  background-color: #555555;
-}
-
-.doc-container {
-  max-width: 900px;
-  margin: 0 auto;
-  background: var(--doc-background);
-  border: 1px solid var(--doc-border);
+  color: #f3eeff;
 }
 
 .document-page header {
-  background: var(--doc-background);
-  color: var(--doc-text);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
+  color: #f3eeff;
   padding: 30px 40px;
   text-align: center;
-  border-bottom: 2px solid var(--doc-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .document-page h1 {
-  font-size: 28px;
+  font-size: 26px;
   margin-bottom: 8px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .document-page .subtitle {
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-size: 16px;
+  opacity: 0.85;
+  margin-top: 8px;
 }
 
 .meta-info {
   display: flex;
   justify-content: space-between;
-  padding: 15px 30px;
-  color: var(--doc-light-text);
+  gap: 12px;
+  padding: 14px 30px;
+  color: #cbb8ff;
   font-size: 14px;
-  border-bottom: 1px solid var(--doc-border);
-  background-color: var(--doc-light-bg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .doc-content {
   padding: 30px 40px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.document-page h2 {
-  color: var(--doc-text);
-  margin: 35px 0 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--doc-border);
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.document-page h3 {
-  color: var(--doc-text);
-  margin: 25px 0 15px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.document-page p {
-  margin-bottom: 15px;
-  text-align: justify;
-}
-
-.document-page ul,
-.document-page ol {
-  margin: 0 0 20px 25px;
-}
-
-.document-page li {
-  margin-bottom: 10px;
-  position: relative;
-  padding-left: 20px;
-}
-
-.document-page table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-}
-
-.document-page th {
-  background-color: var(--doc-light-bg);
-  color: var(--doc-text);
-  font-weight: bold;
-  text-align: left;
-}
-
-.document-page th,
-.document-page td {
-  padding: 12px;
-  border: 1px solid var(--doc-border);
-}
-
-.document-page tr:nth-child(even) {
-  background-color: var(--doc-light-bg);
-}
-
-.document-page .notice-box {
-  background-color: var(--doc-light-bg);
-  border-left: 5px solid #333333;
-  padding: 15px;
-  margin: 20px 0;
 }
 
 .document-page footer {
   text-align: center;
   padding: 20px;
-  background: var(--doc-light-bg);
-  color: var(--doc-light-text);
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbb8ff;
   font-size: 14px;
-  border-top: 1px solid var(--doc-border);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.back-button {
+  display: block;
+  margin: 0 auto 18px;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
 }
 
 @media (max-width: 768px) {
-  .doc-content {
-    padding: 20px;
-  }
-
-  .document-page header {
-    padding: 20px;
-  }
-
-  .meta-info {
-    flex-direction: column;
-    gap: 10px;
-  }
+  .doc-content { padding: 20px; }
+  .document-page header { padding: 22px; }
+  .meta-info { flex-direction: column; gap: 6px; padding: 14px 20px; }
+  .document-page h1 { font-size: 22px; }
 }
 </style>

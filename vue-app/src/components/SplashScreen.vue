@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import RichText from './RichText.vue'
+import { useNav } from '../composables/useNav.js'
 
 const props = defineProps({
   data: { type: Object, required: true },
@@ -8,6 +9,14 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['consent'])
+const { navigate } = useNav()
+
+function onLinkClick(link, e) {
+  if (link.href === 'document.html') {
+    e.preventDefault()
+    navigate('document')
+  }
+}
 
 const visible = ref(true)
 const rejected = ref(false)
@@ -24,19 +33,20 @@ function reject() {
   }, 5000)
 }
 
-const rejectionTitle = [
+// Rejection copy is language-specific; fall back to Japanese if absent.
+const rejectionTitle = props.data?.rejection?.title || [
   { type: 'text', content: 'アクセスが' },
   { type: 'ruby', kanji: '制限', reading: 'せいげん' },
   { type: 'text', content: 'されました' },
 ]
-const rejectionText1 = [
+const rejectionText1 = props.data?.rejection?.text1 || [
   { type: 'text', content: 'プライバシーポリシーに' },
   { type: 'ruby', kanji: '同意', reading: 'どうい' },
   { type: 'text', content: 'しない' },
   { type: 'ruby', kanji: '場合', reading: 'ばあい' },
   { type: 'text', content: '、サイトにアクセスできません。' },
 ]
-const rejectionText2 = [
+const rejectionText2 = props.data?.rejection?.text2 || [
   { type: 'text', content: '5' },
   { type: 'ruby', kanji: '秒後', reading: 'びょうご' },
   { type: 'text', content: 'にトップページにリダイレクトします...' },
@@ -53,7 +63,7 @@ const rejectionText2 = [
         <RichText :segments="text" :showReading="showReading" />
       </p>
       <div class="privacy-links">
-        <a v-for="(link, i) in data.links" :key="i" :href="link.href === 'document.html' ? '?page=document' : link.href" class="privacy-link">
+        <a v-for="(link, i) in data.links" :key="i" :href="link.href === 'document.html' ? '?page=document' : link.href" class="privacy-link" @click="onLinkClick(link, $event)">
           <RichText :segments="link.text" :showReading="showReading" />
         </a>
       </div>

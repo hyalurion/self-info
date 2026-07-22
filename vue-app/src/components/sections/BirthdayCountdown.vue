@@ -1,9 +1,20 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import RichText from '../RichText.vue'
+import { useI18n } from '../../composables/useI18n.js'
 
 defineProps({
   showReading: { type: Boolean, default: false },
+})
+
+const { content } = useI18n()
+
+// Birthday copy is multilingual (see i18n JSON `birthday` field), falling back to ja.
+const bday = computed(() => content.value.birthday || {
+  today: [{ type: 'text', content: 'Today is my birthday! (＊´∀｀*)ﾉ' }],
+  prefix: [{ type: 'text', content: 'My birthday is in ' }],
+  remain: [],
+  suffix: [{ type: 'text', content: ' days! ♡' }],
 })
 
 const days = ref(null)
@@ -80,27 +91,6 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(timer)
 })
-
-const bdayToday = [
-  { type: 'ruby', kanji: '今日', reading: 'きょう' },
-  { type: 'text', content: 'は、' },
-  { type: 'ruby', kanji: '私', reading: 'わたし' },
-  { type: 'text', content: 'の' },
-  { type: 'ruby', kanji: '誕生日', reading: 'たんじょうび' },
-  { type: 'text', content: 'なんだよ～！(＊´∀｀*)ﾉ' },
-]
-const cdownBirthday = [
-  { type: 'text', content: 'お' },
-  { type: 'ruby', kanji: '誕生日', reading: 'たんじょうび' },
-  { type: 'text', content: 'まで' },
-]
-const cdownRemain = [
-  { type: 'text', content: 'あと' },
-]
-const cdownSuffix = [
-  { type: 'ruby', kanji: '日', reading: 'にち' },
-  { type: 'text', content: 'なの～♡' },
-]
 </script>
 
 <template>
@@ -108,15 +98,15 @@ const cdownSuffix = [
     <template v-if="isBirthday">
       <span class="cake-icon">🎂</span>
       <span class="birthday-today">
-        <RichText :segments="bdayToday" :showReading="showReading" />
+        <RichText :segments="bday.today" :showReading="showReading" />
       </span>
     </template>
     <template v-else>
       <span class="cake-icon">🎂</span>
-      <span><RichText :segments="cdownBirthday" :showReading="showReading" /></span>
-      <span><RichText :segments="cdownRemain" :showReading="showReading" /></span>
+      <span><RichText :segments="bday.prefix" :showReading="showReading" /></span>
+      <span><RichText :segments="bday.remain" :showReading="showReading" /></span>
       <span class="days-count" id="days">{{ days }}</span>
-      <span><RichText :segments="cdownSuffix" :showReading="showReading" /></span>
+      <span><RichText :segments="bday.suffix" :showReading="showReading" /></span>
     </template>
   </div>
 </template>

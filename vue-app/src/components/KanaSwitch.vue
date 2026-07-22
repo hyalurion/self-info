@@ -1,6 +1,9 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import RichText from './RichText.vue'
+import { useI18n } from '../composables/useI18n.js'
+
+const { currentLang } = useI18n()
 
 const props = defineProps({
   modelValue: { type: Boolean, default: false },
@@ -123,6 +126,18 @@ const textKanaOff = [
   { type: 'ruby', kanji: '仮名', reading: 'かな' },
   { type: 'text', content: 'なし' },
 ]
+
+// For Traditional Chinese the same toggle controls 注音 (zhuyin) instead of 仮名.
+const labelOn = computed(() =>
+  currentLang.value === 'zh-TW'
+    ? [{ type: 'text', content: '注音 開' }]
+    : textKanaOn,
+)
+const labelOff = computed(() =>
+  currentLang.value === 'zh-TW'
+    ? [{ type: 'text', content: '注音 關' }]
+    : textKanaOff,
+)
 </script>
 
 <template>
@@ -138,7 +153,7 @@ const textKanaOff = [
     tabindex="0"
   >
     <span class="kana-switch-text">
-      <RichText :segments="modelValue ? textKanaOn : textKanaOff" :showReading="showReading" />
+      <RichText :segments="modelValue ? labelOn : labelOff" :showReading="showReading" />
     </span>
     <div ref="trackRef" class="kana-switch-track" :class="{ active: modelValue }">
       <div
@@ -241,7 +256,7 @@ const textKanaOff = [
   color: #ffffff;
   font-size: 12px;
   font-weight: 500;
-  font-family: 'KleeOne-Regular', system-ui, sans-serif;
+  font-family: var(--app-font);
   text-shadow:
     0 0 1px rgba(255, 255, 255, 0.6),
     0 1px 3px rgba(0, 0, 0, 0.5);

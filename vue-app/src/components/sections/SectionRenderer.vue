@@ -6,6 +6,17 @@ const props = defineProps({
   section: { type: Object, required: true },
   showReading: { type: Boolean, default: false },
 })
+
+// A rich-text value may be either an array of segments (ja schema) or a single
+// segment object (some other-language schemas). Normalize so RichText always
+// receives an array.
+function asSegs(v) {
+  if (!v) return []
+  return Array.isArray(v) ? v : [v]
+}
+function hasSegs(v) {
+  return asSegs(v).length > 0
+}
 </script>
 
 <template>
@@ -35,9 +46,9 @@ const props = defineProps({
     <h3 class="section-title"><RichText :segments="section.titleRich" :showReading="showReading" /></h3>
     <ul>
       <li v-for="(item, i) in section.items" :key="i">
-        <span class="highlight"><RichText :segments="item.label" :showReading="showReading" /></span>
-        <span class="info-text"><RichText :segments="item.value" :showReading="showReading" /></span>
-        <RichText v-if="item.note && item.note.length > 0" class="note-text" :segments="item.note" :showReading="showReading" />
+        <span class="highlight"><RichText :segments="asSegs(item.label)" :showReading="showReading" /></span>
+        <span class="info-text"><RichText :segments="asSegs(item.value)" :showReading="showReading" /></span>
+        <RichText v-if="hasSegs(item.note)" class="note-text" :segments="asSegs(item.note)" :showReading="showReading" />
       </li>
     </ul>
   </div>

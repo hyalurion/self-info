@@ -1,6 +1,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import RichText from './RichText.vue'
+import { useNav } from '../composables/useNav.js'
+
+const { navigate } = useNav()
 
 const props = defineProps({
   data: { type: Object, required: true },
@@ -164,7 +167,7 @@ onUnmounted(() => {
 
   <!-- Changelog -->
   <div v-if="data.changelog.href" class="ui-changelog-container">
-    <a :href="data.changelog.href" target="_blank">
+    <a :href="data.changelog.href" @click.prevent="navigate('changelog')">
       <RichText :segments="data.changelog.dateRich" :showReading="showReading" />
       <img :src="data.changelog.img" alt="changelog" class="icon" />
       <RichText :segments="data.changelog.dateAfterImg" :showReading="showReading" />
