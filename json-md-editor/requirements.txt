@@ -1,0 +1,4 @@
+PyQt6>=6.6.0
+markdown>=3.5.0
+# If you want a higher-quality Markdown preview, you can install the PyQt6-WebEngine package.
+# PyQt6-WebEngine>=6.6.0
