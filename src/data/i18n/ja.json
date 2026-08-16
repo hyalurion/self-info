@@ -1603,57 +1603,28 @@
       [
         {
           "type": "ruby",
-          "kanji": "精",
-          "reading": "せい"
+          "kanji": "背景",
+          "reading": "はいけい"
         },
         {
           "type": "ruby",
-          "kanji": "霊",
-          "reading": "れい"
-        },
-        {
-          "type": "ruby",
-          "kanji": "公",
-          "reading": "こう"
-        },
-        {
-          "type": "ruby",
-          "kanji": "主",
-          "reading": "しゅ"
-        },
-        {
-          "type": "text",
-          "content": "-"
-        },
-        {
-          "type": "ruby",
-          "kanji": "星",
-          "reading": "せい"
-        },
-        {
-          "type": "ruby",
-          "kanji": "雨",
-          "reading": "う"
-        },
-        {
-          "type": "text",
-          "content": " | "
-        },
-        {
-          "type": "ruby",
-          "kanji": "梅原",
-          "reading": "うめはら"
-        },
-        {
-          "type": "ruby",
-          "kanji": "生",
-          "reading": "せい"
+          "kanji": "画像",
+          "reading": "がぞう"
         }
       ],
       [
         {
           "type": "text",
-          "content": "Pixiv ID | 143355054"
+          "content": "AIさんが"
+        },
+        {
+          "type": "ruby",
+          "kanji": "創作",
+          "reading": "そうさく"
+        },
+        {
+          "type": "text",
+          "content": "したにゃ～"
         }
       ],
       [
@@ -1679,7 +1650,7 @@
     },
     "changelog": {
       "href": "?page=changelog",
-      "date": "✨更新|2026年07月22日 ✨",
+      "date": "✨更新|2026年08月16日 ✨",
       "dateRich": [
         {
           "type": "text",
@@ -1708,7 +1679,7 @@
         },
         {
           "type": "text",
-          "content": "07"
+          "content": "08"
         },
         {
           "type": "ruby",
@@ -1717,7 +1688,7 @@
         },
         {
           "type": "text",
-          "content": "22"
+          "content": "16"
         },
         {
           "type": "ruby",

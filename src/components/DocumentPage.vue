@@ -93,7 +93,7 @@ const source = computed(() => {
     linear-gradient(rgba(18, 10, 32, 0.62), rgba(18, 10, 32, 0.62)),
     url('/pic/bg.avif');
   background-size: cover;
-  background-position: 52.5% center;
+  background-position: 25% 20%;
   background-attachment: fixed;
   padding: 24px 16px 48px;
   box-sizing: border-box;

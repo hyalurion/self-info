@@ -2398,62 +2398,74 @@
       [
         {
           "type": "ruby",
-          "kanji": "精",
-          "reading": "ㄐㄧㄥ"
+          "kanji": "背",
+          "reading": "ㄅㄟˋ"
         },
         {
           "type": "ruby",
-          "kanji": "靈",
-          "reading": "ㄌㄧㄥˊ"
+          "kanji": "景",
+          "reading": "ㄐㄧㄥˇ"
         },
         {
           "type": "ruby",
-          "kanji": "公",
-          "reading": "ㄍㄨㄥ"
+          "kanji": "圖",
+          "reading": "ㄊㄨˊ"
         },
         {
           "type": "ruby",
-          "kanji": "主",
-          "reading": "ㄓㄨˇ"
+          "kanji": "片",
+          "reading": "ㄆㄧㄢˋ"
+        }
+      ],
+      [
+        {
+          "type": "ruby",
+          "kanji": "是",
+          "reading": "ㄕˋ"
+        },
+        {
+          "type": "ruby",
+          "kanji": "由",
+          "reading": "ㄧㄡˊ"
         },
         {
           "type": "text",
-          "content": " - "
+          "content": "AI"
         },
         {
           "type": "ruby",
-          "kanji": "星",
-          "reading": "ㄒㄧㄥ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "雨",
-          "reading": "ㄩˇ"
-        },
-        {
-          "type": "text",
-          "content": " | "
-        },
-        {
-          "type": "ruby",
-          "kanji": "梅",
-          "reading": "ㄇㄟˊ"
-        },
-        {
-          "type": "ruby",
-          "kanji": "原",
-          "reading": "ㄩㄢˊ"
+          "kanji": "先",
+          "reading": "ㄒㄧㄣ"
         },
         {
           "type": "ruby",
           "kanji": "生",
           "reading": "ㄕㄥ"
+        },
+        {
+          "type": "ruby",
+          "kanji": "創",
+          "reading": "ㄔㄨㄤˋ"
+        },
+        {
+          "type": "ruby",
+          "kanji": "作",
+          "reading": "ㄗㄨㄛˋ"
+        },
+        {
+          "type": "ruby",
+          "kanji": "噠",
+          "reading": "ㄉㄚ"
+        },
+        {
+          "type": "text",
+          "content": "~"
         }
       ],
       [
         {
           "type": "text",
-          "content": "Pixiv ID | 143355054"
+          "content": "BGM | 心做し (Kokoronashi)"
         }
       ]
     ]
@@ -2468,7 +2480,7 @@
     },
     "changelog": {
       "href": "?page=changelog",
-      "date": "✨更新 | 2026年07月22日 ✨", 
+      "date": "✨更新 | 2026年08月16日 ✨", 
       "dateRich": [
         {
           "type": "text",
@@ -2502,7 +2514,7 @@
         },
         {
           "type": "text",
-          "content": "07"
+          "content": "08"
         },
         {
           "type": "ruby",
@@ -2511,7 +2523,7 @@
         },
         {
           "type": "text",
-          "content": "22"
+          "content": "16"
         },
         {
           "type": "ruby",

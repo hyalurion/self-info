@@ -63,7 +63,7 @@ body::before {
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
         url('/pic/bg.avif');
     background-size: cover;
-    background-position: 52.5% center;
+    background-position: 25% 20% ;
     background-attachment: scroll;
 }
 
