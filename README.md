@@ -4,7 +4,7 @@
 >
 > ここは、琉璃ねこたんこと **Hyalurion** のことを、みんなにゆるっと知ってもらうための多言語プロフィールサイトだよ。Vue 3 と Vite の魔法で動いていて、桜がひらひら、紫色がきらきらしてるにゃ〜♡
 
-[もっと詳しく（English）](./README.en.md) · [公開サイトで遊ぶにゃ！](https://yuri-self-info.netlify.app/)
+[English](./README.en.md) · [公開サイトで遊ぶにゃ！](https://yuri-self-info.netlify.app/)
 
 ## 🌟 このサイトでできること
 
