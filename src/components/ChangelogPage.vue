@@ -52,7 +52,11 @@ function fmtDate(iso) {
   <div class="changelog-page">
     <LanguageSelector />
 
-    <button class="back-button" @click="back">← {{ TEXT.back }}</button>
+    <button class="back-button" @click="back" aria-label="Back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </button>
 
     <header class="changelog-header">
       <h1>{{ TEXT.title }}</h1>
@@ -104,26 +108,79 @@ function fmtDate(iso) {
   to { opacity: 1; }
 }
 
+.cl-leave-active {
+  transition:
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center bottom;
+}
+.cl-leave-to {
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  filter: blur(8px);
+}
+
 .back-button {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 10001;
-  padding: 9px 18px;
-  font-size: 14px;
-  font-weight: bold;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(2px) saturate(120%);
-  -webkit-backdrop-filter: blur(2px) saturate(120%);
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: #fff;
-  border-radius: 16px;
+  border-radius: 50%;
   cursor: pointer;
-  transition: all 0.3s ease;
+  box-shadow:
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0.5px rgba(255, 255, 255, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    0 16px 40px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.back-button svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .back-button:hover {
-  background: rgba(255, 255, 255, 0.16);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px) scale(1.06);
+  box-shadow:
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0.5px rgba(255, 255, 255, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    0 10px 28px rgba(0, 0, 0, 0.14),
+    0 24px 64px rgba(0, 0, 0, 0.1);
+}
+.back-button:hover svg {
+  transform: translateX(-1px);
+}
+.back-button:active {
+  transform: translateY(1px) scale(0.9);
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.12);
+  transition-duration: 0.08s;
+}
+.back-button:active svg {
+  transform: translateX(-1px);
 }
 
 .changelog-header {

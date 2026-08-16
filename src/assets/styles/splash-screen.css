@@ -148,12 +148,18 @@
 .privacy-link {
     color: #ffb6c1;
     text-decoration: none;
-    transition: color 0.3s ease;
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.15s ease;
 }
 
 .privacy-link:hover {
     color: #ff69b4;
     text-decoration: underline;
+}
+
+.privacy-link:active {
+    color: #ff1493;
+    transform: translateY(1px) scale(0.97);
 }
 
 .privacy-buttons {
@@ -198,6 +204,16 @@
         0 8px 24px rgba(255, 105, 180, 0.4);
 }
 
+.consent-button.accept:active {
+    transform: translateY(1px) scale(0.97);
+    background: rgba(255, 105, 180, 0.78);
+    box-shadow:
+        inset 0 2px 6px rgba(0, 0, 0, 0.22),
+        inset 0 0.5px 0.5px rgba(255, 255, 255, 0.3),
+        0 1px 2px rgba(255, 105, 180, 0.2);
+    transition-duration: 0.08s;
+}
+
 .consent-button.reject {
     background: rgba(255, 255, 255, 0.06);
     color: #f9cbff;
@@ -216,6 +232,16 @@
         inset 0 0.5px 0.5px rgba(255, 255, 255, 0.4),
         inset 0 0 0 0.5px rgba(255, 255, 255, 0.12),
         0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.consent-button.reject:active {
+    transform: translateY(1px) scale(0.97);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow:
+        inset 0 2px 6px rgba(0, 0, 0, 0.22),
+        inset 0 0.5px 0.5px rgba(255, 255, 255, 0.3),
+        0 1px 2px rgba(0, 0, 0, 0.12);
+    transition-duration: 0.08s;
 }
 
 /* 5. Animation Keyframes */

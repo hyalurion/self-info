@@ -306,6 +306,16 @@ onUnmounted(() => {
     0 4px 20px rgba(0, 0, 0, 0.12);
 }
 
+.ui-changelog-container a:active {
+  transform: translateY(1px) scale(0.97);
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.2),
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.12);
+  transition-duration: 0.08s;
+}
+
 .ui-changelog-container .icon {
   width: 16px;
   height: 16px;

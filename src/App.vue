@@ -70,7 +70,9 @@ onMounted(() => {
   <LoadingScreen v-if="consentGiven && loading && !isSubPage" :data="content.loadingScreen" :showReading="showReading" @complete="onLoadingComplete" />
 
   <DocumentPage v-if="currentPage === 'document'" />
-  <ChangelogPage v-if="currentPage === 'changelog'" />
+  <Transition name="cl" :duration="500">
+    <ChangelogPage v-if="currentPage === 'changelog'" />
+  </Transition>
 
   <div v-if="showContent && !isSubPage" class="page-wrapper">
     <SakuraCanvas />

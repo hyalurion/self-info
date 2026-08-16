@@ -38,7 +38,11 @@ const source = computed(() => {
 
 <template>
   <div class="document-page">
-    <button class="back-button" @click="back()">← {{ legal.back || (currentLang === 'ja' ? '戻る' : 'Back') }}</button>
+    <button class="back-button" @click="back()" aria-label="Back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </button>
 
     <div v-if="hasVariants" class="region-toggle">
       <button :class="{ active: legalRegion === 'MY' }" @click="setLegalRegion('MY')">马来西亚</button>
@@ -97,6 +101,30 @@ const source = computed(() => {
   background-attachment: fixed;
   padding: 24px 16px 48px;
   box-sizing: border-box;
+  animation: docFade 0.4s ease;
+}
+
+@keyframes docFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Staggered slide-up entrance for inner blocks */
+.document-page .region-toggle,
+.document-page .doc-container > * {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: docItemIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.document-page .region-toggle { animation-delay: 0.10s; }
+.document-page .doc-container > header { animation-delay: 0.16s; }
+.document-page .doc-container > .meta-info { animation-delay: 0.26s; }
+.document-page .doc-container > .doc-content { animation-delay: 0.36s; }
+.document-page .doc-container > footer { animation-delay: 0.46s; }
+
+@keyframes docItemIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .document-page * {
@@ -175,22 +203,71 @@ const source = computed(() => {
 }
 
 .back-button {
-  display: block;
-  margin: 0 auto 18px;
-  padding: 10px 24px;
-  font-size: 15px;
-  font-weight: bold;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10001;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
   border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border-radius: 50%;
   cursor: pointer;
-  border-radius: 14px;
-  backdrop-filter: blur(6px);
-  transition: all 0.3s ease;
+  box-shadow:
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0.5px rgba(255, 255, 255, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    0 16px 40px rgba(0, 0, 0, 0.08);
+  animation: backBtnIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s backwards;
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.back-button svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .back-button:hover {
-  background: rgba(255, 255, 255, 0.16);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px) scale(1.06);
+  box-shadow:
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0.5px rgba(255, 255, 255, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    0 10px 28px rgba(0, 0, 0, 0.14),
+    0 24px 64px rgba(0, 0, 0, 0.1);
+}
+.back-button:hover svg {
+  transform: translateX(-1px);
+}
+.back-button:active {
+  transform: translateY(1px) scale(0.9);
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.12);
+  transition-duration: 0.08s;
+}
+.back-button:active svg {
+  transform: translateX(-1px);
+}
+
+@keyframes backBtnIn {
+  from { opacity: 0; transform: translateX(-12px) scale(0.85); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 .region-toggle {
@@ -224,6 +301,11 @@ const source = computed(() => {
 }
 .region-toggle button:hover:not(.active) {
   background: rgba(255, 255, 255, 0.1);
+}
+.region-toggle button:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.22);
+  transition-duration: 0.08s;
 }
 
 @media (max-width: 768px) {
