@@ -17,7 +17,6 @@ from PyQt6.QtWidgets import (
     QMessageBox,
     QPlainTextEdit,
     QPushButton,
-    QStackedWidget,
     QToolBar,
     QToolButton,
     QTreeView,
@@ -34,8 +33,7 @@ from app.file_role import (
     role_label,
 )
 from app.i18n import t
-from app.json_preview import JsonPreviewWidget
-from app.theme import get_preview_colors
+from app.web_preview import WebPreview
 from app.utils import is_valid_json, minify_json, pretty_json
 
 _RICH_TYPES = ("text", "info", "highlight")
@@ -108,16 +106,21 @@ class JsonEditor(QWidget):
         self.text_edit = CodeEditor(mode="json")
         self.text_edit.textChanged.connect(self._on_text_changed)
 
-        self.preview = JsonPreviewWidget()
+        self.preview = WebPreview()
 
-        self.right_stack = QStackedWidget()
-        self.right_stack.addWidget(self.text_edit)
-        self.right_stack.addWidget(self.preview)
+        # Keep the live preview always visible in a splitter, mirroring the
+        # Markdown editor. A QWebEngineView hidden inside a QStackedWidget can
+        # fail to paint on some platforms when shown later; never hiding it
+        # avoids that entirely (the toolbar button just collapses the pane).
+        self.text_splitter = QSplitter(Qt.Orientation.Horizontal)
+        self.text_splitter.addWidget(self.text_edit)
+        self.text_splitter.addWidget(self.preview)
+        self.text_splitter.setSizes([500, 500])
 
         splitter = QSplitter(Qt.Orientation.Horizontal)
         splitter.addWidget(self.tree_view)
-        splitter.addWidget(self.right_stack)
-        splitter.setSizes([420, 480])
+        splitter.addWidget(self.text_splitter)
+        splitter.setSizes([300, 900])
 
         self.toolbar = QToolBar()
         self._build_toolbar()
@@ -155,7 +158,7 @@ class JsonEditor(QWidget):
         tb.addSeparator()
         self._a_find = tb.addAction(t("json.find"), self.text_edit.toggle_find)
         tb.addSeparator()
-        self._a_preview = tb.addAction(t("json.preview"), self.toggle_preview)
+        self._a_preview = tb.addAction(t("md.hide.preview"), self.toggle_preview)
         tb.addSeparator()
         # Role-specific tools live in a dropdown button.
         self._tools_btn = QToolButton()
@@ -224,6 +227,12 @@ class JsonEditor(QWidget):
         self._role = role
         self._lang = lang
         self._rebuild_role_tools()
+        # load_file() rendered before the role was known (it produced a generic
+        # outline). Re-render unconditionally so the correct i18n/changelog
+        # payload replaces it. WebPreview.render() queues the payload if the
+        # page hasn't finished loading yet, so this is safe even when the
+        # editor hasn't been added to a visible tab yet.
+        self._render_preview()
 
     def get_role(self):
         return self._role
@@ -251,7 +260,7 @@ class JsonEditor(QWidget):
         self._auto_sync.setText(t("json.sync"))
         self._a_find.setText(t("json.find"))
         self._tools_btn.setText(t("json.tools"))
-        self._a_preview.setText(t("json.edit") if self.right_stack.currentIndex() == 1 else t("json.preview"))
+        self._a_preview.setText(t("md.hide.preview") if self.preview.isVisible() else t("md.show.preview"))
         self.text_edit.retranslate_ui()
         self._rebuild_role_tools()
 
@@ -598,30 +607,39 @@ class JsonEditor(QWidget):
 
     # ---------- Preview ----------
     def toggle_preview(self):
-        """Switch the right pane between the text editor and the rendered preview."""
-        showing_preview = self.right_stack.currentIndex() == 0
-        self.right_stack.setCurrentIndex(1 if showing_preview else 0)
-        self._a_preview.setText(t("json.edit") if showing_preview else t("json.preview"))
-        if showing_preview:
+        """Show or hide the live preview pane."""
+        if self.preview.isVisible():
+            self.preview.hide()
+            self._a_preview.setText(t("md.show.preview"))
+        else:
+            self.preview.show()
+            self._a_preview.setText(t("md.hide.preview"))
             self._render_preview()
 
     def _render_preview(self):
         text = self.text_edit.toPlainText()
-        ok, _err = is_valid_json(text)
+        lang = self._lang or "ja"
+        ok, err = is_valid_json(text)
         if not ok:
-            self.preview.show_invalid(get_preview_colors(), self._lang)
+            self.preview.render({"mode": "generic", "lang": lang, "data": None, "error": err})
             return
         try:
             data = json.loads(text)
-        except Exception:  # noqa: BLE001
-            self.preview.show_invalid(get_preview_colors(), self._lang)
+        except Exception as exc:  # noqa: BLE001
+            self.preview.render({"mode": "generic", "lang": lang, "data": None, "error": str(exc)})
             return
-        self.preview.render(data, self._role, self._lang, get_preview_colors())
+        if self._role == ROLE_I18N:
+            mode = "i18n"
+        elif self._role == ROLE_CHANGELOG:
+            mode = "changelog"
+        else:
+            mode = "generic"
+        self.preview.render({"mode": mode, "lang": lang, "data": data})
 
     def retheme(self):
         """Re-apply theme colours to the code editor and preview."""
         self.text_edit.retheme()
-        if self.right_stack.currentIndex() == 1:
+        if self.preview.isVisible():
             self._render_preview()
 
     # ---------- Events ----------
@@ -630,7 +648,7 @@ class JsonEditor(QWidget):
             return
         self._modified = True
         self.contentChanged.emit()
-        if self.right_stack.currentIndex() == 1:
+        if self.preview.isVisible():
             self._preview_timer.start()
 
     def _on_data_changed(self, *_):

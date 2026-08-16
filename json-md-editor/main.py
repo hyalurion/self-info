@@ -5,6 +5,12 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+# QtWebEngine must be imported before QApplication is created, otherwise the
+# preview widgets raise "QtWebEngineWidgets must be imported ... before a
+# QCoreApplication instance is created". Importing early keeps that guarantee
+# explicit (independent of import order in app modules).
+import PyQt6.QtWebEngineWidgets  # noqa: F401
+
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QApplication
@@ -45,6 +51,13 @@ def main():
     # style here so the window paints correctly before that.
     window = MainWindow()
     window.show()
+    # Warm up QtWebEngine (Chromium process + webfont cache) in the background
+    # so the first preview is snappy instead of paying the cold-start cost.
+    try:
+        from app.web_preview import prewarm  # noqa: PLC0415
+        prewarm()
+    except Exception:  # noqa: BLE001
+        pass
     sys.exit(app.exec())
 
 

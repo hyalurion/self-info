@@ -2,7 +2,6 @@
 
 from PyQt6.QtCore import pyqtSignal, Qt, QTimer
 from PyQt6.QtGui import QKeySequence, QShortcut
-from PyQt6.QtPrintSupport import QPrintDialog, QPrinter
 from PyQt6.QtWidgets import (
     QDialog,
     QFileDialog,
@@ -12,7 +11,6 @@ from PyQt6.QtWidgets import (
     QMessageBox,
     QPushButton,
     QSplitter,
-    QTextBrowser,
     QToolBar,
     QToolButton,
     QVBoxLayout,
@@ -32,6 +30,7 @@ from app.legal_features import (
 from app.markdown_converter import convert_markdown
 from app.theme import get_preview_colors
 from app.utils import write_text
+from app.web_preview import WebPreview
 
 
 from app.fonts import css_font_stack
@@ -73,8 +72,7 @@ class MarkdownEditor(QWidget):
         self.editor = CodeEditor(mode="markdown")
         self.editor.textChanged.connect(self._on_text_changed)
 
-        self.preview = QTextBrowser()
-        self.preview.setOpenExternalLinks(True)
+        self.preview = WebPreview()
 
         self.splitter = QSplitter(Qt.Orientation.Horizontal)
         self.splitter.addWidget(self.editor)
@@ -206,8 +204,7 @@ class MarkdownEditor(QWidget):
     # ---------- Preview ----------
     def _render_preview(self):
         text = self.editor.toPlainText()
-        body = convert_markdown(text)
-        self.preview.setHtml(_preview_css(get_preview_colors(), self._lang) + body)
+        self.preview.render({"mode": "markdown", "lang": self._lang or "ja", "data": text})
 
     def retheme(self):
         """Re-apply theme colours to the code editor and re-render preview."""
@@ -296,12 +293,16 @@ class MarkdownEditor(QWidget):
         )
         if not path:
             return
-        printer = QPrinter(QPrinter.PrinterMode.HighResolution)
-        printer.setOutputFormat(QPrinter.OutputFormat.PdfFormat)
-        printer.setOutputFileName(path)
-        if QPrintDialog(printer, self).exec() == QDialog.DialogCode.Accepted:
-            self.preview.print_(printer)
+        # Render the current web preview to PDF (QtWebEngine async API).
+        self.preview.page().printToPdf(lambda data: self._on_pdf_done(data, path))
+
+    def _on_pdf_done(self, data, path):
+        try:
+            with open(path, "wb") as fh:
+                fh.write(bytes(data))
             self.message.emit(f"{t('md.export.pdf')}: {path}")
+        except Exception as exc:  # noqa: BLE001
+            QMessageBox.warning(self, t("md.export.pdf.title"), str(exc))
 
     # ---------- Events ----------
     def _on_text_changed(self):

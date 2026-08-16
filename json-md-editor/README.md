@@ -4,6 +4,9 @@ A **PyQt6**-based desktop application for efficient visual editing and managemen
 Deeply adapted for the `self-info` site project: recognizes three data roles, supports four interface languages
 (Japanese / English / Simplified Chinese / Traditional Chinese), and provides three modern themes (Light / Dark / Follow System).
 
+Its live preview embeds the **real built site** (the Vue app) via QtWebEngine, so what you see is exactly what
+production renders — there is no separate, hand-maintained preview renderer to drift out of sync.
+
 ## Core Features
 
 ### Project Awareness (Role-aware)
@@ -29,13 +32,13 @@ The status bar displays the current file's "role + language + size", e.g., `i18n
   - Normalize: Fill missing `type` / `content`.
 - **Changelog**: "Add Entry" dialog to input version, date, and content, appended to the array.
 - Line numbers, syntax highlighting, find (Ctrl+F).
-- **UI Preview** (toolbar "Preview" button / click again to switch back to "Edit"): Renders JSON to approximate the site's real presentation, faithfully reproducing `self-info`'s Vue rendering logic:
-  - **i18n Content**: Rich-text segments (`text` / `ruby` furigana / `highlight` highlight blocks / `info` info blocks, recursively nestable) / differentiated layouts for various `section` types (Birthday / Language / ACG / Personality / Lucky / Gaming / SNS / Conclusion) / footer / legal cards.
-  - **Changelog**: Each `[{version, date, content}]` presented as a card, `content` rendered with Markdown.
-  - 300ms debounced auto-re-render during editing; error prompt when JSON is invalid. Preview colors change in real-time with themes (Light / Dark / Follow System).
+- **UI Preview** (always visible in a splitter beside the text editor; toolbar "Hide Preview" button collapses it): Renders JSON through the **real site frontend** — an embedded Chromium view (`QWebEngineView`) loads the built Vue app and is fed the edited data, so the preview is pixel-identical to production:
+  - **i18n Content**: `header` / `sections` / `footer` rendered by the actual `PageHeader`, `SectionRenderer`, `RichText` and `PageFooter` Vue components (rich-text `text`/`ruby`/`highlight`/`info`/`game-card` segments; all section types — Birthday / Language / ACG / Personality / Lucky / Gaming / SNS / Closing).
+  - **Changelog**: each `[{version, date, content}]` rendered as a liquid-glass card with `content` parsed by the site's own `MarkdownRenderer`.
+  - 300ms debounced auto re-render while editing; invalid JSON shows the parse error in the preview.
 
 ### Markdown Legal Document Editing
-- **Live Preview**: Edit on the left, render on the right (300ms debounce).
+- **Live Preview**: Edit on the left, render on the right (300ms debounce) through the site's own `MarkdownRenderer` (marked + DOMPurify) on the production document background.
 - **Insert Privacy Policy Template by Language**: Japanese / English / Simplified Chinese / Traditional Chinese, structure consistent with site's `src/data/legal/*`.
 - **Auto-numbering**: Legal documents numbered according to site conventions — `Article 1 / Article 2…` (Level 1), `A. / B.` (Level 2), `1.` (Level 3).
 - **Table of Contents Navigation**: List all headings, double-click to jump to corresponding line.
@@ -47,7 +50,8 @@ The status bar displays the current file's "role + language + size", e.g., `i18n
 - **Four-language Interface**: Toolbar language selector switches in real-time, menus / toolbar / status bar / dialogs all follow translations.
 - Language preference persisted via `QSettings`.
 - **Three Themes (Light / Dark / Follow System)**: Toolbar theme selector to switch; "Follow System" reads OS color scheme in real-time,
-  interface automatically follows when system light/dark changes. Application shell and Markdown / JSON preview area colors are consistent, theme preference persisted.
+  interface automatically follows when system light/dark changes. The editor shell follows the selected theme; the live web preview
+  always shows the site's own (dark) production theme.
 - **Modern Visuals**: Deep purple / light purple background + soft purple accent, rounded controls, thin scrollbars, glass-effect menus/status bar.
 - Multi-tab editing, unsaved indicator (`*`); left file browser can switch root directory; save prompt on exit.
 - Shortcuts: Ctrl+N New, Ctrl+O Open, Ctrl+S Save, Ctrl+W Close Tab, Ctrl+F Find.
@@ -64,12 +68,16 @@ pip install -r requirements.txt
 python main.py
 ```
 
-`requirements.txt` dependencies: `PyQt6>=6.6.0`, `markdown>=3.5.0`
+`requirements.txt` dependencies: `PyQt6>=6.6.0`, `PyQt6-WebEngine>=6.6.0`, `markdown>=3.5.0`
+
+> The live preview needs the built site. Run `npm run build` in the project root first so that
+> `dist/preview.html` exists; the editor serves `dist/` over a local `127.0.0.1` HTTP server and loads it
+> in an embedded Chromium view. Set the `SELFINFO_DIST_DIR` environment variable to override the dist location.
 
 > Note: `main.py` is running with the correct Python interpreter that has `PyQt6` installed.
 
 > Running environment hint (local): `C:\Users\qtequ\.workbuddy\binaries\python\envs\default\Scripts\python.exe`
-> (PyQt6 6.11 + markdown 3.10). Start command:
+> (PyQt6 6.11 + PyQt6-WebEngine 6.11 + markdown 3.10). Start command:
 > ```bash
 > python main.py
 > ```
@@ -83,7 +91,7 @@ json-md-editor/
 ├── app/
 │   ├── main_window.py       # Main window: menu/toolbar/status bar/language selector/theme selector/consistency check
 │   ├── json_editor.py       # JSON editor (role-aware: i18n / changelog / generic) + preview toggle
-│   ├── json_preview.py      # JSON → UI preview (faithfully reproduces Vue's rich-text / section / changelog rendering)
+│   ├── web_preview.py       # Live preview: embeds the real built Vue app (QWebEngineView + localhost server + JS bridge)
 │   ├── markdown_editor.py   # Markdown editor (role-aware: legal documents / generic) + live preview
 │   ├── file_role.py         # Path → role + language detection
 │   ├── i18n.py              # Four-language translation table and t() helper

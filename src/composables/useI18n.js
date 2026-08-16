@@ -88,7 +88,17 @@ const currentLang = ref(detectLanguage())
 applyToDocument(currentLang.value)
 syncLangUrl(currentLang.value)
 
-const content = computed(() => CONTENT[currentLang.value] || ja)
+// Editor live-preview override: when set, the whole site (including components
+// like BirthdayCountdown that read `content`) renders the injected data instead
+// of the bundled locale files. The production site never calls this, so its
+// behaviour is unchanged.
+const injectedContent = ref(null)
+
+export function injectContent(data) {
+  injectedContent.value = data || null
+}
+
+const content = computed(() => injectedContent.value || CONTENT[currentLang.value] || ja)
 
 // Legal jurisdiction selector for languages that ship multiple regional privacy
 // documents. zh-Hans (Simplified Chinese) targets both Malaysia and Singapore,
