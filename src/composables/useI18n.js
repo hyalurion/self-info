@@ -79,6 +79,8 @@ function applyToDocument(code) {
   if (typeof document !== 'undefined') {
     document.documentElement.setAttribute('data-lang', code)
     document.documentElement.lang = code
+    const meta = CONTENT[code]?.meta
+    if (meta?.title) document.title = meta.title
   }
 }
 

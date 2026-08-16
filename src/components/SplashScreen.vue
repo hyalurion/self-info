@@ -29,7 +29,7 @@ function accept() {
 function reject() {
   rejected.value = true
   setTimeout(() => {
-    window.location.href = 'about:blank'
+    window.location.reload()
   }, 5000)
 }
 
