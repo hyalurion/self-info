@@ -60,7 +60,7 @@
 | 停止收集、處理或利用 | 停止資料收集與處理 | 透過郵件操作 |
 | 請求刪除 | 永久刪除個人資料 | 書面請求至資料保護官 |
 
-權利行使窗口： [quiettimejsg@gmail.com](mailto:quiettimejsg@gmail.com)
+權利行使窗口： [yurihyalurion@protonmail.com](mailto:yurihyalurion@protonmail.com)
 
 > **處理時限：** 資料存取請求將在30天內響應，刪除請求將在14個工作日內完成，完全清除最長可能需30天。
 
@@ -85,7 +85,7 @@
 
 
 **資料保護官聯絡方式**
-- 電子郵件：[quiettimejsg@gmail.com](mailto:quiettimejsg@gmail.com)
+- 電子郵件：[yurihyalurion@protonmail.com](mailto:yurihyalurion@protonmail.com)
 - 回覆時限：7個工作日內初步回應
 
 **主管機關資訊**

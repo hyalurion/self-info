@@ -60,7 +60,7 @@ If U In 'MURICA, U Can:
 | Say "Stop!" | We Stop Takin Data | Use Site Settings Or Email |
 | Say "Delete!" | We Delete All Ur Data | Email Us |
 
-Email Us At: [quiettimejsg@gmail.com](mailto:quiettimejsg@gmail.com)
+Email Us At: [yurihyalurion@protonmail.com](mailto:yurihyalurion@protonmail.com)
 
 > **IMPORTANT!!1!** If U Say "Delete!", It Happen Fast But Backupz Take Up To 30 Dayz To Vanish.
 

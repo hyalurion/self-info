@@ -60,7 +60,7 @@
 | 删除权 | 永久删除个人数据 | 书面请求至DPO |
 | 投诉权 | 向PDPC提出投诉 | 通过PDPC网站 |
 
-权利行使窗口： [quiettimejsg@gmail.com](mailto:quiettimejsg@gmail.com)
+权利行使窗口： [yurihyalurion@protonmail.com](mailto:yurihyalurion@protonmail.com)
 
 > **处理时限：** 数据访问请求将在30天内响应，删除请求将在14个工作日内完成，完全清除最长可能需30天。
 
@@ -85,6 +85,6 @@
 - 浏览器设置拒绝Cookie
 - 通过Google官方插件退出追踪：[https://tools.google.com/dlpage/gaoptout](https://tools.google.com/dlpage/gaoptout)
 
-数据保护官邮箱: [quiettimejsg@gmail.com](mailto:quiettimejsg@gmail.com)
+数据保护官邮箱: [yurihyalurion@protonmail.com](mailto:yurihyalurion@protonmail.com)
 
 新加坡个人数据保护委员会(PDPC)网站: [www.pdpc.gov.sg](https://www.pdpc.gov.sg)

@@ -57,7 +57,7 @@
 | 撤回同意权 | 停止数据收集与处理 | 通过邮件操作 |
 | 删除权 | 永久删除个人数据 | 书面请求至DPO |
 
-权利行使窗口： [quiettimejsg@gmail.com](mailto:quiettimejsg@gmail.com)
+权利行使窗口： [yurihyalurion@protonmail.com](mailto:yurihyalurion@protonmail.com)
 
 > **处理时限：** 数据删除请求将在14个工作日内完成，完全清除最长可能需30天。
 

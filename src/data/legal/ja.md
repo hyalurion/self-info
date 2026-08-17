@@ -60,7 +60,7 @@
 | 利用停止 | 収集・利用・提供の停止 | 設定画面または問い合わせ |
 | 消去請求 | データの完全消去 | 問い合わせ窓口へ請求 |
 
-権利行使窓口: [quiettimejsg@gmail.com](mailto:quiettimejsg@gmail.com)
+権利行使窓口: [yurihyalurion@protonmail.com](mailto:yurihyalurion@protonmail.com)
 
 > **重要:** データ消去要求はGoogle Analytics上で処理されますが、バックアップシステムから完全に削除されるまで最大30日を要します（APPI第33条）。
 
