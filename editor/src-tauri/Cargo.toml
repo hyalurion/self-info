@@ -1,0 +1,19 @@
+[package]
+name = "self-info-editor"
+version = "2.0.0"
+description = "Liquid Glass JSON and Markdown editor for Self-Info"
+authors = ["Hyalurion"]
+edition = "2021"
+
+[lib]
+name = "self_info_editor_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
