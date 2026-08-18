@@ -9,23 +9,23 @@ importers:
   .:
     dependencies:
       '@tauri-apps/api':
-        specifier: ^2.8.0
+        specifier: ^2.11.1
         version: 2.11.1
       '@tauri-apps/plugin-dialog':
-        specifier: ^2.2.0
+        specifier: ^2.7.2
         version: 2.7.2
       dompurify:
-        specifier: ^3.4.12
+        specifier: ^3.4.13
         version: 3.4.13
       marked:
-        specifier: ^18.0.7
+        specifier: ^18.0.9
         version: 18.0.9
       vue:
-        specifier: ^3.5.39
+        specifier: ^3.5.41
         version: 3.5.41
     devDependencies:
       '@tauri-apps/cli':
-        specifier: ^2.8.0
+        specifier: ^2.11.4
         version: 2.11.4
       '@vitejs/plugin-vue':
         specifier: ^6.0.8
@@ -34,7 +34,7 @@ importers:
         specifier: ^0.28.2
         version: 0.28.2
       vite:
-        specifier: ^8.1.4
+        specifier: ^8.2.1
         version: 8.2.1(esbuild@0.28.2)
 
 packages:
