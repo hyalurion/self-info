@@ -1,0 +1,82 @@
+{
+  "brand": {
+    "title": "自己紹介エディター",
+    "subtitle": "コンテンツスタジオ"
+  },
+  "toolbar": {
+    "newJson": "＋ JSON",
+    "newMd": "＋ MD",
+    "open": "開く",
+    "save": "保存",
+    "saveAs": "別名で保存"
+  },
+  "sidebar": {
+    "title": "プロジェクトファイル",
+    "chooseRoot": "プロジェクトフォルダを選択",
+    "checkI18n": "多言語整合チェック"
+  },
+  "contextbar": {
+    "generic": "汎用",
+    "i18n": "多言語",
+    "changelog": "更新履歴",
+    "legal": "法務文書",
+    "format": "整形",
+    "minify": "圧縮",
+    "validate": "検証",
+    "schema": "スキーマ",
+    "wrap": "ラップ",
+    "unwrap": "アンラップ",
+    "normalize": "正規化",
+    "addEntry": "項目を追加",
+    "autoNumber": "自動採番",
+    "exportHtml": "HTML出力",
+    "hideTree": "ツリーを隠す",
+    "showTree": "ツリー",
+    "hidePreview": "プレビューを隠す",
+    "showPreview": "プレビュー"
+  },
+  "findbar": {
+    "placeholder": "検索…",
+    "btn": "検索"
+  },
+  "tree": {
+    "noData": "データなし",
+    "jsonOnly": "JSONファイルのみツリー表示が利用できます。"
+  },
+  "empty": "JSON / Markdown ファイルを開くか作成して開始してください。",
+  "status": {
+    "unsaved": "・未保存",
+    "ready": "準備OK、にゃ～♪",
+    "lines": "行",
+    "words": "語",
+    "pages": "ページ",
+    "lnCol": "行 / 列 準備OK"
+  },
+  "dialog": {
+    "title": "更新履歴項目を追加",
+    "version": "バージョン",
+    "versionPlaceholder": "1.4.0",
+    "date": "日付",
+    "markdown": "Markdown",
+    "markdownPlaceholder": "どんな変更がありましたか？",
+    "cancel": "キャンセル",
+    "confirm": "項目を追加"
+  },
+  "toast": {
+    "saved": "保存しました",
+    "formattedJson": "JSONを整形しました",
+    "minifiedJson": "JSONを圧縮しました",
+    "jsonError": "JSONエラー：",
+    "invalidJson": "無効なJSON：",
+    "validJson": "JSONは有効です ★",
+    "richIssues": "件のリッチテキスト問題：",
+    "richHappy": "リッチテキストスキーマは元気です ★",
+    "richChanged": "個のフィールドを変更しました",
+    "changelogNeedArray": "更新履歴はJSON配列である必要があります",
+    "changelogAdded": "更新履歴項目を追加しました",
+    "chooseRootFirst": "最初にプロジェクトフォルダを選択してください",
+    "i18nMatchAll": "件のトップレベルキーがすべて一致しました ★",
+    "found": "見つけました、にゃ～♪",
+    "noMatches": "該当なし"
+  }
+}

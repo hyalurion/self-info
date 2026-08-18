@@ -1,0 +1,82 @@
+{
+  "brand": {
+    "title": "自介編輯器",
+    "subtitle": "內容工作室"
+  },
+  "toolbar": {
+    "newJson": "＋ JSON",
+    "newMd": "＋ MD",
+    "open": "打開",
+    "save": "儲存",
+    "saveAs": "另存新檔"
+  },
+  "sidebar": {
+    "title": "專案檔案",
+    "chooseRoot": "選擇專案資料夾",
+    "checkI18n": "檢查多語言一致性"
+  },
+  "contextbar": {
+    "generic": "通用",
+    "i18n": "多語言",
+    "changelog": "更新日誌",
+    "legal": "法律文件",
+    "format": "格式化",
+    "minify": "壓縮",
+    "validate": "驗證",
+    "schema": "結構檢查",
+    "wrap": "包裹",
+    "unwrap": "解包",
+    "normalize": "正規化",
+    "addEntry": "新增條目",
+    "autoNumber": "自動編號",
+    "exportHtml": "匯出 HTML",
+    "hideTree": "隱藏樹狀圖",
+    "showTree": "樹狀圖",
+    "hidePreview": "隱藏預覽",
+    "showPreview": "預覽"
+  },
+  "findbar": {
+    "placeholder": "尋找…",
+    "btn": "尋找"
+  },
+  "tree": {
+    "noData": "無資料",
+    "jsonOnly": "僅 JSON 檔案支援樹狀圖顯示。"
+  },
+  "empty": "請開啟或建立一個 JSON / Markdown 檔案以開始。",
+  "status": {
+    "unsaved": "· 未儲存",
+    "ready": "就緒，喵~",
+    "lines": "行",
+    "words": "詞",
+    "pages": "頁",
+    "lnCol": "行 / 欄 就緒"
+  },
+  "dialog": {
+    "title": "新增更新日誌條目",
+    "version": "版本",
+    "versionPlaceholder": "1.4.0",
+    "date": "日期",
+    "markdown": "Markdown",
+    "markdownPlaceholder": "本次有哪些變更？",
+    "cancel": "取消",
+    "confirm": "確認新增"
+  },
+  "toast": {
+    "saved": "已儲存",
+    "formattedJson": "已格式化 JSON",
+    "minifiedJson": "已壓縮 JSON",
+    "jsonError": "JSON 錯誤：",
+    "invalidJson": "無效 JSON：",
+    "validJson": "JSON 驗證通過 ★",
+    "richIssues": " 處富文字問題：",
+    "richHappy": "富文字結構狀態良好 ★",
+    "richChanged": " 個欄位已修改",
+    "changelogNeedArray": "更新日誌必須是 JSON 陣列",
+    "changelogAdded": "已新增更新日誌條目",
+    "chooseRootFirst": "請先選擇專案資料夾",
+    "i18nMatchAll": " 個頂層鍵全部匹配 ★",
+    "found": "找到嘍，喵~",
+    "noMatches": "未找到匹配項"
+  }
+}
