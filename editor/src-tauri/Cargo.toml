@@ -3,7 +3,8 @@ name = "self-info-editor"
 version = "2.0.0"
 description = "Liquid Glass JSON and Markdown editor for Self-Info"
 authors = ["Hyalurion"]
-edition = "2021"
+edition = "2024"
+rust-version = "1.85"
 
 [lib]
 name = "self_info_editor_lib"
