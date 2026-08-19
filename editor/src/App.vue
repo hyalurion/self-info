@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { open, save } from '@tauri-apps/plugin-dialog'
 import { invoke } from '@tauri-apps/api/core'
 import { listen } from '@tauri-apps/api/event'
+import { Window, getCurrentWindow } from '@tauri-apps/api/window'
 import JsonTree from '@/components/JsonTree.vue'
 import SitePreview from '@/components/SitePreview.vue'
 import { autoNumberArticles, detectRole, humanSize, jsonError, langName, markdownStats, minifyJson, prettyJson, richIssues, transformRich } from '@/lib/editor-utils.js'
@@ -64,6 +65,22 @@ const status = computed(() => {
   return `${roleLabel.value} · ${langName[lang.value] || '—'} · ${humanSize(active.value.text)}${dirty}`
 })
 const stats = computed(() => active.value && !active.value.isJson ? markdownStats(active.value.text) : null)
+// ========== Window Title (i18n brand.title only — no subtitle) ==========
+function applyWindowTitle() {
+  const brand = i18n.value?.brand
+  if (!brand) return
+  const base = brand.title
+  const name = active.value?.name?.trim()
+  const full = name ? `${name} - ${base}` : base
+  document.title = full
+  // Push to the native OS title bar via both current webview + explicit main-window label.
+  // Tauri 2.x requires permission: "core:window:allow-set-title" in capabilities/default.json
+  try { getCurrentWindow().setTitle(full).catch(() => {}) } catch (e) { /* browser env */ }
+  try { Window.getByLabel('main').setTitle(full).catch(() => {}) } catch (e) { /* ignore */ }
+}
+// Watch language state DIRECTLY (not deep-nested getters on computed json) + tab name.
+// Immediate=true so the localized title replaces the conf.json default as soon as setup runs.
+watch([interfaceLang, () => active.value?.name], applyWindowTitle, { immediate: true })
 
 // ========== Platform Detection ==========
 const isMacOS = computed(() => typeof navigator !== 'undefined' && /Mac|iPhone|iPad/i.test(navigator.platform || navigator.userAgent))
@@ -181,7 +198,9 @@ onMounted(async () => {
   window.addEventListener('keydown', keydown)
   document.addEventListener('click', onDocClick)
   unlistenMenu = await listen('menu:action', (event) => handleMenuAction(event.payload))
-  newTab('json')
+  // applyWindowTitle is already run via watch { immediate: true }, but run it again after
+  // all async setup (tabs/root) to make sure the window title isn't stuck on the conf default.
+  applyWindowTitle()
 })
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', keydown)

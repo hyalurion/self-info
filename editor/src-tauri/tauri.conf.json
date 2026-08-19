@@ -12,7 +12,8 @@
   "app": {
     "windows": [
       {
-        "title": "Self-Info Editor — Liquid Glass",
+        "label": "main",
+        "title": "Self-Info Editor",
         "width": 1440,
         "height": 920,
         "minWidth": 1040,
