@@ -46,25 +46,23 @@ npm run preview
 
 ## 🐱 JSON / Markdown エディタ
 
-`json-md-editor/` には、Self-Info のデータを編集するための PyQt6 製デスクトップアプリが入ってるにゃ。i18n の JSON、changelog、プライバシーポリシーの Markdown、ふつうの JSON / Markdown を、ファイルの役割に合わせてお手伝いしてくれるよ。
+`editor/` には、Self-Info のデータを編集するための **Tauri + Vue** 製デスクトップアプリが入ってるにゃ。PyQt6 と QtWebEngine のかわりに、サイトと同じ Vue の魔法と、軽やかな Tauri のおうちを使ってるよ。深い紫、ふわっとしたぼかし、きらっと光る縁をそろえた液体ガラス UI だから、サイトと同じ世界で編集できるにゃ〜♡
 
-サイト本体の表示をそのままプレビューできるように、ビルド済みの Vue アプリを QtWebEngine に読み込む仕組みになってるにゃ。だから、まずプロジェクトルートで `npm run build` をしてからエディタを起動してね。
+i18n の JSON、changelog、プライバシーポリシーの Markdown、ふつうの JSON / Markdown をファイルの場所から見つけて、役割に合わせてお手伝いするよ。JSON の整形・縮小・検証、ツリー編集、リッチテキストのラップ／アンラップ／正規化、changelog の追加、見出しの自動採番、Markdown 統計、HTML 出力、4言語のキー整合性チェックもできるにゃ。プレビューは実際のサイトコンポーネントをそのまま使うから、表示が迷子になりにくいのだ〜★
 
 ```bash
-cd json-md-editor
-python -m venv .venv
-
-# macOS / Linux
-source .venv/bin/activate
-
-# Windows PowerShell の場合
-# .venv\Scripts\Activate.ps1
-
-pip install -r requirements.txt
-python main.py
+cd editor
+pnpm install
+pnpm tauri dev
 ```
 
-JSON の整形・検証、リッチテキストのラップ／アンラップ、changelog の追加、Markdown のライブプレビュー、プライバシーポリシーのテンプレート、見出しの自動採番、HTML / PDF 出力などができるよ。編集のお手伝いがいっぱいで、ねこたんも安心にゃ (｡･ω･｡)ﾉ♡
+本番用の Linux パッケージを作るときは、次の呪文を唱えてね。Rust と各OS用の Tauri 前提ライブラリが必要だよ。
+
+```bash
+pnpm tauri build
+```
+
+開発サーバーだけ見たいときは `pnpm dev`、Vue 部分だけ確認したいときは `pnpm build` が使えるにゃ。かわいい猫耳液体ガラスアイコンも、アプリのおそとで待ってるよ (｡･ω･｡)ﾉ♡
 
 ## 🔗 URL パラメータ
 
@@ -97,7 +95,7 @@ https://yuri-self-info.netlify.app/?lang=en&page=changelog
 │   ├── assets/                 # アニメーションとスタイル
 │   └── preview-entry.js        # エディタのプレビュー入口
 ├── public/                     # 背景、BGM、フォントなど
-├── json-md-editor/             # JSON / Markdown 編集用の小さなアプリ
+├── editor/                     # Tauri + Vue 製 JSON / Markdown 編集アプリ
 ├── index.html
 ├── preview.html
 ├── package.json
@@ -116,7 +114,7 @@ https://yuri-self-info.netlify.app/?lang=en&page=changelog
 | --- | --- |
 | ウェブ | Vue 3、Vite |
 | Markdown | marked、DOMPurify |
-| デスクトップエディタ | Python、PyQt6、PyQt6-WebEngine |
+| デスクトップエディタ | Tauri 2、Rust、Vue 3 |
 | 見た目 | CSS、言語ごとのフォント、Canvas アニメーション |
 | アクセス解析 | Google Analytics 4 |
 

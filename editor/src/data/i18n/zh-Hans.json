@@ -1,0 +1,107 @@
+{
+  "brand": {
+    "title": "自介编辑器",
+    "subtitle": "内容工作室"
+  },
+  "sidebar": {
+    "title": "项目文件",
+    "chooseRoot": "选择项目文件夹",
+    "checkI18n": "检查多语言一致性"
+  },
+  "contextbar": {
+    "generic": "通用",
+    "i18n": "多语言",
+    "changelog": "更新日志",
+    "legal": "法律文档",
+    "format": "格式化",
+    "minify": "压缩",
+    "validate": "校验",
+    "schema": "结构检查",
+    "wrap": "包裹",
+    "unwrap": "解包",
+    "normalize": "规范化",
+    "addEntry": "添加条目",
+    "autoNumber": "自动编号",
+    "exportHtml": "导出 HTML",
+    "hideTree": "隐藏树状图",
+    "showTree": "树状图",
+    "hidePreview": "隐藏预览",
+    "showPreview": "预览"
+  },
+  "findbar": {
+    "placeholder": "查找…",
+    "btn": "查找"
+  },
+  "tree": {
+    "noData": "无数据",
+    "jsonOnly": "仅 JSON 文件支持树状图显示。",
+    "dragToResize": "拖动调整树状图宽度",
+    "dragToResizePreview": "拖动调整预览宽度"
+  },
+  "empty": "请打开或创建一个 JSON / Markdown 文件以开始。",
+  "status": {
+    "unsaved": "· 未保存",
+    "ready": "准备就绪，喵~",
+    "lines": "行",
+    "words": "词",
+    "pages": "页",
+    "lnCol": "行 / 列 就绪"
+  },
+  "dialog": {
+    "title": "添加更新日志条目",
+    "version": "版本",
+    "versionPlaceholder": "1.4.0",
+    "date": "日期",
+    "markdown": "Markdown",
+    "markdownPlaceholder": "本次有哪些变更？",
+    "cancel": "取消",
+    "confirm": "确认添加"
+  },
+  "menu": {
+    "appMenu": "自介编辑器",
+    "langMenu": "语言设置",
+    "newJson": "新建 JSON",
+    "newMd": "新建 Markdown",
+    "open": "打开…",
+    "save": "保存",
+    "saveAs": "另存为…",
+    "about": "关于自介编辑器",
+    "services": "服务",
+    "hide": "隐藏自介编辑器",
+    "hideOthers": "隐藏其他",
+    "unhide": "显示全部",
+    "quit": "退出自介编辑器",
+    "toolsMenu": "工具",
+    "viewMenu": "可视化",
+    "format": "格式化",
+    "minify": "压缩",
+    "validate": "校验",
+    "schemaCheck": "结构检查",
+    "wrap": "包裹",
+    "unwrap": "解包",
+    "normalize": "规范化",
+    "addEntry": "新增条目",
+    "autoNumber": "自动编号条款",
+    "exportHtml": "导出 HTML",
+    "toggleTree": "切换树状图",
+    "togglePreview": "切换预览",
+    "checkI18n": "多语言一致性检查"
+  },
+  "toast": {
+    "saved": "已保存",
+    "formattedJson": "已格式化 JSON",
+    "minifiedJson": "已压缩 JSON",
+    "jsonError": "JSON 错误：",
+    "invalidJson": "无效 JSON：",
+    "validJson": "JSON 校验通过 ★",
+    "richIssues": " 处富文本问题：",
+    "richHappy": "富文本结构状态良好 ★",
+    "richChanged": " 个字段已修改",
+    "changelogNeedArray": "更新日志必须是 JSON 数组",
+    "changelogAdded": "已添加更新日志条目",
+    "chooseRootFirst": "请先选择项目文件夹",
+    "i18nMatchAll": " 个顶层键全部匹配 ★",
+    "found": "找到啦，喵~",
+    "noMatches": "未找到匹配项"
+  }
+}

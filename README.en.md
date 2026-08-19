@@ -46,25 +46,23 @@ npm run preview
 
 ## 🐱 JSON & Markdown Editor
 
-Inside `json-md-editor/` lives a PyQt6 desktop app made to help edit Self-Info data. It knows if a file iz i18n JSON, a changelog, a Paw-licy Paper Markdown, or just generic JSON / Markdown, then gives da file the right lil tools.
+Inside `editor/` lives a **Tauri + Vue** desktop app made to help edit Self-Info data. PyQt6 n QtWebEngine went to take a nap; now da editor uses da same Vue magicks as da website inside a light lil Tauri home. Deep purple blur, shiny glass rims, pinky-lavender sparklez, n rounded liquid-glass panels make editin' feel like it belongs in mai universe, meow~
 
-Da live preview loads da built Vue app through QtWebEngine, so what yu see follows da real site frontend instead of a second renderer that might get confused. First run `npm run build` in da project root, den start da editor:
+It knows if a file iz i18n JSON, a changelog, a Paw-licy Paper Markdown, or generic JSON / Markdown, den gives da file da right tools. Yu get JSON format / minify / validate, editable tree view, rich-text wrap / unwrap / normalize, changelog entry creation, legal heading auto-numberin', Markdown stats, HTML export, n four-langwage top-level key checks. Da preview reuses da real site Vue components, so no second renderer gets lost in da forest, nya~ ★
 
 ```bash
-cd json-md-editor
-python -m venv .venv
-
-# macOS / Linux
-source .venv/bin/activate
-
-# Windows PowerShell:
-# .venv\Scripts\Activate.ps1
-
-pip install -r requirements.txt
-python main.py
+cd editor
+pnpm install
+pnpm tauri dev
 ```
 
-It can format n validate JSON, wrap / unwrap rich text, add changelog entries, preview Markdown live, insert Paw-licy templates, auto-number headings, and export HTML / PDF. So many helpful tools—Nekotan feelz safe now (｡･ω･｡)ﾉ♡
+To make a production desktop package, say dis spell. Rust n da Tauri system bits for ur OS need to be ready first, fren.
+
+```bash
+pnpm tauri build
+```
+
+`pnpm dev` starts da frontend only, and `pnpm build` checks da Vue bundle. A cute blue-haired cat-ear liquid-glass icon waits outside da app too (｡･ω･｡)ﾉ♡
 
 ## 🔗 URL parameters
 
@@ -97,7 +95,7 @@ https://yuri-self-info.netlify.app/?lang=en&page=changelog
 │   ├── assets/                 # Animation n style stuffs
 │   └── preview-entry.js        # Editor preview entrance
 ├── public/                     # Background, BGM, fonts, and static stuffs
-├── json-md-editor/             # JSON / Markdown editor app
+├── editor/                     # Tauri + Vue JSON / Markdown editor app
 ├── index.html
 ├── preview.html
 ├── package.json
@@ -116,7 +114,7 @@ Change profile n translation text in `src/data/i18n/`, Paw-licy Papers in `src/d
 | --- | --- |
 | Web | Vue 3, Vite |
 | Markdown | marked, DOMPurify |
-| Desktop editor | Python, PyQt6, PyQt6-WebEngine |
+| Desktop editor | Tauri 2, Rust, Vue 3 |
 | Shiny looks | CSS, langwage fonts, Canvas animation |
 | Visitor peekies | Googol Anal-nyaa-tics 4 |
 

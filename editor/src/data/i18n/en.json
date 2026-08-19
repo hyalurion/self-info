@@ -1,0 +1,107 @@
+{
+  "brand": {
+    "title": "Self-Info Editor",
+    "subtitle": "Content Studio"
+  },
+  "sidebar": {
+    "title": "Project Files",
+    "chooseRoot": "Choose a project folder",
+    "checkI18n": "Check i18n"
+  },
+  "contextbar": {
+    "generic": "Generic",
+    "i18n": "i18n",
+    "changelog": "Changelog",
+    "legal": "Legal",
+    "format": "Format",
+    "minify": "Minify",
+    "validate": "Validate",
+    "schema": "Schema",
+    "wrap": "Wrap",
+    "unwrap": "Unwrap",
+    "normalize": "Normalize",
+    "addEntry": "Add entry",
+    "autoNumber": "Auto-number",
+    "exportHtml": "Export HTML",
+    "hideTree": "Hide tree",
+    "showTree": "Tree",
+    "hidePreview": "Hide preview",
+    "showPreview": "Preview"
+  },
+  "findbar": {
+    "placeholder": "Find…",
+    "btn": "Find"
+  },
+  "tree": {
+    "noData": "No data",
+    "jsonOnly": "Tree view is available for JSON files.",
+    "dragToResize": "Drag to resize tree",
+    "dragToResizePreview": "Drag to resize preview"
+  },
+  "empty": "Open or create a JSON / Markdown file to begin.",
+  "status": {
+    "unsaved": "· Unsaved",
+    "ready": "Ready, meow~",
+    "lines": "lines",
+    "words": "words",
+    "pages": "pages",
+    "lnCol": "Ln / Col ready"
+  },
+  "dialog": {
+    "title": "Add Changelog Entry",
+    "version": "Version",
+    "versionPlaceholder": "1.4.0",
+    "date": "Date",
+    "markdown": "Markdown",
+    "markdownPlaceholder": "What changed?",
+    "cancel": "Cancel",
+    "confirm": "Add entry"
+  },
+  "menu": {
+    "appMenu": "Self-Info Editor",
+    "langMenu": "Language",
+    "newJson": "New JSON",
+    "newMd": "New Markdown",
+    "open": "Open…",
+    "save": "Save",
+    "saveAs": "Save As…",
+    "about": "About Self-Info Editor",
+    "services": "Services",
+    "hide": "Hide Self-Info Editor",
+    "hideOthers": "Hide Others",
+    "unhide": "Show All",
+    "quit": "Quit Self-Info Editor",
+    "toolsMenu": "Tools",
+    "viewMenu": "View",
+    "format": "Format",
+    "minify": "Minify",
+    "validate": "Validate",
+    "schemaCheck": "Schema Check",
+    "wrap": "Wrap",
+    "unwrap": "Unwrap",
+    "normalize": "Normalize",
+    "addEntry": "Add Entry",
+    "autoNumber": "Auto-number Articles",
+    "exportHtml": "Export HTML",
+    "toggleTree": "Toggle Tree",
+    "togglePreview": "Toggle Preview",
+    "checkI18n": "Check i18n"
+  },
+  "toast": {
+    "saved": "Saved",
+    "formattedJson": "Formatted JSON",
+    "minifiedJson": "Minified JSON",
+    "jsonError": "JSON error: ",
+    "invalidJson": "Invalid JSON: ",
+    "validJson": "JSON is valid ★",
+    "richIssues": " rich-text issue(s): ",
+    "richHappy": "Rich-text schema is happy ★",
+    "richChanged": " field(s) changed",
+    "changelogNeedArray": "Changelog must be a JSON array",
+    "changelogAdded": "Changelog entry added",
+    "chooseRootFirst": "Choose the project folder first",
+    "i18nMatchAll": " top-level keys match ★",
+    "found": "Found it, meow~",
+    "noMatches": "No matches"
+  }
+}

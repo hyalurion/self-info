@@ -119,9 +119,14 @@ function setLegalRegion(code) {
 }
 
 // Format an ISO date string into a long, language-appropriate format so every
-// language shows a consistent full date (e.g. 2025年8月16日 / August 16, 2025).
+// language shows a consistent full date:
+//   English:  "August 16, 2025"
+//   Japanese: "2025年8月16日"
+//   简体中文:  "2025年8月16日"
+//   繁體中文:  "2025年8月16日"
 const MONTHS_EN = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December']
+const MONTHS_JA = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
 
 export function formatLongDate(iso, lang) {
   let y, mo, day
@@ -142,7 +147,11 @@ export function formatLongDate(iso, lang) {
   if (lang === 'en') {
     return `${MONTHS_EN[mo - 1]} ${day}, ${y}`
   }
-  // ja / zh-Hans / zh-TW share the YYYY年M月D日 long format
+  if (lang === 'ja') {
+    // Native Japanese date format: YYYY年M月D日
+    return `${y}年${MONTHS_JA[mo - 1]}${day}日`
+  }
+  // zh-Hans / zh-TW share the YYYY年M月D日 long format
   return `${y}年${mo}月${day}日`
 }
 
