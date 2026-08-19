@@ -3,13 +3,6 @@
     "title": "Self-Info Editor",
     "subtitle": "Content Studio"
   },
-  "toolbar": {
-    "newJson": "＋ JSON",
-    "newMd": "＋ MD",
-    "open": "Open",
-    "save": "Save",
-    "saveAs": "Save As"
-  },
   "sidebar": {
     "title": "Project Files",
     "chooseRoot": "Choose a project folder",
@@ -41,7 +34,9 @@
   },
   "tree": {
     "noData": "No data",
-    "jsonOnly": "Tree view is available for JSON files."
+    "jsonOnly": "Tree view is available for JSON files.",
+    "dragToResize": "Drag to resize tree",
+    "dragToResizePreview": "Drag to resize preview"
   },
   "empty": "Open or create a JSON / Markdown file to begin.",
   "status": {
@@ -61,6 +56,36 @@
     "markdownPlaceholder": "What changed?",
     "cancel": "Cancel",
     "confirm": "Add entry"
+  },
+  "menu": {
+    "appMenu": "Self-Info Editor",
+    "langMenu": "Language",
+    "newJson": "New JSON",
+    "newMd": "New Markdown",
+    "open": "Open…",
+    "save": "Save",
+    "saveAs": "Save As…",
+    "about": "About Self-Info Editor",
+    "services": "Services",
+    "hide": "Hide Self-Info Editor",
+    "hideOthers": "Hide Others",
+    "unhide": "Show All",
+    "quit": "Quit Self-Info Editor",
+    "toolsMenu": "Tools",
+    "viewMenu": "View",
+    "format": "Format",
+    "minify": "Minify",
+    "validate": "Validate",
+    "schemaCheck": "Schema Check",
+    "wrap": "Wrap",
+    "unwrap": "Unwrap",
+    "normalize": "Normalize",
+    "addEntry": "Add Entry",
+    "autoNumber": "Auto-number Articles",
+    "exportHtml": "Export HTML",
+    "toggleTree": "Toggle Tree",
+    "togglePreview": "Toggle Preview",
+    "checkI18n": "Check i18n"
   },
   "toast": {
     "saved": "Saved",

@@ -3,13 +3,6 @@
     "title": "自己紹介エディター",
     "subtitle": "コンテンツスタジオ"
   },
-  "toolbar": {
-    "newJson": "＋ JSON",
-    "newMd": "＋ MD",
-    "open": "開く",
-    "save": "保存",
-    "saveAs": "別名で保存"
-  },
   "sidebar": {
     "title": "プロジェクトファイル",
     "chooseRoot": "プロジェクトフォルダを選択",
@@ -41,7 +34,9 @@
   },
   "tree": {
     "noData": "データなし",
-    "jsonOnly": "JSONファイルのみツリー表示が利用できます。"
+    "jsonOnly": "JSONファイルのみツリー表示が利用できます。",
+    "dragToResize": "ドラッグでツリー幅を調整",
+    "dragToResizePreview": "ドラッグでプレビュー幅を調整"
   },
   "empty": "JSON / Markdown ファイルを開くか作成して開始してください。",
   "status": {
@@ -61,6 +56,36 @@
     "markdownPlaceholder": "どんな変更がありましたか？",
     "cancel": "キャンセル",
     "confirm": "項目を追加"
+  },
+  "menu": {
+    "appMenu": "自己紹介エディター",
+    "langMenu": "言語設定",
+    "newJson": "新規 JSON",
+    "newMd": "新規 Markdown",
+    "open": "開く…",
+    "save": "保存",
+    "saveAs": "別名で保存…",
+    "about": "自己紹介エディターについて",
+    "services": "サービス",
+    "hide": "自己紹介エディターを隠す",
+    "hideOthers": "ほかを隠す",
+    "unhide": "すべて表示",
+    "quit": "自己紹介エディターを終了",
+    "toolsMenu": "ツール",
+    "viewMenu": "表示",
+    "format": "フォーマット",
+    "minify": "圧縮",
+    "validate": "バリデーション",
+    "schemaCheck": "構造チェック",
+    "wrap": "ラップ",
+    "unwrap": "アンラップ",
+    "normalize": "正規化",
+    "addEntry": "エントリー追加",
+    "autoNumber": "条項自動ナンバリング",
+    "exportHtml": "HTML書き出し",
+    "toggleTree": "ツリー切り替え",
+    "togglePreview": "プレビュー切り替え",
+    "checkI18n": "多言語整合チェック"
   },
   "toast": {
     "saved": "保存しました",

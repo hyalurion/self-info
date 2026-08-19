@@ -32,4 +32,4 @@ button { color: inherit; }
 .dialog input, .dialog textarea { background: rgba(5,3,14,.35); border: 1px solid rgba(255,255,255,.17); border-radius: 10px; padding: 9px; color: white; }
 .dialog textarea { min-height: 130px; resize: vertical; }
 .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }
-.toast { position: fixed; z-index: 50; right: 20px; bottom: 20px; max-width: 380px; padding: 11px 15px; border-radius: 14px; color: #fff; background: rgba(58,32,86,.9); border: 1px solid rgba(255,255,255,.2); box-shadow: 0 16px 40px rgba(0,0,0,.25); }
+.toast { position: fixed; z-index: 50; right: 20px; bottom: 20px; max-width: 380px; padding: 11px 15px; border-radius: 14px; color: #fff; background: rgba(212, 212, 212, 0.35); border: 1px solid rgba(255,255,255,.2); box-shadow: 0 16px 40px rgba(0,0,0,.25); }

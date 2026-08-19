@@ -3,10 +3,25 @@ export const langName = { ja: '日本語', en: 'English', 'zh-Hans': '简体中�
 
 export function detectRole(path = '') {
   const p = path.replaceAll('\\', '/').toLowerCase()
-  const lang = LANGS.find((code) => p.endsWith(`/i18n/${code.toLowerCase()}.json`)) || (p.endsWith('/changelogs/zh.json') ? 'zh-Hans' : p.endsWith('/changelogs/tw.json') ? 'zh-TW' : null)
-  if (p.includes('/src/data/i18n/') && p.endsWith('.json')) return { role: 'i18n', lang }
-  if (p.includes('/src/data/changelogs/') && p.endsWith('.json')) return { role: 'changelog', lang }
-  if (p.includes('/src/data/legal/') && p.endsWith('.md')) return { role: 'legal', lang: LANGS.find((code) => p.includes(`/${code.toLowerCase()}.`)) || null }
+  let lang = null
+  if (p.includes('/src/data/i18n/') && p.endsWith('.json')) {
+    lang = LANGS.find((code) => p.endsWith(`/${code.toLowerCase()}.json`)) || null
+    return { role: 'i18n', lang }
+  }
+  if (p.includes('/src/data/changelogs/') && p.endsWith('.json')) {
+    // Changelog lang mapping:
+    //   en.json -> en, ja.json -> ja, zh.json -> zh-Hans, tw.json -> zh-TW
+    //   (and also accept zh-hans.json / zh-tw.json for code-consistent names)
+    if (p.endsWith('/ja.json')) lang = 'ja'
+    else if (p.endsWith('/en.json')) lang = 'en'
+    else if (p.endsWith('/zh.json') || p.endsWith('/zh-hans.json')) lang = 'zh-Hans'
+    else if (p.endsWith('/tw.json') || p.endsWith('/zh-tw.json')) lang = 'zh-TW'
+    return { role: 'changelog', lang }
+  }
+  if (p.includes('/src/data/legal/') && p.endsWith('.md')) {
+    lang = LANGS.find((code) => p.includes(`/${code.toLowerCase()}.`)) || null
+    return { role: 'legal', lang }
+  }
   return { role: 'generic', lang: null }
 }
 

@@ -33,7 +33,35 @@ function fmtDate(value) { return formatLongDate(value, lang.value) }
 </template>
 
 <style scoped>
-.preview-root { min-height: 100%; padding: 20px; color: #fff; overflow: auto; }
+.preview-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 18px;
+  color: #fff;
+  overflow: auto;
+  isolation: isolate;
+}
+.preview-root :deep(.changelog-page),
+.preview-root :deep(.document-page),
+.preview-root :deep(.page-shell),
+.preview-root :deep(.content-wrapper),
+.preview-root :deep(.preview-root) {
+  position: static !important;
+  inset: auto !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.preview-root :deep(.changelog-list) {
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.preview-root :deep(.back-button) { display: none !important; }
 .changelog-list { display: grid; gap: 16px; }
 .changelog-entry, .doc-container { padding: 18px; border-radius: 20px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14); box-shadow: inset 0 1px .5px rgba(255,255,255,.25); }
 .entry-head { display:flex; justify-content:space-between; padding-bottom: 10px; margin-bottom: 10px; color: #c9a6ff; border-bottom: 1px solid rgba(255,255,255,.14); }

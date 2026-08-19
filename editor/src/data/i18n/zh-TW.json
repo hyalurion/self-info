@@ -3,13 +3,6 @@
     "title": "自介編輯器",
     "subtitle": "內容工作室"
   },
-  "toolbar": {
-    "newJson": "＋ JSON",
-    "newMd": "＋ MD",
-    "open": "打開",
-    "save": "儲存",
-    "saveAs": "另存新檔"
-  },
   "sidebar": {
     "title": "專案檔案",
     "chooseRoot": "選擇專案資料夾",
@@ -41,7 +34,9 @@
   },
   "tree": {
     "noData": "無資料",
-    "jsonOnly": "僅 JSON 檔案支援樹狀圖顯示。"
+    "jsonOnly": "僅 JSON 檔案支援樹狀圖顯示。",
+    "dragToResize": "拖曳調整樹狀圖寬度",
+    "dragToResizePreview": "拖曳調整預覽寬度"
   },
   "empty": "請開啟或建立一個 JSON / Markdown 檔案以開始。",
   "status": {
@@ -61,6 +56,36 @@
     "markdownPlaceholder": "本次有哪些變更？",
     "cancel": "取消",
     "confirm": "確認新增"
+  },
+  "menu": {
+    "appMenu": "自介編輯器",
+    "langMenu": "語言設定",
+    "newJson": "新增 JSON",
+    "newMd": "新增 Markdown",
+    "open": "開啟…",
+    "save": "儲存",
+    "saveAs": "另存新檔…",
+    "about": "關於自介編輯器",
+    "services": "服務",
+    "hide": "隱藏自介編輯器",
+    "hideOthers": "隱藏其他",
+    "unhide": "顯示全部",
+    "quit": "結束自介編輯器",
+    "toolsMenu": "工具",
+    "viewMenu": "視覺化",
+    "format": "格式化",
+    "minify": "壓縮",
+    "validate": "驗證",
+    "schemaCheck": "結構檢查",
+    "wrap": "包覆",
+    "unwrap": "解包",
+    "normalize": "正規化",
+    "addEntry": "新增條目",
+    "autoNumber": "自動編號條款",
+    "exportHtml": "匯出 HTML",
+    "toggleTree": "切換樹狀圖",
+    "togglePreview": "切換預覽",
+    "checkI18n": "多語言一致性檢查"
   },
   "toast": {
     "saved": "已儲存",
