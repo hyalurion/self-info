@@ -1,218 +1,160 @@
 // Browser compatibility detection module.
-// Runs before the Vue app mounts. If the browser/OS is too old, redirect to outdate.html.
-// A `?force=1` query parameter bypasses the check (used by the "force visit" link).
+// Runs before the Vue app mounts. Instead of guessing from the UA string,
+// it probes the browser for the advanced features this project actually uses.
+// If any required feature is missing, it redirects to outdate.html.
+// A `?force=1` query parameter (or sessionStorage flag) bypasses the check
+// (used by the "force visit" link on outdate.html).
 
 (function () {
   'use strict';
 
-  // ---------- Utility functions ----------
+  // ---------- Feature probes ----------
+  // Each probe returns true when the feature is available. Add new probes
+  // here as the project adopts more advanced features.
 
-  function compareVersions(v1, v2) {
-    if (!v1 && !v2) return 0;
-    if (!v1) return -1;
-    if (!v2) return 1;
-    var parts1 = String(v1).split(/[._-]/);
-    var parts2 = String(v2).split(/[._-]/);
-    var len = Math.max(parts1.length, parts2.length);
-    for (var i = 0; i < len; i++) {
-      var a = i < parts1.length ? (parseInt(parts1[i], 10) || 0) : 0;
-      var b = i < parts2.length ? (parseInt(parts2[i], 10) || 0) : 0;
-      if (a > b) return 1;
-      if (a < b) return -1;
-    }
-    return 0;
+  // --- JavaScript APIs ---
+
+  // Browsers that understand the `nomodule` attribute support ES modules.
+  // (index.html loads the app via <script type="module">)
+  function hasESModules() {
+    var s = document.createElement('script');
+    return 'noModule' in s;
   }
 
-  function isVersionAtLeast(version, target) {
-    if (!version) return false;
-    return compareVersions(version, target) >= 0;
+  // fetch + AbortSignal.timeout are used for the analytics request.
+  function hasFetch() {
+    return typeof window.fetch === 'function';
+  }
+  function hasAbortSignalTimeout() {
+    return typeof window.AbortSignal === 'function' &&
+      typeof window.AbortSignal.timeout === 'function';
   }
 
-  // ---------- UA parsing ----------
-
-  function parseUA(ua) {
-    var result = {
-      os: { name: '不明', version: '' },
-      browser: { name: '不明', version: '' }
-    };
-
-    if (!ua) ua = navigator.userAgent || '';
-    ua = String(ua);
-
-    // ----- OS -----
-    var osName = '不明';
-    var osVer = '';
-
-    var iosMatch = ua.match(/iPhone OS (\d+)[._](\d+)(?:[._](\d+))?/i);
-    var iPadMatch = ua.match(/iPad OS (\d+)[._](\d+)(?:[._](\d+))?/i);
-    var iPodMatch = ua.match(/iPod touch; CPU iPhone OS (\d+)[._](\d+)(?:[._](\d+))?/i);
-
-    if (iPadMatch) {
-      osName = 'iPadOS';
-      osVer = iPadMatch[1] + '.' + iPadMatch[2];
-    } else if (iosMatch || iPodMatch) {
-      var m = iosMatch || iPodMatch;
-      osName = 'iOS';
-      osVer = m[1] + '.' + m[2];
-    } else if (/iPad|iPhone|iPod/.test(ua) && /Mac OS X/.test(ua)) {
-      var plat = navigator.platform || '';
-      if (/iPad|iPhone|iPod/.test(plat)) {
-        osName = plat.indexOf('iPad') !== -1 ? 'iPadOS' : 'iOS';
-        var verMatch = ua.match(/OS (\d+)[._](\d+)(?:[._](\d+))?/i);
-        if (verMatch) osVer = verMatch[1] + '.' + verMatch[2];
-      }
-    }
-
-    if (osName === '不明') {
-      var macMatch = ua.match(/Mac OS X (\d+)[._](\d+)(?:[._](\d+))?/i);
-      if (macMatch) {
-        osName = 'macOS';
-        osVer = parseInt(macMatch[1], 10) + '.' + parseInt(macMatch[2], 10);
-      }
-    }
-
-    if (osName === '不明') {
-      var andMatch = ua.match(/Android (\d+)(?:[._](\d+))?(?:[._](\d+))?/i);
-      if (andMatch) {
-        osName = 'Android';
-        osVer = andMatch[1];
-        if (andMatch[2]) osVer += '.' + andMatch[2];
-      }
-    }
-
-    if (osName === '不明') {
-      var winMatch = ua.match(/Windows NT (\d+)[._](\d+)/i);
-      if (winMatch) {
-        osName = 'Windows';
-        osVer = winMatch[1] + '.' + winMatch[2];
-      }
-    }
-
-    result.os.name = osName;
-    result.os.version = osVer;
-
-    // ----- Browser -----
-    var browserName = '不明';
-    var browserVer = '';
-
-    var edgeMatch = ua.match(/Edg(?:iOS)?\/(\d+)(?:[._](\d+))?(?:[._](\d+))?/i);
-    if (edgeMatch) {
-      browserName = 'Edge';
-      browserVer = edgeMatch[1];
-    }
-
-    if (browserName === '不明') {
-      var chromeMatch = ua.match(/(?:Chrome|CriOS|HeadlessChrome)\/(\d+)/i);
-      if (chromeMatch && !/Edg\//.test(ua) && !/OPR\//.test(ua) && !/FxiOS/.test(ua)) {
-        browserName = 'Chrome';
-        browserVer = chromeMatch[1];
-      }
-    }
-
-    if (browserName === '不明') {
-      var ffMatch = ua.match(/(?:Firefox|FxiOS)\/(\d+)/i);
-      if (ffMatch) {
-        browserName = 'Firefox';
-        browserVer = ffMatch[1];
-      }
-    }
-
-    if (browserName === '不明') {
-      var safMatch = ua.match(/Version\/(\d+)(?:[._](\d+))?.*?Safari\//i);
-      if (safMatch && !/Chrome\//.test(ua) && !/Edg\//.test(ua) && !/CriOS/.test(ua) && !/FxiOS/.test(ua)) {
-        browserName = 'Safari';
-        browserVer = safMatch[1];
-      }
-    }
-
-    if (browserName === '不明') {
-      var oprMatch = ua.match(/OPR\/(\d+)/i);
-      if (oprMatch) {
-        browserName = 'Opera';
-        browserVer = oprMatch[1];
-      }
-    }
-
-    if (browserName === '不明') {
-      var samMatch = ua.match(/SamsungBrowser\/(\d+)/i);
-      if (samMatch) {
-        browserName = 'Samsung Internet';
-        browserVer = samMatch[1];
-      }
-    }
-
-    result.browser.name = browserName;
-    result.browser.version = browserVer;
-
-    return result;
+  // async/await (analytics.js) lowers to Promises.
+  function hasPromise() {
+    return typeof window.Promise === 'function';
   }
 
-  // ---------- Compatibility check ----------
-
-  // Minimum supported versions
-  var MIN_MACOS = '15.4';
-  var MIN_IOS = '18.4';
-  var MIN_ANDROID = '10';
-  var MIN_WINDOWS = '10';
-  var MIN_CHROME = '115';
-  var MIN_EDGE = '115';
-  var MIN_FIREFOX = '128';
-  var MIN_SAFARI = '18.4';
-
-  // Returns true if the current environment is supported
-  function isSupported(parsed) {
-    var os = parsed.os;
-    var browser = parsed.browser;
-    var osName = os.name || '';
-    var osVer = os.version || '';
-    var browserName = browser.name || '';
-    var browserVer = browser.version || '';
-
-    // iOS / iPadOS: must be >= MIN_IOS (cannot upgrade browser independently)
-    if (/iPadOS|iOS/.test(osName)) {
-      return isVersionAtLeast(osVer, MIN_IOS);
+  // useI18n.js persists the selected language in localStorage; sessionStorage
+  // carries the "force visit" bypass flag.
+  function hasLocalStorage() {
+    try {
+      return typeof window.localStorage !== 'undefined' && window.localStorage !== null;
+    } catch (e) {
+      return false;
     }
-
-    // macOS: OS >= MIN_MACOS, and browser must meet its minimum
-    if (/macOS/.test(osName)) {
-      if (!isVersionAtLeast(osVer, MIN_MACOS)) return false;
-      return checkBrowser(browserName, browserVer);
+  }
+  function hasSessionStorage() {
+    try {
+      return typeof window.sessionStorage !== 'undefined' && window.sessionStorage !== null;
+    } catch (e) {
+      return false;
     }
-
-    // Android: OS >= MIN_ANDROID, Chrome must meet minimum
-    if (/Android/.test(osName)) {
-      if (!isVersionAtLeast(osVer, MIN_ANDROID)) return false;
-      return checkBrowser(browserName, browserVer);
-    }
-
-    // Windows: OS >= MIN_WINDOWS, browser must meet minimum
-    if (/Windows/.test(osName)) {
-      if (!isVersionAtLeast(osVer, MIN_WINDOWS)) return false;
-      return checkBrowser(browserName, browserVer);
-    }
-
-    // ChromeOS: Chrome must meet minimum
-    if (/ChromeOS/.test(osName)) {
-      return checkBrowser(browserName, browserVer);
-    }
-
-    // HarmonyOS / Linux / unknown: treat as unsupported (advice will guide user)
-    return false;
   }
 
-  function checkBrowser(browserName, browserVer) {
-    if (/Chrome/.test(browserName)) return isVersionAtLeast(browserVer, MIN_CHROME);
-    if (/Edge/.test(browserName)) return isVersionAtLeast(browserVer, MIN_EDGE);
-    if (/Firefox/.test(browserName)) return isVersionAtLeast(browserVer, MIN_FIREFOX);
-    if (/Safari/.test(browserName)) return isVersionAtLeast(browserVer, MIN_SAFARI);
-    if (/Opera/.test(browserName)) return isVersionAtLeast(browserVer, MIN_CHROME);
-    if (/Samsung Internet/.test(browserName)) return isVersionAtLeast(browserVer, MIN_CHROME);
-    return false;
+  // UIElements.vue / sakura.js drive animations with requestAnimationFrame.
+  function hasRequestAnimationFrame() {
+    return typeof window.requestAnimationFrame === 'function';
+  }
+
+  // URLSearchParams is used to read the ?force=1 bypass below.
+  function hasURLSearchParams() {
+    return typeof window.URLSearchParams === 'function';
+  }
+
+  // --- CSS features ---
+  // CSS.supports is the detection mechanism itself; if it is missing the
+  // browser is far too old, so every probe below returns false in that case.
+  function cssSupports(prop, value) {
+    var css = window.CSS;
+    if (!css || typeof css.supports !== 'function') return false;
+    try {
+      return value !== undefined ? css.supports(prop, value) : css.supports(prop);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // style.css / liquid-glass-block.css rely on var(--…) everywhere.
+  function hasCSSCustomProperties() {
+    return cssSupports('(--compat-check: 0)') ||
+      cssSupports('--compat-check', '0') ||
+      cssSupports('color', 'var(--compat-check)');
+  }
+
+  // Liquid glass effect (style.css, splash-screen.css, liquid-glass-block.css).
+  // Safari only exposes it under the -webkit- prefix.
+  function hasBackdropFilter() {
+    return cssSupports('backdrop-filter', 'blur(2px)') ||
+      cssSupports('-webkit-backdrop-filter', 'blur(2px)');
+  }
+
+  // liquid-glass-block.css animates --sheen-x / --sheen-y via @property.
+  // The @property at-rule ships alongside CSS.registerProperty in practice.
+  function hasPropertyRule() {
+    return !!window.CSS && typeof window.CSS.registerProperty === 'function';
+  }
+
+  // liquid-glass-block.css ::after rim uses a conic-gradient.
+  function hasConicGradient() {
+    return cssSupports('background', 'conic-gradient(from 0deg, white, black)');
+  }
+
+  // style.css body::before uses the `inset` shorthand.
+  function hasInset() {
+    return cssSupports('inset', '0');
+  }
+
+  // liquid-glass-block.css rim compositing (unprefixed in Chrome/Firefox,
+  // -webkit- with the Porter-Duff `xor` keyword in Safari).
+  function hasMaskComposite() {
+    return cssSupports('mask-composite', 'exclude') ||
+      cssSupports('-webkit-mask-composite', 'xor');
+  }
+
+  // style.css and DocumentPage.vue request smooth scrolling.
+  function hasScrollBehaviorSmooth() {
+    return cssSupports('scroll-behavior', 'smooth');
+  }
+
+  // ---------- Required feature list ----------
+  // Ordered for readability; each entry notes where the feature is used.
+  var REQUIRED_FEATURES = [
+    { name: 'ES Modules',              check: hasESModules },            // index.html <script type=module>
+    { name: 'fetch',                   check: hasFetch },                 // analytics.js
+    { name: 'AbortSignal.timeout',     check: hasAbortSignalTimeout },   // analytics.js
+    { name: 'Promise',                check: hasPromise },               // async/await
+    { name: 'localStorage',           check: hasLocalStorage },          // useI18n.js
+    { name: 'sessionStorage',         check: hasSessionStorage },         // bypass flag
+    { name: 'requestAnimationFrame',  check: hasRequestAnimationFrame },  // UIElements.vue, sakura.js
+    { name: 'URLSearchParams',         check: hasURLSearchParams },       // ?force=1 bypass
+    { name: 'CSS Custom Properties',  check: hasCSSCustomProperties },    // style.css var()
+    { name: 'backdrop-filter',        check: hasBackdropFilter },         // liquid glass
+    { name: 'CSS @property',          check: hasPropertyRule },           // liquid-glass-block.css
+    { name: 'conic-gradient',         check: hasConicGradient },          // liquid-glass-block.css rim
+    { name: 'inset',                  check: hasInset },                  // style.css body::before
+    { name: 'mask-composite',         check: hasMaskComposite },          // liquid-glass-block.css rim
+    { name: 'scroll-behavior: smooth', check: hasScrollBehaviorSmooth }   // style.css, DocumentPage.vue
+  ];
+
+  // Returns an array of missing feature names (empty when everything is OK).
+  function getMissingFeatures() {
+    var missing = [];
+    for (var i = 0; i < REQUIRED_FEATURES.length; i++) {
+      var feature = REQUIRED_FEATURES[i];
+      try {
+        if (!feature.check()) missing.push(feature.name);
+      } catch (e) {
+        missing.push(feature.name);
+      }
+    }
+    return missing;
   }
 
   // ---------- Public API ----------
 
-  // Check compatibility. If unsupported, redirect to outdate.html (unless bypassed).
+  // Check compatibility. If any required feature is missing, redirect to
+  // outdate.html (unless bypassed via ?force=1 or sessionStorage).
   function checkCompatibility() {
     // Allow bypass via ?force=1 (used by the "force visit" link on outdate.html)
     try {
@@ -225,13 +167,11 @@
       if (sessionStorage.getItem('forceVisit') === '1') return true;
     } catch (e) { /* ignore */ }
 
-    var parsed = parseUA();
-    var supported = isSupported(parsed);
-
-    if (!supported) {
-      // Redirect to outdate.html. Preserve the force flag so the "visit anyway" link can set it.
-      var redirect = 'outdate.html';
-      window.location.replace(redirect);
+    var missing = getMissingFeatures();
+    if (missing.length > 0) {
+      // Redirect to outdate.html. The force flag is preserved by the link on
+      // that page so the "visit anyway" path can set it.
+      window.location.replace('outdate.html');
       return false;
     }
     return true;

@@ -10,10 +10,15 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
         }
 
+        /* ---------- Theme variables (modern browsers only) ---------- */
+        /* Old browsers (IE, Chrome <49) can't use var() — every rule below
+           also has a direct fallback value on the line above the var() line,
+           so those browsers still get proper colours. */
         :root {
-            /* Light theme: pure white background, black text */
             --bg: #ffffff;
             --text-primary: #000000;
             --text-secondary: #555555;
@@ -42,10 +47,13 @@
         }
 
         body {
+            font-family: system-ui, -apple-system, sans-serif;
             font-family: var(--font);
+            background: #ffffff;
             background: var(--bg);
+            color: #000000;
             color: var(--text-primary);
-            min-height: 100vh;
+            min-height: 100vh;  /* old browsers fall back to height:100% above */
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
@@ -75,18 +83,21 @@
             font-size: 22px;
             font-weight: 600;
             line-height: 1.5;
+            color: #000000;
             color: var(--text-primary);
             margin-bottom: 20px;
             word-break: break-word;
         }
 
         .message .highlight {
+            color: #000000;
             color: var(--text-accent);
             text-decoration: underline;
         }
 
         .divider {
             margin: 20px auto;
+            color: #cccccc;
             color: var(--border);
             font-size: 14px;
             letter-spacing: 4px;
@@ -94,6 +105,7 @@
 
         .info-grid {
             font-size: 15px;
+            color: #555555;
             color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 20px;
@@ -101,6 +113,7 @@
 
         .info-grid .label {
             font-weight: 600;
+            color: #000000;
             color: var(--text-primary);
             margin-right: 6px;
         }
@@ -108,16 +121,20 @@
         .info-grid .tag {
             display: inline-block;
             padding: 2px 10px;
+            border: 1px solid #cccccc;
             border: 1px solid var(--border);
             border-radius: 4px;
             font-size: 14px;
+            color: #000000;
             color: var(--text-primary);
         }
 
         .advice-box {
             margin: 24px 0 16px;
             padding: 16px 20px;
+            border: 1px solid #cccccc;
             border: 1px solid var(--border);
+            border-left: 4px solid #000000;
             border-left: 4px solid var(--text-accent);
             text-align: left;
             border-radius: 4px;
@@ -126,6 +143,7 @@
         .advice-box .advice-label {
             font-size: 13px;
             font-weight: 700;
+            color: #000000;
             color: var(--text-accent);
             letter-spacing: 0.5px;
             margin-bottom: 6px;
@@ -134,6 +152,7 @@
         .advice-box .advice-text {
             font-size: 15px;
             line-height: 1.6;
+            color: #000000;
             color: var(--text-primary);
             word-break: break-word;
         }
@@ -141,6 +160,7 @@
         .force-visit {
             margin: 28px 0 16px;
             font-size: 15px;
+            color: #555555;
             color: var(--text-secondary);
         }
 
@@ -148,11 +168,14 @@
             display: inline-block;
             margin-top: 10px;
             padding: 10px 24px;
+            color: #ffffff;
             color: var(--bg);
+            background: #000000;
             background: var(--text-primary);
             text-decoration: none;
             border-radius: 4px;
             font-weight: 600;
+            border: 1px solid #000000;
             border: 1px solid var(--text-primary);
             -webkit-transition: opacity 0.2s;
             transition: opacity 0.2s;
@@ -160,6 +183,13 @@
 
         .force-visit a:active {
             opacity: 0.7;
+        }
+
+        .footnote {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #555555;
+            color: var(--text-secondary);
         }
 
         /* ---------- Responsive ---------- */
@@ -214,7 +244,7 @@
         <div class="force-visit">
             それでも小屋に遊びに行きたいにゃん？
             <br>
-            <a id="forceVisitLink" href="/">無理して入る (=^･ω･^=)</a>
+            <a id="forceVisitLink" href="/?force=1">無理して入る (=^･ω･^=)</a>
         </div>
 
         <div class="footnote">
@@ -227,12 +257,6 @@
             'use strict';
 
             // ---------- Utility functions ----------
-
-            // Strip leading/trailing separators from a version string
-            function trimVersion(v) {
-                if (!v) return '';
-                return v.replace(/^[\s._-]+|[\s._-]+$/g, '').trim();
-            }
 
             // Compare two version strings.
             // Returns 1 if v1 > v2, -1 if v1 < v2, 0 if equal.
@@ -302,7 +326,16 @@
                     }
                 }
 
-                // 2. macOS
+                // 2. Windows Phone (must check before Windows NT)
+                if (osName === '不明') {
+                    var wpMatch = ua.match(/Windows Phone(?: OS)? (\d+)[._](\d+)/i);
+                    if (wpMatch) {
+                        osName = 'Windows Phone';
+                        osVer = wpMatch[1] + '.' + wpMatch[2];
+                    }
+                }
+
+                // 3. macOS
                 if (osName === '不明') {
                     var macMatch = ua.match(/Mac OS X (\d+)[._](\d+)(?:[._](\d+))?/i);
                     if (macMatch) {
@@ -314,7 +347,7 @@
                     }
                 }
 
-                // 3. Android
+                // 4. Android
                 if (osName === '不明') {
                     var andMatch = ua.match(/Android (\d+)(?:[._](\d+))?(?:[._](\d+))?/i);
                     if (andMatch) {
@@ -325,7 +358,7 @@
                     }
                 }
 
-                // 4. Windows
+                // 5. Windows
                 if (osName === '不明') {
                     var winMatch = ua.match(/Windows NT (\d+)[._](\d+)/i);
                     if (winMatch) {
@@ -339,11 +372,15 @@
                             osName = 'Windows 8';
                         } else if (osVer === '6.1') {
                             osName = 'Windows 7';
+                        } else if (osVer === '6.0') {
+                            osName = 'Windows Vista';
+                        } else if (osVer === '5.1') {
+                            osName = 'Windows XP';
                         }
                     }
                 }
 
-                // 5. HarmonyOS
+                // 6. HarmonyOS
                 if (osName === '不明') {
                     var hmMatch = ua.match(/HarmonyOS(?:[\/\s](\d+)(?:[._](\d+))?)?/i);
                     if (hmMatch) {
@@ -355,7 +392,26 @@
                     }
                 }
 
-                // 6. Linux (excluding Android)
+                // 7. KaiOS
+                if (osName === '不明') {
+                    var kaiMatch = ua.match(/KAIOS\/(\d+)[._](\d+)/i);
+                    if (kaiMatch) {
+                        osName = 'KaiOS';
+                        osVer = kaiMatch[1] + '.' + kaiMatch[2];
+                    }
+                }
+
+                // 8. BlackBerry
+                if (osName === '不明') {
+                    var bbMatch = ua.match(/BB10;.*?[^\d](\d+)[._](\d+)/i);
+                    if (!bbMatch) bbMatch = ua.match(/BlackBerry(?:\d+)?[\/\s](\d+)[._](\d+)/i);
+                    if (bbMatch) {
+                        osName = 'BlackBerry';
+                        osVer = bbMatch[1] + '.' + bbMatch[2];
+                    }
+                }
+
+                // 9. Linux (excluding Android)
                 if (osName === '不明' && /Linux/.test(ua) && !/Android/.test(ua)) {
                     osName = 'Linux';
                     var linVer = ua.match(/Linux(?:[\/\s](\d+)(?:[._](\d+))?)?/i);
@@ -365,7 +421,25 @@
                     }
                 }
 
-                // 7. ChromeOS
+                // 10. FreeBSD / OpenBSD / NetBSD
+                if (osName === '不明') {
+                    var bsdMatch = ua.match(/(FreeBSD|OpenBSD|NetBSD)[\/\s](\d+)[._](\d+)/i);
+                    if (bsdMatch) {
+                        osName = bsdMatch[1];
+                        osVer = bsdMatch[2] + '.' + bsdMatch[3];
+                    }
+                }
+
+                // 11. Solaris / SunOS
+                if (osName === '不明') {
+                    var solMatch = ua.match(/(SunOS|Solaris)[\/\s](\d+)[._](\d+)/i);
+                    if (solMatch) {
+                        osName = 'Solaris';
+                        osVer = solMatch[2] + '.' + solMatch[3];
+                    }
+                }
+
+                // 12. ChromeOS
                 if (osName === '不明' && /CrOS/.test(ua)) {
                     osName = 'ChromeOS';
                     var crosMatch = ua.match(/CrOS (?:[a-zA-Z0-9_]+ )?(\d+)[._](\d+)/i);
@@ -379,19 +453,166 @@
                 result.os.raw = osName + (osVer ? ' ' + osVer : '');
 
                 // ----- Browser detection -----
+                // Order matters: rare/edge-case browsers often include
+                // "Chrome" or "Safari" in their UA, so check them first.
                 var browserName = '不明';
                 var browserVer = '';
 
-                // 1. Edge
+                // 1. Internet Explorer (MSIE or Trident/IE11)
+                if (browserName === '不明') {
+                    var ieMatch = ua.match(/MSIE (\d+)(?:[._](\d+))?/i);
+                    if (ieMatch) {
+                        browserName = 'Internet Explorer';
+                        browserVer = ieMatch[1];
+                        if (ieMatch[2]) browserVer += '.' + ieMatch[2];
+                    } else {
+                        // IE11 hides MSIE; uses Trident + rv:
+                        var trident = ua.match(/Trident\/(\d+)[._](\d+)/i);
+                        if (trident) {
+                            var rvMatch = ua.match(/rv:(\d+)[._](\d+)/i);
+                            if (rvMatch) {
+                                browserName = 'Internet Explorer';
+                                browserVer = rvMatch[1] + '.' + rvMatch[2];
+                            }
+                        }
+                    }
+                    // document.documentMode is IE-only (IE8+)
+                    if (browserName === '不明' && document.documentMode) {
+                        browserName = 'Internet Explorer';
+                        browserVer = String(document.documentMode);
+                    }
+                }
+
+                // 2. Legacy Edge (EdgeHTML — uses "Edge/" not "Edg/")
+                if (browserName === '不明') {
+                    var legacyEdgeMatch = ua.match(/Edge\/(\d+)(?:[._](\d+))?/i);
+                    if (legacyEdgeMatch) {
+                        browserName = 'Edge (Legacy)';
+                        browserVer = legacyEdgeMatch[1];
+                        if (legacyEdgeMatch[2]) browserVer += '.' + legacyEdgeMatch[2];
+                    }
+                }
+
+                // 3. UC Browser
+                if (browserName === '不明') {
+                    var ucMatch = ua.match(/UC?Browser\/(\d+)(?:[._](\d+))?/i);
+                    if (!ucMatch) ucMatch = ua.match(/UCWEB\/(\d+)(?:[._](\d+))?/i);
+                    if (ucMatch) {
+                        browserName = 'UC Browser';
+                        browserVer = ucMatch[1];
+                        if (ucMatch[2]) browserVer += '.' + ucMatch[2];
+                    }
+                }
+
+                // 4. QQ Browser
+                if (browserName === '不明') {
+                    var qqMatch = ua.match(/(?:MQQBrowser|QQBrowser)\/(\d+)(?:[._](\d+))?/i);
+                    if (qqMatch) {
+                        browserName = 'QQ Browser';
+                        browserVer = qqMatch[1];
+                        if (qqMatch[2]) browserVer += '.' + qqMatch[2];
+                    }
+                }
+
+                // 5. Baidu Browser
+                if (browserName === '不明') {
+                    var baiduMatch = ua.match(/(?:BIDUBrowser|bdbrowser)\/(\d+)(?:[._](\d+))?/i);
+                    if (baiduMatch) {
+                        browserName = 'Baidu Browser';
+                        browserVer = baiduMatch[1];
+                        if (baiduMatch[2]) browserVer += '.' + baiduMatch[2];
+                    }
+                }
+
+                // 6. Sogou Browser
+                if (browserName === '不明') {
+                    if (/Sogou/.test(ua) || /SE 2\.X MetaSr/i.test(ua)) {
+                        browserName = 'Sogou Browser';
+                        browserVer = '';
+                    }
+                }
+
+                // 7. 360 Browser
+                if (browserName === '不明') {
+                    var q360Match = ua.match(/360(?:SE|EE|Browser)/i);
+                    if (q360Match) {
+                        browserName = '360 Browser';
+                        browserVer = '';
+                    }
+                }
+
+                // 8. Maxthon
+                if (browserName === '不明') {
+                    var maxMatch = ua.match(/Maxthon\/(\d+)(?:[._](\d+))?/i);
+                    if (maxMatch) {
+                        browserName = 'Maxthon';
+                        browserVer = maxMatch[1];
+                        if (maxMatch[2]) browserVer += '.' + maxMatch[2];
+                    }
+                }
+
+                // 9. Yandex Browser
+                if (browserName === '不明') {
+                    var yaMatch = ua.match(/YaBrowser\/(\d+)(?:[._](\d+))?/i);
+                    if (yaMatch) {
+                        browserName = 'Yandex Browser';
+                        browserVer = yaMatch[1];
+                        if (yaMatch[2]) browserVer += '.' + yaMatch[2];
+                    }
+                }
+
+                // 10. Vivaldi
+                if (browserName === '不明') {
+                    var vivMatch = ua.match(/Vivaldi\/(\d+)(?:[._](\d+))?/i);
+                    if (vivMatch) {
+                        browserName = 'Vivaldi';
+                        browserVer = vivMatch[1];
+                        if (vivMatch[2]) browserVer += '.' + vivMatch[2];
+                    }
+                }
+
+                // 11. Whale (Naver)
+                if (browserName === '不明') {
+                    var whaleMatch = ua.match(/Whale\/(\d+)(?:[._](\d+))?/i);
+                    if (whaleMatch) {
+                        browserName = 'Whale';
+                        browserVer = whaleMatch[1];
+                        if (whaleMatch[2]) browserVer += '.' + whaleMatch[2];
+                    }
+                }
+
+                // 12. Chromium Edge (Edg/ or EdgiOS/)
                 var edgeMatch = ua.match(/Edg(?:iOS)?\/(\d+)(?:[._](\d+))?(?:[._](\d+))?/i);
-                if (edgeMatch) {
+                if (browserName === '不明' && edgeMatch) {
                     browserName = 'Edge';
                     browserVer = edgeMatch[1];
                     if (edgeMatch[2]) browserVer += '.' + edgeMatch[2];
                     if (edgeMatch[3]) browserVer += '.' + edgeMatch[3];
                 }
 
-                // 2. Chrome
+                // 13. Opera
+                if (browserName === '不明') {
+                    var oprMatch = ua.match(/OPR\/(\d+)(?:[._](\d+))?(?:[._](\d+))?/i);
+                    if (oprMatch) {
+                        browserName = 'Opera';
+                        browserVer = oprMatch[1];
+                        if (oprMatch[2]) browserVer += '.' + oprMatch[2];
+                        if (oprMatch[3]) browserVer += '.' + oprMatch[3];
+                    }
+                }
+
+                // 14. Samsung Internet
+                if (browserName === '不明') {
+                    var samMatch = ua.match(/SamsungBrowser\/(\d+)(?:[._](\d+))?(?:[._](\d+))?/i);
+                    if (samMatch) {
+                        browserName = 'Samsung Internet';
+                        browserVer = samMatch[1];
+                        if (samMatch[2]) browserVer += '.' + samMatch[2];
+                        if (samMatch[3]) browserVer += '.' + samMatch[3];
+                    }
+                }
+
+                // 15. Chrome
                 if (browserName === '不明') {
                     var chromeMatch = ua.match(/(?:Chrome|CriOS|HeadlessChrome)\/(\d+)(?:[._](\d+))?(?:[._](\d+))?/i);
                     if (chromeMatch && !/Edg\//.test(ua) && !/OPR\//.test(ua) && !/FxiOS/.test(ua) && !/EdgiOS/.test(ua)) {
@@ -402,7 +623,7 @@
                     }
                 }
 
-                // 3. Firefox
+                // 16. Firefox
                 if (browserName === '不明') {
                     var ffMatch = ua.match(/(?:Firefox|FxiOS)\/(\d+)(?:[._](\d+))?(?:[._](\d+))?/i);
                     if (ffMatch) {
@@ -413,7 +634,7 @@
                     }
                 }
 
-                // 4. Safari
+                // 17. Safari
                 if (browserName === '不明') {
                     var safMatch = ua.match(/Version\/(\d+)(?:[._](\d+))?(?:[._](\d+))?.*?Safari\//i);
                     if (safMatch && !/Chrome\//.test(ua) && !/Edg\//.test(ua) && !/CriOS/.test(ua) && !/FxiOS/.test(ua) && !/EdgiOS/.test(ua)) {
@@ -429,28 +650,6 @@
                             if (saf2[2]) browserVer += '.' + saf2[2];
                             if (saf2[3]) browserVer += '.' + saf2[3];
                         }
-                    }
-                }
-
-                // 5. Opera
-                if (browserName === '不明') {
-                    var oprMatch = ua.match(/OPR\/(\d+)(?:[._](\d+))?(?:[._](\d+))?/i);
-                    if (oprMatch) {
-                        browserName = 'Opera';
-                        browserVer = oprMatch[1];
-                        if (oprMatch[2]) browserVer += '.' + oprMatch[2];
-                        if (oprMatch[3]) browserVer += '.' + oprMatch[3];
-                    }
-                }
-
-                // 6. Samsung Internet
-                if (browserName === '不明') {
-                    var samMatch = ua.match(/SamsungBrowser\/(\d+)(?:[._](\d+))?(?:[._](\d+))?/i);
-                    if (samMatch) {
-                        browserName = 'Samsung Internet';
-                        browserVer = samMatch[1];
-                        if (samMatch[2]) browserVer += '.' + samMatch[2];
-                        if (samMatch[3]) browserVer += '.' + samMatch[3];
                     }
                 }
 
@@ -487,9 +686,79 @@
                 var browserName = browser.name || '';
                 var browserVer = browser.version || '';
 
+                // Internet Explorer — completely unsupported, no version check needed
+                if (/Internet Explorer/.test(browserName)) {
+                    return 'IEはもう対応してないの(>_<) Chrome ' + MIN_CHROME + '+、Edge ' + MIN_EDGE + '+、Firefox ' + MIN_FIREFOX + '+ などのモダンブラウザに乗り換えてね！';
+                }
+
+                // Legacy Edge (EdgeHTML) — also unsupported
+                if (/Legacy/.test(browserName)) {
+                    return '古いEdgeはもう使えないよ〜(＞_＜) Chromium版 Edge ' + MIN_EDGE + '+ にアップデートするか、Chrome ' + MIN_CHROME + '+ を使ってね！';
+                }
+
+                // UC Browser
+                if (/UC Browser/.test(browserName)) {
+                    return 'UC Browserはテストしてないの(´• ω •`) Chrome ' + MIN_CHROME + '+ か Firefox ' + MIN_FIREFOX + '+ だと安心だよ！';
+                }
+
+                // QQ Browser
+                if (/QQ Browser/.test(browserName)) {
+                    return 'QQブラウザはテストしてないの(´• ω •`) Chrome ' + MIN_CHROME + '+ か Firefox ' + MIN_FIREFOX + '+ だと安心だよ！';
+                }
+
+                // Baidu Browser
+                if (/Baidu/.test(browserName)) {
+                    return 'Baiduブラウザはテストしてないの(´• ω •`) Chrome ' + MIN_CHROME + '+ か Firefox ' + MIN_FIREFOX + '+ だと安心だよ！';
+                }
+
+                // Sogou Browser
+                if (/Sogou/.test(browserName)) {
+                    return 'Sogouブラウザはテストしてないの(´• ω •`) Chrome ' + MIN_CHROME + '+ か Firefox ' + MIN_FIREFOX + '+ だと安心だよ！';
+                }
+
+                // 360 Browser
+                if (/360/.test(browserName)) {
+                    return '360ブラウザはテストしてないの(´• ω •`) Chrome ' + MIN_CHROME + '+ か Firefox ' + MIN_FIREFOX + '+ だと安心だよ！';
+                }
+
+                // Maxthon
+                if (/Maxthon/.test(browserName)) {
+                    return 'Maxthonはテストしてないの(´• ω •`) Chrome ' + MIN_CHROME + '+ か Firefox ' + MIN_FIREFOX + '+ だと安心だよ！';
+                }
+
+                // Yandex Browser
+                if (/Yandex/.test(browserName)) {
+                    return 'Yandex Browserはテストしてないの(´• ω •`) Chrome ' + MIN_CHROME + '+ だとたぶん大丈夫！';
+                }
+
+                // Vivaldi
+                if (/Vivaldi/.test(browserName)) {
+                    return 'Vivaldiはテストしてないの(´• ω •`) Chrome ' + MIN_CHROME + '+ ベースならたぶん大丈夫！';
+                }
+
+                // Whale (Naver)
+                if (/Whale/.test(browserName)) {
+                    return 'Whaleはテストしてないの(´• ω •`) Chrome ' + MIN_CHROME + '+ だとたぶん大丈夫！';
+                }
+
                 // iOS / iPadOS — browser engine is tied to OS version
                 if (/iPadOS|iOS/.test(osName)) {
                     return osName + ' ' + osVer + ' じゃ、まだ遊べないの(>_<) ' + MIN_IOS + ' 以上にアップデートするか、おうちのパソコンで来てね♪';
+                }
+
+                // Windows Phone — end of life
+                if (/Windows Phone/.test(osName)) {
+                    return 'Windows Phoneはもう対応してないの(>_<) Android ' + MIN_ANDROID + '+ か iOS ' + MIN_IOS + '+ のスマホで来てね！';
+                }
+
+                // KaiOS
+                if (/KaiOS/.test(osName)) {
+                    return 'KaiOSは対応してないの(´• ω •`) Android ' + MIN_ANDROID + '+ か iOS ' + MIN_IOS + '+ のスマホで来てね！';
+                }
+
+                // BlackBerry
+                if (/BlackBerry/.test(osName)) {
+                    return 'BlackBerryは対応してないの(´• ω •`) Android ' + MIN_ANDROID + '+ か iOS ' + MIN_IOS + '+ のスマホで来てね！';
                 }
 
                 // macOS
@@ -585,6 +854,16 @@
                     return 'ChromeOSならChrome ' + MIN_CHROME + '+ を使ってね(・ω・)';
                 }
 
+                // FreeBSD / OpenBSD / NetBSD
+                if (/FreeBSD|OpenBSD|NetBSD/.test(osName)) {
+                    return osName + 'はまだテストしてないよ〜(・ω・;) Chrome ' + MIN_CHROME + '+ か Firefox ' + MIN_FIREFOX + '+ だとたぶん大丈夫！';
+                }
+
+                // Solaris
+                if (/Solaris/.test(osName)) {
+                    return 'Solarisはまだテストしてないよ〜(・ω・;) Chrome ' + MIN_CHROME + '+ か Firefox ' + MIN_FIREFOX + '+ だとたぶん大丈夫！';
+                }
+
                 // Unknown system
                 return osName + ' っていうシステム、初めて見るかも(・ω・;) Chrome ' + MIN_CHROME + '+、Edge ' + MIN_EDGE + '+、Firefox ' + MIN_FIREFOX + '+、Safari ' + MIN_SAFARI + '+ の環境だと安心だよ！';
             }
@@ -596,6 +875,15 @@
                 var div = document.createElement('div');
                 div.appendChild(document.createTextNode(str));
                 return div.innerHTML;
+            }
+
+            function setText(el, text) {
+                if (!el) return;
+                if (typeof el.textContent === 'string') {
+                    el.textContent = text;
+                } else if (typeof el.innerText === 'string') {
+                    el.innerText = text;  // IE8 fallback
+                }
             }
 
             function render() {
@@ -617,16 +905,14 @@
                 // Render advice
                 var adviceText = generateAdvice(os, browser);
                 var adviceEl = document.getElementById('adviceText');
-                if (adviceEl) {
-                    adviceEl.textContent = adviceText;
-                }
+                setText(adviceEl, adviceText);
 
                 // For unknown OS/browser, change the advice label
                 var adviceBox = document.getElementById('adviceBox');
                 if (adviceBox && (os.name === '不明' || browser.name === '不明')) {
                     var label = adviceBox.getElementsByTagName('div')[0];
                     if (label) {
-                        label.textContent = '・ω・?  なんだかわからない';
+                        setText(label, '・ω・?  なんだかわからない');
                     }
                 }
 
@@ -635,19 +921,36 @@
                 var forceLink = document.getElementById('forceVisitLink');
                 if (forceLink) {
                     forceLink.setAttribute('href', '/?force=1');
-                    forceLink.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        try {
-                            sessionStorage.setItem('forceVisit', '1');
-                        } catch (err) { /* ignore */ }
-                        window.location.href = '/?force=1';
-                    }, false);
+                    if (forceLink.addEventListener) {
+                        forceLink.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            try {
+                                sessionStorage.setItem('forceVisit', '1');
+                            } catch (err) { /* ignore */ }
+                            window.location.href = '/?force=1';
+                        }, false);
+                    } else if (forceLink.attachEvent) {
+                        // IE8 fallback
+                        forceLink.attachEvent('onclick', function () {
+                            try {
+                                sessionStorage.setItem('forceVisit', '1');
+                            } catch (err) { /* ignore */ }
+                            window.location.href = '/?force=1';
+                            return false;
+                        });
+                    }
                 }
             }
 
             // Run on DOMContentLoaded or immediately if DOM is ready
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', render);
+                if (document.addEventListener) {
+                    document.addEventListener('DOMContentLoaded', render);
+                } else if (document.attachEvent) {
+                    // IE8 fallback
+                    document.attachEvent('onDOMContentLoaded', render);
+                    window.attachEvent('onload', render);
+                }
             } else {
                 render();
             }

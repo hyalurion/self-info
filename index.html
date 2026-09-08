@@ -8,6 +8,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffffff" />
     <title>Self-Info</title>
+    <script type="module">
+      // Runs only in browsers that support ES modules. Sets a flag that the
+      // classic script below reads to decide whether to redirect. Browsers
+      // without module support (IE, Chrome <61, old Safari) never execute
+      // this, so the flag stays falsy and they get redirected.
+      window.__moduleSupported = true;
+    </script>
+    <script>
+      // Pre-gate for browsers without ES module support. Such browsers can't
+      // run the module-based compat check in main.js and would be stuck on a
+      // blank page. We detect module support via the flag set by the inline
+      // module script above — more reliable than the `nomodule` attribute,
+      // which some browsers (notably Chrome 48) mishandle: they skip nomodule
+      // scripts despite not actually supporting ES modules.
+      //
+      // Timing: module scripts are deferred and execute after the document is
+      // parsed but before DOMContentLoaded fires. So at DOMContentLoaded we
+      // can reliably tell: flag truthy => modules work; flag falsy => redirect.
+      (function () {
+        function redirectIfUnsupported() {
+          if (window.__moduleSupported) return;
+          // Honor the bypass flags so outdate.html's "force visit" link works.
+          try {
+            var params = new URLSearchParams(window.location.search);
+            if (params.get('force') === '1') return;
+          } catch (e) { /* URLSearchParams may be missing on very old browsers */ }
+          try {
+            if (sessionStorage.getItem('forceVisit') === '1') return;
+          } catch (e) { /* ignore */ }
+          window.location.replace('outdate.html');
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', redirectIfUnsupported);
+        } else {
+          redirectIfUnsupported();
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="app"></div>
