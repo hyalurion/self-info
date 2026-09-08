@@ -1650,7 +1650,7 @@
     },
     "changelog": {
       "href": "?page=changelog",
-      "date": "✨更新|2026年08月16日 ✨",
+      "date": "✨更新|2026年09月08日 ✨",
       "dateRich": [
         {
           "type": "text",
@@ -1679,7 +1679,7 @@
         },
         {
           "type": "text",
-          "content": "08"
+          "content": "09"
         },
         {
           "type": "ruby",
@@ -1688,7 +1688,7 @@
         },
         {
           "type": "text",
-          "content": "16"
+          "content": "08"
         },
         {
           "type": "ruby",

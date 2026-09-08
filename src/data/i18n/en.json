@@ -750,7 +750,7 @@
     },
     "changelog": {
       "href": "?page=changelog",
-      "date": "✨Updated | August 16th, 2026 ✨",
+      "date": "✨Updated | September 8th, 2026 ✨",
       "dateRich": [
         {
           "type": "text",
@@ -769,11 +769,11 @@
       "dateAfterImg": [
         {
           "type": "text",
-          "content": "August "
+          "content": "September "
         },
         {
           "type": "text",
-          "content": "16th, "
+          "content": "8th, "
         },
         {
           "type": "text",
