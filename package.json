@@ -9,12 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "dompurify": "^3.4.12",
-    "marked": "^18.0.7",
-    "vue": "^3.5.39"
+    "dompurify": "^3.4.15",
+    "marked": "^18.0.14",
+    "vue": "^3.5.43"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.8",
-    "vite": "^8.1.4"
+    "@vitejs/plugin-vue": "^6.0.9",
+    "vite": "^8.3.0"
   }
 }
