@@ -1,6 +1,7 @@
 <script setup>
 import RichText from '../../components/RichText.vue'
 import BirthdayCountdown from './BirthdayCountdown.vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   section: { type: Object, required: true },
@@ -17,6 +18,14 @@ function asSegs(v) {
 function hasSegs(v) {
   return asSegs(v).length > 0
 }
+// SNS section: newer schemas use a `links` array, older ones a single `link`.
+const snsLinks = computed(() =>
+  Array.isArray(props.section.links)
+    ? props.section.links
+    : props.section.link
+      ? [props.section.link]
+      : []
+)
 </script>
 
 <template>
@@ -79,12 +88,15 @@ function hasSegs(v) {
     <h3 class="section-title"><RichText :segments="section.titleRich" :showReading="showReading" /></h3>
     <div style="text-align: center; margin-top: 10px;">
       <a
-        :href="section.link.href"
+        v-for="(link, i) in snsLinks"
+        :key="i"
+        :href="link.href"
         target="_blank"
+        :style="{ marginLeft: i > 0 ? '10px' : '0' }"
         style="display: inline-block; padding: 8px 16px; background-color: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); border-radius: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); text-align: center; font-size: 14px; color: white; font-weight: 500; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.3); transition: all 0.3s ease;"
       >
-        <img :src="section.link.img" :alt="section.link.imgAlt" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" />
-        <RichText :segments="section.link.text" :showReading="showReading" />
+        <img :src="link.img" :alt="link.imgAlt" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" />
+        <RichText :segments="asSegs(link.text)" :showReading="showReading" />
       </a>
     </div>
   </div>

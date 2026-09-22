@@ -1494,22 +1494,35 @@
           "content": "🔗 SNS"
         }
       ],
-      "link": {
-        "href": "https://m.hoyolab.com/#/accountCenter/postList?id=317761459",
-        "img": "pic/hyl_icon.jpg",
-        "imgAlt": "HoYoLAB",
-        "text": [
-          {
-            "type": "ruby",
-            "kanji": "琉璃",
-            "reading": "ゆり"
-          },
-          {
-            "type": "text",
-            "content": "Hyalurion（ID | 317761459）"
-          }
-        ]
-      }
+      "links": [
+        {
+          "href": "https://m.hoyolab.com/#/accountCenter/postList?id=317761459",
+          "img": "pic/hyl_icon.jpg",
+          "imgAlt": "HoYoLAB",
+          "text": [
+            {
+              "type": "ruby",
+              "kanji": "琉璃",
+              "reading": "ゆり"
+            },
+            {
+              "type": "text",
+              "content": "Hyalurion（ID | 317761459）"
+            }
+          ]
+        },
+        {
+          "href": "https://x.com/qtequiettime",
+          "img": "pic/x_icon.webp",
+          "imgAlt": "X",
+          "text": [
+            {
+              "type": "text",
+              "content": "X | @qtequiettime"
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "closing",
@@ -1650,7 +1663,7 @@
     },
     "changelog": {
       "href": "?page=changelog",
-      "date": "✨更新|2026年09月08日 ✨",
+      "date": "✨更新|2026年09月22日 ✨",
       "dateRich": [
         {
           "type": "text",
@@ -1688,7 +1701,7 @@
         },
         {
           "type": "text",
-          "content": "08"
+          "content": "22"
         },
         {
           "type": "ruby",
