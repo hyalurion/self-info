@@ -202,25 +202,8 @@
           { "type": "text", "content": "好唷，一起玩吧！(≧∇≦)ﾉ" }
         ],
         "id": "consent-accept"
-      },
-      {
-        "text": [
-          { "type": "text", "content": "還是不要了喵... (´･ω･`)" }
-        ],
-        "id": "consent-reject"
       }
-    ],
-    "rejection": {
-      "title": [
-        { "type": "text", "content": "嗚...進不去惹 (´；ω；`)" }
-      ],
-      "text1": [
-        { "type": "text", "content": "如果不同意，貓貓糖就不能讓你進來玩囉... (｡•́︿•̀｡)" }
-      ],
-      "text2": [
-        { "type": "text", "content": "5秒後帶你回首頁～掰掰～" }
-      ]
-    }
+    ]
   },
   "loadingScreen": {
     "text": "少女祈禱中…",

@@ -18,17 +18,22 @@ import { initAnalytics } from './analytics.js'
 const { currentLang, content } = useI18n()
 const { currentPage } = useNav()
 
-const consentGiven = ref(false)
+const splashVisible = ref(true)
 const loading = ref(false)
 const showContent = ref(false)
 const showReading = ref(false)
 
 const isSubPage = computed(() => currentPage.value !== 'home')
 
-function onConsent() {
-  consentGiven.value = true
-  loading.value = true
-  initAnalytics()
+// Acknowledge the privacy notice once per browser; afterwards the popup is
+// skipped and the policy stays reachable via the footer link.
+const PRIVACY_ACK_KEY = 'privacy-acknowledged'
+
+function onSplashAcknowledge() {
+  splashVisible.value = false
+  try {
+    localStorage.setItem(PRIVACY_ACK_KEY, '1')
+  } catch {}
 }
 
 function onLoadingComplete() {
@@ -57,6 +62,18 @@ watch(currentLang, (lang) => {
 watch(showReading, updateUrlParam)
 
 onMounted(() => {
+  // The privacy notice is informational only: data collection is enabled by
+  // default, so analytics starts on mount without an opt-in.
+  initAnalytics()
+  loading.value = true
+
+  // Skip the notice if it was already acknowledged in this browser.
+  try {
+    if (localStorage.getItem(PRIVACY_ACK_KEY) === '1') {
+      splashVisible.value = false
+    }
+  } catch {}
+
   const params = new URLSearchParams(window.location.search)
   if (params.get('kana') === '1' && currentLang.value === 'ja') {
     showReading.value = true
@@ -65,11 +82,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <SplashScreen v-if="!consentGiven && !isSubPage" :data="content.splashScreen" :showReading="showReading" @consent="onConsent" />
+  <SplashScreen v-if="splashVisible && !isSubPage" :data="content.splashScreen" :showReading="showReading" @acknowledge="onSplashAcknowledge" />
 
-  <LoadingScreen v-if="consentGiven && loading && !isSubPage" :data="content.loadingScreen" :showReading="showReading" @complete="onLoadingComplete" />
+  <LoadingScreen v-if="loading && !isSubPage" :data="content.loadingScreen" :showReading="showReading" @complete="onLoadingComplete" />
+  
+  <Transition name="doc" :duration="500">
+    <DocumentPage v-if="currentPage === 'document'" />
+  </Transition>
 
-  <DocumentPage v-if="currentPage === 'document'" />
   <Transition name="cl" :duration="500">
     <ChangelogPage v-if="currentPage === 'changelog'" />
   </Transition>

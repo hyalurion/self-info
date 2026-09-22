@@ -319,37 +319,8 @@
           }
         ],
         "id": "consent-accept"
-      },
-      {
-        "text": [
-          {
-            "type": "text",
-            "content": "やっぱり遠慮する…(´･ω･`)"
-          }
-        ],
-        "id": "consent-reject"
       }
-    ],
-    "rejection": {
-      "title": [
-        {
-          "type": "text",
-          "content": "えっ…お断りされちゃった (´；ω；`)"
-        }
-      ],
-      "text1": [
-        {
-          "type": "text",
-          "content": "同意してくれないと、ねこたんと遊べないにゃ…(｡•́︿•̀｡)"
-        }
-      ],
-      "text2": [
-        {
-          "type": "text",
-          "content": "5秒後にホームページへ戻っちゃうよ〜バイバイ〜"
-        }
-      ]
-    }
+    ]
   },
   "loadingScreen": {
     "text": "少女が願いを祈ってるよ…",

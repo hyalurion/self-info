@@ -73,37 +73,8 @@
           }
         ],
         "id": "consent-accept"
-      },
-      {
-        "text": [
-          {
-            "type": "text",
-            "content": "Nuu, me go out... (´･ω･`)"
-          }
-        ],
-        "id": "consent-reject"
       }
-    ],
-    "rejection": {
-      "title": [
-        {
-          "type": "text",
-          "content": "Nuuu! Door ish closed... (´；ω；`)"
-        }
-      ],
-      "text1": [
-        {
-          "type": "text",
-          "content": "If u no agree to da paw-licy, Nekotan can't let u in... so sadd (｡•́︿•̀｡)"
-        }
-      ],
-      "text2": [
-        {
-          "type": "text",
-          "content": "Sending u back home in 5 secs... byebye nya~"
-        }
-      ]
-    }
+    ]
   },
   "loadingScreen": {
     "text": "Making wish...",

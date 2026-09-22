@@ -81,13 +81,7 @@ function fmtDate(iso) {
 </template>
 
 <style scoped>
-.changelog-page::-webkit-scrollbar {
-    display: none;
-}
-
 .changelog-page {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
     scroll-behavior: smooth;
 }
 

@@ -73,37 +73,8 @@
           }
         ],
         "id": "consent-accept"
-      },
-      {
-        "text": [
-          {
-            "type": "text",
-            "content": "还是不了喵… (´･ω･`)"
-          }
-        ],
-        "id": "consent-reject"
       }
-    ],
-    "rejection": {
-      "title": [
-        {
-          "type": "text",
-          "content": "唔…被挡在门外了 (´；ω；`)"
-        }
-      ],
-      "text1": [
-        {
-          "type": "text",
-          "content": "如果不答应，不能进来啦… (｡•́︿•̀｡)"
-        }
-      ],
-      "text2": [
-        {
-          "type": "text",
-          "content": "5秒后送你回首页哦，拜拜～"
-        }
-      ]
-    }
+    ]
   },
   "loadingScreen": {
     "text": "少女祈祷中…",

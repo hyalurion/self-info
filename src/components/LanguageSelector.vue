@@ -159,8 +159,6 @@ function choose(code) {
   flex-direction: column;
   gap: 0;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
   transform-origin: calc(100% - 10px) -28px;
   will-change: transform, opacity;
 }

@@ -21,6 +21,41 @@
     -webkit-backdrop-filter: blur(0px);
 }
 
+/* 1.5 Privacy Notice Popup — anchored bottom-right, does not block the page */
+.privacy-popup {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 9999;
+}
+
+.privacy-popup .splash-content {
+    display: flex;
+    flex-direction: column;
+    width: min(420px, calc(100vw - 48px));
+    max-height: min(50vh, 400px);
+    animation: splash-slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Only the white body text scrolls; title, links and button stay fixed */
+.privacy-popup .privacy-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+/* Leave transition: slide back down and fade out */
+.privacy-popup-leave-active {
+    transition: transform 0.35s cubic-bezier(0.4, 0, 1, 1), opacity 0.35s ease;
+    will-change: transform, opacity;
+}
+
+.privacy-popup-leave-to {
+    opacity: 0;
+    transform: translateY(60px);
+}
+
 /* 2. Content Card — Liquid Glass */
 .splash-content {
     position: relative;
@@ -166,7 +201,6 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-top: 1.5rem;
     position: relative;
     z-index: 1;
     opacity: 0;
@@ -214,36 +248,6 @@
     transition-duration: 0.08s;
 }
 
-.consent-button.reject {
-    background: rgba(255, 255, 255, 0.06);
-    color: #f9cbff;
-    box-shadow:
-        inset 0 0.5px 0.5px rgba(255, 255, 255, 0.3),
-        inset 0 0 0 0.5px rgba(255, 255, 255, 0.08),
-        0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-.consent-button.reject:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px) scale(1.02);
-    backdrop-filter: blur(2px) saturate(110%);
-    -webkit-backdrop-filter: blur(2px) saturate(110%);
-    box-shadow:
-        inset 0 0.5px 0.5px rgba(255, 255, 255, 0.4),
-        inset 0 0 0 0.5px rgba(255, 255, 255, 0.12),
-        0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-.consent-button.reject:active {
-    transform: translateY(1px) scale(0.97);
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow:
-        inset 0 2px 6px rgba(0, 0, 0, 0.22),
-        inset 0 0.5px 0.5px rgba(255, 255, 255, 0.3),
-        0 1px 2px rgba(0, 0, 0, 0.12);
-    transition-duration: 0.08s;
-}
-
 /* 5. Animation Keyframes */
 
 /* Remain unchanged: Rotation animation */
@@ -273,6 +277,18 @@
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+/* Privacy popup: expand upward from the bottom-right corner */
+@keyframes splash-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -329,6 +345,20 @@
 }
 
 @media screen and (max-width: 768px) {
+    /* Mobile: privacy popup becomes a centered bottom sheet at 90% width */
+    .privacy-popup {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .privacy-popup .splash-content {
+        max-width: none;
+        max-height: 40vh;
+    }
+
     .splash-content {
         width: 90%;
         padding: 2rem 1.5rem;

@@ -87,14 +87,44 @@ body::before {
         0 16px 48px rgba(0, 0, 0, 0.04);
 }
 
-/* 3. Scrollbar */
-html::-webkit-scrollbar {
-    display: none;
+/* 3. Sakura-pink Scrollbar — shared by all pages & popups (WebKit + Firefox) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
 }
 
-html {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+/* Opaque dark plum: the root scrollbar track is painted over the white page
+   canvas, so translucent colors would show up as white. */
+::-webkit-scrollbar-track {
+    background: #2e1c28;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #ffc2d1, #ff88c2);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ffd3de, #ffa0c6);
+}
+
+/* Keep the pressed state pink — without this Chromium darkens it to near-black. */
+::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg, #fdaec9, #f472b0);
+}
+
+::-webkit-scrollbar-corner {
+    background: #2e1c28;
+}
+
+/* Firefox only: standard scrollbar properties on the default path would make
+   Chromium ignore the custom WebKit styling above and fall back to native
+   rendering (white track, near-black pressed thumb). */
+@supports not selector(::-webkit-scrollbar) {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: #ff88c2 #2e1c28;
+    }
 }
 
 /* 4. Smooth Scrolling and Content Styles */

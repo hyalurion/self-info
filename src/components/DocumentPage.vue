@@ -72,15 +72,6 @@ const source = computed(() => {
 </template>
 
 <style scoped>
-.document-page::-webkit-scrollbar {
-    display: none;
-}
-
-.document-page {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
 .document-page {
     scroll-behavior: smooth;
 }
@@ -107,6 +98,20 @@ const source = computed(() => {
 @keyframes docFade {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* Leave: fade out with slide-down + blur, mirroring the changelog page */
+.doc-leave-active {
+  transition:
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center bottom;
+}
+.doc-leave-to {
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  filter: blur(8px);
 }
 
 /* Staggered slide-up entrance for inner blocks */
