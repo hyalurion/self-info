@@ -713,7 +713,8 @@
   },
   "ui": {
     "bgm": {
-      "src": "bgm/bgm_kokoronashi.opus"
+      "src": "bgm/bgm_kokoronashi.opus",
+      "cover": "pic/bgm_kokoronashi_cover.webp"
     },
     "feedback": {
       "href": "https://jyskyp4y.forms.app/untitled-form",
@@ -721,7 +722,7 @@
     },
     "changelog": {
       "href": "?page=changelog",
-      "date": "✨Updated | September 22th, 2026 ✨",
+      "date": "✨Updated | Oct. 3th, 2026 (UTC+9) ✨",
       "dateRich": [
         {
           "type": "text",
@@ -740,11 +741,11 @@
       "dateAfterImg": [
         {
           "type": "text",
-          "content": "September "
+          "content": "Oct. "
         },
         {
           "type": "text",
-          "content": "22th, "
+          "content": "3th, "
         },
         {
           "type": "text",
@@ -752,7 +753,7 @@
         },
         {
           "type": "text",
-          "content": "✨"
+          "content": " (UTC+9) ✨"
         }
       ]
     }

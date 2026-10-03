@@ -153,8 +153,21 @@ onUnmounted(() => {
   <!-- BGM Toggle Button -->
   <div v-if="data.bgm?.src" class="ui-bgm-container">
     <audio ref="audioEl" :src="data.bgm.src" preload="auto" />
-    <button id="bgm-toggle" class="bgm-button" :class="{ paused: bgmPaused }" title="BGM ON/OFF" @click="toggleBGM">
-      <span>♬</span>
+    <button
+      id="bgm-toggle"
+      type="button"
+      class="bgm-button"
+      :class="{ paused: bgmPaused }"
+      :aria-pressed="String(!bgmPaused)"
+      :aria-label="bgmPaused ? 'Play BGM' : 'Pause BGM'"
+      title="BGM ON/OFF"
+      @click="toggleBGM"
+    >
+      <!-- Spinning vinyl: cover art as the center label -->
+      <span class="vinyl" aria-hidden="true">
+        <img v-if="data.bgm.cover" class="vinyl-label" :src="data.bgm.cover" alt="" />
+        <span class="vinyl-hole"></span>
+      </span>
     </button>
   </div>
 
@@ -198,40 +211,111 @@ onUnmounted(() => {
   z-index: 1000;
 }
 
+/* BGM Toggle Button — spinning vinyl record */
 .bgm-button {
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(2px) saturate(110%);
-  -webkit-backdrop-filter: blur(2px) saturate(110%);
-  border-radius: 20px;
-  box-shadow:
-    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.35),
-    inset 0 0 0 0.5px rgba(255, 255, 255, 0.08),
-    0 2px 12px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
-  color: white;
+  position: relative;
+  width: 48px;
+  height: 48px;
+  padding: 0;
   border: none;
+  background: transparent;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 50%;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .bgm-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  transform: translateY(-1px);
-  box-shadow:
-    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.45),
-    inset 0 0 0 0.5px rgba(255, 255, 255, 0.12),
-    0 4px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
 }
 
 .bgm-button:active {
-  transform: translateY(0) scale(0.97);
+  transform: translateY(0) scale(0.94);
 }
 
-.bgm-button.paused {
-  opacity: 0.5;
+/* The vinyl disc itself */
+.vinyl {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background:
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      #1c1c20 0px,
+      #101013 1.5px,
+      #1c1c20 3px
+    ),
+    #0d0d10;
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.18);
+  animation: vinyl-spin 7s linear infinite;
+}
+
+.bgm-button.paused .vinyl {
+  animation-play-state: paused;
+}
+
+/* Glossy highlight on the disc */
+.vinyl::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 32% 26%,
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0) 46%
+  );
+}
+
+@keyframes vinyl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Cover art as the center label */
+.vinyl-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 56%;
+  height: 56%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.5),
+    0 0 4px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Spindle hole on top of the label */
+.vinyl-hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: 7px;
+  height: 7px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #0c0c0f;
+  box-shadow:
+    0 0 0 1.5px rgba(255, 255, 255, 0.35),
+    inset 0 0.5px 1px rgba(0, 0, 0, 0.8);
+}
+
+/* Frosted-glass note disc removed — paused state simply stops the spin */
+
+@media (prefers-reduced-motion: reduce) {
+  .vinyl {
+    animation: none;
+  }
 }
 
 .feedback-container {
@@ -342,9 +426,8 @@ onUnmounted(() => {
   }
 
   .bgm-button {
-    padding: 6px 10px;
-    font-size: 14px;
-    border-radius: 16px;
+    width: 42px;
+    height: 42px;
   }
 
   .feedback-container {
@@ -382,8 +465,8 @@ onUnmounted(() => {
   }
 
   .bgm-button {
-    padding: 5px 8px;
-    font-size: 12px;
+    width: 38px;
+    height: 38px;
   }
 
   .feedback-container {

@@ -703,7 +703,8 @@
   },
   "ui": {
     "bgm": {
-      "src": "bgm/bgm_kokoronashi.opus"
+      "src": "bgm/bgm_kokoronashi.opus",
+      "cover": "pic/bgm_kokoronashi_cover.webp"
     },
     "feedback": {
       "href": "https://jyskyp4y.forms.app/untitled-form",
@@ -711,7 +712,7 @@
     },
     "changelog": {
       "href": "?page=changelog",
-      "date": "✨更新 | 2026年09月22日 ✨", 
+      "date": "✨更新 | 2026年10月03日 (UTC+9) ✨", 
       "dateRich": [
         {
           "type": "text",
@@ -734,11 +735,15 @@
         },
         {
           "type": "text",
-          "content": "09月"
+          "content": "10月"
         },
         {
           "type": "text",
-          "content": "22日"
+          "content": "03日"
+        },
+        {
+          "type": "text",
+          "content": " (UTC+9)"
         },
         {
           "type": "text",
