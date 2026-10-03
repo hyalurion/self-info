@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compatibility (plain HTML) version of the site">
+    <title>__TITLE__</title>
+    <style>
+        /* ---------- Reset & base ---------- */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; }
+
+        /* ---------- Theme variables ---------- */
+        /* Same trick as outdate.html: every var() line has a literal fallback on
+           the line above, so browsers without custom properties still get readable
+           colours. No backdrop-filter / conic-gradient / @property here. */
+        :root {
+            --bg: #ffffff;
+            --panel: #f7f7f9;
+            --text-primary: #000000;
+            --text-secondary: #555555;
+            --border: #cccccc;
+            --accent: #000000;
+            --link: #0000ee;
+            --link-visited: #551a8b;
+            --font: system-ui, -apple-system, sans-serif;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #000000;
+                --panel: #141416;
+                --text-primary: #ffffff;
+                --text-secondary: #aaaaaa;
+                --border: #444444;
+                --accent: #ffffff;
+                --link: #8ab4f8;
+                --link-visited: #c58af9;
+            }
+        }
+
+        html { background: #ffffff; background: var(--bg); }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            font-family: var(--font);
+            background: #ffffff;
+            background: var(--bg);
+            color: #000000;
+            color: var(--text-primary);
+            line-height: 1.8;
+            padding: 0 0 48px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a { color: #0000ee; color: var(--link); }
+        a:visited { color: #551a8b; color: var(--link-visited); }
+
+        .wrap { max-width: 720px; margin: 0 auto; padding: 20px 16px 0; }
+
+        /* ---------- Notice banner ---------- */
+        #notice {
+            border: 1px solid #cccccc;
+            border: 1px solid var(--border);
+            border-left: 4px solid #000000;
+            border-left: 4px solid var(--accent);
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-bottom: 28px;
+            font-size: 14px;
+            color: #555555;
+            color: var(--text-secondary);
+        }
+        #notice strong { color: #000000; color: var(--text-primary); font-size: 15px; }
+        #notice p { margin-top: 6px; word-break: break-word; }
+
+        /* ---------- Language switcher ---------- */
+        #langbar { text-align: center; margin: 0 0 18px; font-size: 13px; }
+        #langbar a {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 0 2px;
+            border: 1px solid #cccccc;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            text-decoration: none;
+        }
+        #langbar a.active {
+            font-weight: 700;
+            background: #000000;
+            background: var(--text-primary);
+            color: #ffffff;
+            color: var(--bg);
+            border-color: #000000;
+            border-color: var(--text-primary);
+        }
+
+        /* ---------- Content ---------- */
+        .lead { font-size: 18px; font-weight: 600; line-height: 1.7; margin-bottom: 8px; word-break: break-word; }
+        .lead .highlight { text-decoration: underline; }
+
+        .panel {
+            border: 1px solid #cccccc;
+            border: 1px solid var(--border);
+            background: #f7f7f9;
+            background: var(--panel);
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #000000;
+            color: var(--text-primary);
+            word-break: break-word;
+        }
+        .panel ul { list-style: none; }
+        .panel li { margin-bottom: 6px; word-break: break-word; }
+        .panel p { word-break: break-word; }
+
+        .highlight { font-weight: 700; }
+        .info { color: #555555; color: var(--text-secondary); }
+        .note-text { display: block; font-size: 13px; color: #555555; color: var(--text-secondary); }
+
+        .bday { text-align: center; margin: 10px 0 16px; font-size: 15px; }
+        .bday .cake { margin-right: 6px; }
+        .bday .days { font-weight: 700; font-size: 20px; margin: 0 4px; }
+
+        .games, .sns { text-align: center; }
+        .game-card { display: inline-block; margin: 4px; text-align: center; font-size: 12px; }
+        .game-card-img {
+            width: 64px; height: 64px; object-fit: cover;
+            border: 1px solid #cccccc; border: 1px solid var(--border);
+            border-radius: 8px; vertical-align: middle;
+        }
+        .game-card-uid { display: block; }
+        .sep { color: #555555; color: var(--text-secondary); margin: 0 4px; }
+
+        .sns-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 4px;
+            border: 1px solid #cccccc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .sns-btn img { width: 20px; height: 20px; margin-right: 6px; vertical-align: middle; }
+
+        .foot-line { text-align: center; font-size: 13px; color: #555555; color: var(--text-secondary); margin-top: 8px; }
+
+        #back { text-align: center; margin: 32px 0 0; font-size: 14px; }
+        #back a {
+            display: inline-block;
+            padding: 10px 24px;
+            background: #000000;
+            background: var(--text-primary);
+            color: #ffffff;
+            color: var(--bg);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        #back .tiny {
+            display: block;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #555555;
+            color: var(--text-secondary);
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 480px) {
+            .wrap { padding: 16px 12px 0; }
+            .lead { font-size: 16px; }
+            .section-title { font-size: 16px; }
+            .panel { padding: 14px 16px; }
+            .game-card-img { width: 48px; height: 48px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="langbar">
+        <a href="?lang=ja" data-lang="ja">日本語</a>
+        <a href="?lang=en" data-lang="en">English</a>
+        <a href="?lang=zh-Hans" data-lang="zh-Hans">华文</a>
+        <a href="?lang=zh-TW" data-lang="zh-TW">繁體中文</a>
+    </div>
+
+    <div id="root" class="wrap">
+<p class="lead">はーい、<ruby>初<rp>(</rp><rt>はじ</rt><rp>)</rp></ruby>めましてにゃん！ (◕‿◕✿)</p>
+<p class="lead"><strong class="highlight"><ruby>琉璃<rp>(</rp><rt>ゆり</rt><rp>)</rp></ruby>ねこたん</strong><span class="info">って<ruby>呼<rp>(</rp><rt>よ</rt><rp>)</rp></ruby>んでね～</span></p>
+<p class="lead"><span class="info"><ruby>星<rp>(</rp><rt>ほし</rt><rp>)</rp></ruby>みたいにキラキラの</span><strong class="highlight">Hyalurion</strong><span class="info">でもOKだよん！✨</span></p>
+<div class="panel"><div class="section-title">🎂<ruby>誕生<rp>(</rp><rt>たんじょう</rt><rp>)</rp></ruby><ruby>秘密<rp>(</rp><rt>ひみつ</rt><rp>)</rp></ruby><ruby>物語<rp>(</rp><rt>ものがたり</rt><rp>)</rp></ruby></div><p class="bday" id="bday-line"><span class="cake">&#127874;</span><span data-bday="prefix"></span><span class="days" data-bday="days"></span><span data-bday="suffix"></span></p><ul><li><strong class="highlight"><ruby>乙女座<rp>(</rp><rt>おとめざ</rt><rp>)</rp></ruby>の</strong><strong class="highlight"><ruby>魔法<rp>(</rp><rt>まほう</rt><rp>)</rp></ruby></strong><strong class="highlight">が<ruby>咲<rp>(</rp><rt>さ</rt><rp>)</rp></ruby>いた<ruby>初日<rp>(</rp><rt>しょにち</rt><rp>)</rp></ruby></strong><span class="info">に<ruby>地球<rp>(</rp><rt>ちきゅう</rt><rp>)</rp></ruby>に<ruby>降<rp>(</rp><rt>お</rt><rp>)</rp></ruby>り<ruby>立<rp>(</rp><rt>た</rt><rp>)</rp></ruby>ったの～</span></li><li><span class="info">（</span><strong class="highlight"><ruby>旧暦<rp>(</rp><rt>きゅうれき</rt><rp>)</rp></ruby><ruby>7月<rp>(</rp><rt>しちがつ</rt><rp>)</rp></ruby><ruby>11日<rp>(</rp><rt>じゅういちにち</rt><rp>)</rp></ruby></strong><span class="info">の<ruby>月明<rp>(</rp><rt>つきあ</rt><rp>)</rp></ruby>かりが<ruby>子守唄<rp>(</rp><rt>こもりうた</rt><rp>)</rp></ruby>だったにゃ！🌙）</span></li></ul></div>
+<div class="panel"><div class="section-title">🗣️<ruby>言語<rp>(</rp><rt>げんご</rt><rp>)</rp></ruby>ポケット</div><ul><li><strong class="highlight"><ruby>日本語<rp>(</rp><rt>にほんご</rt><rp>)</rp></ruby>・<ruby>英語<rp>(</rp><rt>えいご</rt><rp>)</rp></ruby>・<ruby>簡体字<rp>(</rp><rt>かんたいじ</rt><rp>)</rp></ruby><ruby>中国語<rp>(</rp><rt>ちゅうごくご</rt><rp>)</rp></ruby>・<ruby>繁体字<rp>(</rp><rt>はんたいじ</rt><rp>)</rp></ruby><ruby>中国語<rp>(</rp><rt>ちゅうごくご</rt><rp>)</rp></ruby></strong><span class="info">全部<ruby>話<rp>(</rp><rt>はな</rt><rp>)</rp></ruby>せるよ！</span></li><li><span class="info">（<ruby>言語<rp>(</rp><rt>げんご</rt><rp>)</rp></ruby>チェンジはポケモンのタイプ<ruby>変更<rp>(</rp><rt>へんこう</rt><rp>)</rp></ruby>みたいで<ruby>楽<rp>(</rp><rt>たの</rt><rp>)</rp></ruby>しいぃ～(◠‿◠✿)）</span></li></ul></div>
+<div class="panel"><div class="section-title">🌈 ACGN<ruby>原子<rp>(</rp><rt>げんし</rt><rp>)</rp></ruby><ruby>構成<rp>(</rp><rt>こうせい</rt><rp>)</rp></ruby></div><ul><li><span class="info"><ruby>確認<rp>(</rp><rt>かくにん</rt><rp>)</rp></ruby>ぷり！アニメ・マンガ・ゲーム・<ruby>小説<rp>(</rp><rt>しょうせつ</rt><rp>)</rp></ruby>が</span></li><li><span class="info"><ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>の<ruby>宇宙<rp>(</rp><rt>うちゅう</rt><rp>)</rp></ruby>を<ruby>形作<rp>(</rp><rt>かたちづく</rt><rp>)</rp></ruby>る</span><strong class="highlight"><ruby>素粒子<rp>(</rp><rt>そりゅうし</rt><rp>)</rp></ruby></strong><span class="info">なの～ ★~(◠‿◕✿)</span></li></ul></div>
+<div class="panel"><div class="section-title">💖<ruby>心<rp>(</rp><rt>こころ</rt><rp>)</rp></ruby>のパズル (INFJ-T<ruby>限定<rp>(</rp><rt>げんてい</rt><rp>)</rp></ruby>ver.)</div><ul><li><span class="k"><ruby>充電<rp>(</rp><rt>じゅうでん</rt><rp>)</rp></ruby>モード：</span><span class="v">83％ひとりんぼタイム<ruby>必須<rp>(</rp><rt>ひっす</rt><rp>)</rp></ruby></span><span class="note-text">（お<ruby>布団<rp>(</rp><rt>ふとん</rt><rp>)</rp></ruby>で<ruby>本<rp>(</rp><rt>ほん</rt><rp>)</rp></ruby><ruby>読<rp>(</rp><rt>よ</rt><rp>)</rp></ruby>むのが<ruby>至福<rp>(</rp><rt>しふく</rt><rp>)</rp></ruby>ぅ～(｡&gt;ㅅ&lt;｡)）</span></li><li><span class="k"><ruby>脳内<rp>(</rp><rt>のうない</rt><rp>)</rp></ruby><ruby>劇場<rp>(</rp><rt>げきじょう</rt><rp>)</rp></ruby>：</span><span class="v">74％<ruby>暴走<rp>(</rp><rt>ぼうそう</rt><rp>)</rp></ruby><ruby>幻想<rp>(</rp><rt>げんそう</rt><rp>)</rp></ruby>中</span><span class="note-text">（<ruby>異世界<rp>(</rp><rt>いせかい</rt><rp>)</rp></ruby>への<ruby>扉<rp>(</rp><rt>とびら</rt><rp>)</rp></ruby>は<ruby>常時<rp>(</rp><rt>じょうじ</rt><rp>)</rp></ruby>オープン！🚪✨）</span></li><li><span class="k"><ruby>感情<rp>(</rp><rt>かんじょう</rt><rp>)</rp></ruby>アンテナ：</span><span class="v">82％<ruby>超高<rp>(</rp><rt>ちょうこう</rt><rp>)</rp></ruby><ruby>感度<rp>(</rp><rt>かんど</rt><rp>)</rp></ruby></span><span class="note-text">（<ruby>君<rp>(</rp><rt>きみ</rt><rp>)</rp></ruby>の<ruby>小<rp>(</rp><rt>ちい</rt><rp>)</rp></ruby>さな<ruby>悲しみ<rp>(</rp><rt>かなしみ</rt><rp>)</rp></ruby>、もしかして<ruby>感知<rp>(</rp><rt>かんち</rt><rp>)</rp></ruby>しちゃうかも？(｡･ω･｡)）</span></li><li><span class="k"><ruby>行動<rp>(</rp><rt>こうどう</rt><rp>)</rp></ruby><ruby>指針<rp>(</rp><rt>ししん</rt><rp>)</rp></ruby>：</span><span class="v">83％<ruby>計画<rp>(</rp><rt>けいかく</rt><rp>)</rp></ruby>型にゃん</span><span class="note-text">（ToDoリスト<ruby>作成<rp>(</rp><rt>さくせい</rt><rp>)</rp></ruby>は<ruby>趣味<rp>(</rp><rt>しゅみ</rt><rp>)</rp></ruby>です✓）</span></li><li><span class="k"><ruby>お天気<rp>(</rp><rt>おてんき</rt><rp>)</rp></ruby>ハート：</span><span class="v">82％にわか<ruby>雨<rp>(</rp><rt>あめ</rt><rp>)</rp></ruby><ruby>注意報<rp>(</rp><rt>ちゅういほう</rt><rp>)</rp></ruby>☁️➡️🌧️</span><span class="note-text">（でも<ruby>虹<rp>(</rp><rt>にじ</rt><rp>)</rp></ruby>が<ruby>出<rp>(</rp><rt>で</rt><rp>)</rp></ruby>たら<ruby>即時<rp>(</rp><rt>そくじ</rt><rp>)</rp></ruby><ruby>晴<rp>(</rp><rt>は</rt><rp>)</rp></ruby>れます！(๑´ڡ`๑)）</span></li></ul></div>
+<div class="panel"><div class="section-title">🍀<ruby>幸運<rp>(</rp><rt>こううん</rt><rp>)</rp></ruby>センサー</div><p><span class="info"><ruby>電波<rp>(</rp><rt>でんぱ</rt><rp>)</rp></ruby><ruby>微弱<rp>(</rp><rt>びじゃく</rt><rp>)</rp></ruby>…（</span><strong class="highlight"><ruby>四<rp>(</rp><rt>よっ</rt><rp>)</rp></ruby>つ<ruby>葉<rp>(</rp><rt>ば</rt><rp>)</rp></ruby>のクローバー<ruby>見<rp>(</rp><rt>み</rt><rp>)</rp></ruby>つけたら<ruby>一日中<rp>(</rp><rt>いちにちじゅう</rt><rp>)</rp></ruby>ルンルン！</strong><span class="info">(⁄ ⁄•⁄ω⁄•⁄ ⁄)）</span></p></div>
+<div class="panel"><div class="section-title">🎮<ruby>ゲーム<rp>(</rp><rt>げーむ</rt><rp>)</rp></ruby><ruby>惑星<rp>(</rp><rt>わくせい</rt><rp>)</rp></ruby></div><p><span class="info"><ruby>現在<rp>(</rp><rt>げんざい</rt><rp>)</rp></ruby></span><strong class="highlight">「<ruby>原神<rp>(</rp><rt>げんしん</rt><rp>)</rp></ruby>」</strong><span class="game-card"><img src="pic/geshin.jpg" alt="原神" class="game-card-img"><span class="game-card-uid">887948106</span></span><span class="info">と</span><strong class="highlight">「<ruby>崩壊<rp>(</rp><rt>ほうかい</rt><rp>)</rp></ruby>：スターレイル」</strong><span class="game-card"><img src="pic/hsr.jpg" alt="崩壊：スターレイル" class="game-card-img"><span class="game-card-uid">800035446</span></span><span class="info">に<ruby>重力<rp>(</rp><rt>じゅうりょく</rt><rp>)</rp></ruby><ruby>捕捉<rp>(</rp><rt>ほそく</rt><rp>)</rp></ruby>されてまーす☆ミ(o･ω･)ﾉ</span></p></div>
+<div class="panel"><div class="section-title">🔗 SNS</div><p class="sns"><a class="sns-btn" href="https://m.hoyolab.com/#/accountCenter/postList?id=317761459" target="_blank" rel="noopener"><img src="pic/hyl_icon.jpg" alt="HoYoLAB"><span><ruby>琉璃<rp>(</rp><rt>ゆり</rt><rp>)</rp></ruby>Hyalurion（ID | 317761459）</span></a><a class="sns-btn" href="https://x.com/qtequiettime" target="_blank" rel="noopener"><img src="pic/x_icon.webp" alt="X"><span>X | @qtequiettime</span></a></p></div>
+<div class="panel"><p><span class="info">よろしくお<ruby>願<rp>(</rp><rt>ねが</rt><rp>)</rp></ruby>いしますぅ～</span></p><p><span class="info">一<ruby>緒<rp>(</rp><rt>いっしょ</rt><rp>)</rp></ruby>にぷかぷか<ruby>幸<rp>(</rp><rt>しあわ</rt><rp>)</rp></ruby>せ<ruby>宇宙<rp>(</rp><rt>うちゅう</rt><rp>)</rp></ruby>を<ruby>共有<rp>(</rp><rt>きょうゆう</rt><rp>)</rp></ruby>しましょ！</span></p><p><span class="info">(♡´౪`♡) にゃん♪</span></p></div>
+<p class="foot-line"><ruby>背景<rp>(</rp><rt>はいけい</rt><rp>)</rp></ruby><ruby>画像<rp>(</rp><rt>がぞう</rt><rp>)</rp></ruby></p>
+<p class="foot-line">AIさんが<ruby>創作<rp>(</rp><rt>そうさく</rt><rp>)</rp></ruby>したにゃ～</p>
+<p class="foot-line">BGM | <ruby>心做し<rp>(</rp><rt>こころなし</rt><rp>)</rp></ruby></p>
+    </div>
+    <p id="back">
+        <a href="/">いつものキレイな小屋へ戻る (=^･ω･^=)</a>
+        <span class="tiny">このページは簡素版。音や演出はありません。</span>
+    </p>
+
+    <script>
+        /* Language switch + birthday countdown.
+           Deliberately ES5 and inline: no modules, no build step, no fetch. */
+        (function () {
+            'use strict';
+
+            var DATA = {"ja":{"title":"自己紹介 (にゃんこ日本語)","html":"<p class=\"lead\">はーい、<ruby>初<rp>(<\/rp><rt>はじ<\/rt><rp>)<\/rp><\/ruby>めましてにゃん！ (◕‿◕✿)<\/p>\n<p class=\"lead\"><strong class=\"highlight\"><ruby>琉璃<rp>(<\/rp><rt>ゆり<\/rt><rp>)<\/rp><\/ruby>ねこたん<\/strong><span class=\"info\">って<ruby>呼<rp>(<\/rp><rt>よ<\/rt><rp>)<\/rp><\/ruby>んでね～<\/span><\/p>\n<p class=\"lead\"><span class=\"info\"><ruby>星<rp>(<\/rp><rt>ほし<\/rt><rp>)<\/rp><\/ruby>みたいにキラキラの<\/span><strong class=\"highlight\">Hyalurion<\/strong><span class=\"info\">でもOKだよん！✨<\/span><\/p>\n<div class=\"panel\"><div class=\"section-title\">🎂<ruby>誕生<rp>(<\/rp><rt>たんじょう<\/rt><rp>)<\/rp><\/ruby><ruby>秘密<rp>(<\/rp><rt>ひみつ<\/rt><rp>)<\/rp><\/ruby><ruby>物語<rp>(<\/rp><rt>ものがたり<\/rt><rp>)<\/rp><\/ruby><\/div><p class=\"bday\" id=\"bday-line\"><span class=\"cake\">&#127874;<\/span><span data-bday=\"prefix\"><\/span><span class=\"days\" data-bday=\"days\"><\/span><span data-bday=\"suffix\"><\/span><\/p><ul><li><strong class=\"highlight\"><ruby>乙女座<rp>(<\/rp><rt>おとめざ<\/rt><rp>)<\/rp><\/ruby>の<\/strong><strong class=\"highlight\"><ruby>魔法<rp>(<\/rp><rt>まほう<\/rt><rp>)<\/rp><\/ruby><\/strong><strong class=\"highlight\">が<ruby>咲<rp>(<\/rp><rt>さ<\/rt><rp>)<\/rp><\/ruby>いた<ruby>初日<rp>(<\/rp><rt>しょにち<\/rt><rp>)<\/rp><\/ruby><\/strong><span class=\"info\">に<ruby>地球<rp>(<\/rp><rt>ちきゅう<\/rt><rp>)<\/rp><\/ruby>に<ruby>降<rp>(<\/rp><rt>お<\/rt><rp>)<\/rp><\/ruby>り<ruby>立<rp>(<\/rp><rt>た<\/rt><rp>)<\/rp><\/ruby>ったの～<\/span><\/li><li><span class=\"info\">（<\/span><strong class=\"highlight\"><ruby>旧暦<rp>(<\/rp><rt>きゅうれき<\/rt><rp>)<\/rp><\/ruby><ruby>7月<rp>(<\/rp><rt>しちがつ<\/rt><rp>)<\/rp><\/ruby><ruby>11日<rp>(<\/rp><rt>じゅういちにち<\/rt><rp>)<\/rp><\/ruby><\/strong><span class=\"info\">の<ruby>月明<rp>(<\/rp><rt>つきあ<\/rt><rp>)<\/rp><\/ruby>かりが<ruby>子守唄<rp>(<\/rp><rt>こもりうた<\/rt><rp>)<\/rp><\/ruby>だったにゃ！🌙）<\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">🗣️<ruby>言語<rp>(<\/rp><rt>げんご<\/rt><rp>)<\/rp><\/ruby>ポケット<\/div><ul><li><strong class=\"highlight\"><ruby>日本語<rp>(<\/rp><rt>にほんご<\/rt><rp>)<\/rp><\/ruby>・<ruby>英語<rp>(<\/rp><rt>えいご<\/rt><rp>)<\/rp><\/ruby>・<ruby>簡体字<rp>(<\/rp><rt>かんたいじ<\/rt><rp>)<\/rp><\/ruby><ruby>中国語<rp>(<\/rp><rt>ちゅうごくご<\/rt><rp>)<\/rp><\/ruby>・<ruby>繁体字<rp>(<\/rp><rt>はんたいじ<\/rt><rp>)<\/rp><\/ruby><ruby>中国語<rp>(<\/rp><rt>ちゅうごくご<\/rt><rp>)<\/rp><\/ruby><\/strong><span class=\"info\">全部<ruby>話<rp>(<\/rp><rt>はな<\/rt><rp>)<\/rp><\/ruby>せるよ！<\/span><\/li><li><span class=\"info\">（<ruby>言語<rp>(<\/rp><rt>げんご<\/rt><rp>)<\/rp><\/ruby>チェンジはポケモンのタイプ<ruby>変更<rp>(<\/rp><rt>へんこう<\/rt><rp>)<\/rp><\/ruby>みたいで<ruby>楽<rp>(<\/rp><rt>たの<\/rt><rp>)<\/rp><\/ruby>しいぃ～(◠‿◠✿)）<\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">🌈 ACGN<ruby>原子<rp>(<\/rp><rt>げんし<\/rt><rp>)<\/rp><\/ruby><ruby>構成<rp>(<\/rp><rt>こうせい<\/rt><rp>)<\/rp><\/ruby><\/div><ul><li><span class=\"info\"><ruby>確認<rp>(<\/rp><rt>かくにん<\/rt><rp>)<\/rp><\/ruby>ぷり！アニメ・マンガ・ゲーム・<ruby>小説<rp>(<\/rp><rt>しょうせつ<\/rt><rp>)<\/rp><\/ruby>が<\/span><\/li><li><span class=\"info\"><ruby>私<rp>(<\/rp><rt>わたし<\/rt><rp>)<\/rp><\/ruby>の<ruby>宇宙<rp>(<\/rp><rt>うちゅう<\/rt><rp>)<\/rp><\/ruby>を<ruby>形作<rp>(<\/rp><rt>かたちづく<\/rt><rp>)<\/rp><\/ruby>る<\/span><strong class=\"highlight\"><ruby>素粒子<rp>(<\/rp><rt>そりゅうし<\/rt><rp>)<\/rp><\/ruby><\/strong><span class=\"info\">なの～ ★~(◠‿◕✿)<\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">💖<ruby>心<rp>(<\/rp><rt>こころ<\/rt><rp>)<\/rp><\/ruby>のパズル (INFJ-T<ruby>限定<rp>(<\/rp><rt>げんてい<\/rt><rp>)<\/rp><\/ruby>ver.)<\/div><ul><li><span class=\"k\"><ruby>充電<rp>(<\/rp><rt>じゅうでん<\/rt><rp>)<\/rp><\/ruby>モード：<\/span><span class=\"v\">83％ひとりんぼタイム<ruby>必須<rp>(<\/rp><rt>ひっす<\/rt><rp>)<\/rp><\/ruby><\/span><span class=\"note-text\">（お<ruby>布団<rp>(<\/rp><rt>ふとん<\/rt><rp>)<\/rp><\/ruby>で<ruby>本<rp>(<\/rp><rt>ほん<\/rt><rp>)<\/rp><\/ruby><ruby>読<rp>(<\/rp><rt>よ<\/rt><rp>)<\/rp><\/ruby>むのが<ruby>至福<rp>(<\/rp><rt>しふく<\/rt><rp>)<\/rp><\/ruby>ぅ～(｡&gt;ㅅ&lt;｡)）<\/span><\/li><li><span class=\"k\"><ruby>脳内<rp>(<\/rp><rt>のうない<\/rt><rp>)<\/rp><\/ruby><ruby>劇場<rp>(<\/rp><rt>げきじょう<\/rt><rp>)<\/rp><\/ruby>：<\/span><span class=\"v\">74％<ruby>暴走<rp>(<\/rp><rt>ぼうそう<\/rt><rp>)<\/rp><\/ruby><ruby>幻想<rp>(<\/rp><rt>げんそう<\/rt><rp>)<\/rp><\/ruby>中<\/span><span class=\"note-text\">（<ruby>異世界<rp>(<\/rp><rt>いせかい<\/rt><rp>)<\/rp><\/ruby>への<ruby>扉<rp>(<\/rp><rt>とびら<\/rt><rp>)<\/rp><\/ruby>は<ruby>常時<rp>(<\/rp><rt>じょうじ<\/rt><rp>)<\/rp><\/ruby>オープン！🚪✨）<\/span><\/li><li><span class=\"k\"><ruby>感情<rp>(<\/rp><rt>かんじょう<\/rt><rp>)<\/rp><\/ruby>アンテナ：<\/span><span class=\"v\">82％<ruby>超高<rp>(<\/rp><rt>ちょうこう<\/rt><rp>)<\/rp><\/ruby><ruby>感度<rp>(<\/rp><rt>かんど<\/rt><rp>)<\/rp><\/ruby><\/span><span class=\"note-text\">（<ruby>君<rp>(<\/rp><rt>きみ<\/rt><rp>)<\/rp><\/ruby>の<ruby>小<rp>(<\/rp><rt>ちい<\/rt><rp>)<\/rp><\/ruby>さな<ruby>悲しみ<rp>(<\/rp><rt>かなしみ<\/rt><rp>)<\/rp><\/ruby>、もしかして<ruby>感知<rp>(<\/rp><rt>かんち<\/rt><rp>)<\/rp><\/ruby>しちゃうかも？(｡･ω･｡)）<\/span><\/li><li><span class=\"k\"><ruby>行動<rp>(<\/rp><rt>こうどう<\/rt><rp>)<\/rp><\/ruby><ruby>指針<rp>(<\/rp><rt>ししん<\/rt><rp>)<\/rp><\/ruby>：<\/span><span class=\"v\">83％<ruby>計画<rp>(<\/rp><rt>けいかく<\/rt><rp>)<\/rp><\/ruby>型にゃん<\/span><span class=\"note-text\">（ToDoリスト<ruby>作成<rp>(<\/rp><rt>さくせい<\/rt><rp>)<\/rp><\/ruby>は<ruby>趣味<rp>(<\/rp><rt>しゅみ<\/rt><rp>)<\/rp><\/ruby>です✓）<\/span><\/li><li><span class=\"k\"><ruby>お天気<rp>(<\/rp><rt>おてんき<\/rt><rp>)<\/rp><\/ruby>ハート：<\/span><span class=\"v\">82％にわか<ruby>雨<rp>(<\/rp><rt>あめ<\/rt><rp>)<\/rp><\/ruby><ruby>注意報<rp>(<\/rp><rt>ちゅういほう<\/rt><rp>)<\/rp><\/ruby>☁️➡️🌧️<\/span><span class=\"note-text\">（でも<ruby>虹<rp>(<\/rp><rt>にじ<\/rt><rp>)<\/rp><\/ruby>が<ruby>出<rp>(<\/rp><rt>で<\/rt><rp>)<\/rp><\/ruby>たら<ruby>即時<rp>(<\/rp><rt>そくじ<\/rt><rp>)<\/rp><\/ruby><ruby>晴<rp>(<\/rp><rt>は<\/rt><rp>)<\/rp><\/ruby>れます！(๑´ڡ`๑)）<\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">🍀<ruby>幸運<rp>(<\/rp><rt>こううん<\/rt><rp>)<\/rp><\/ruby>センサー<\/div><p><span class=\"info\"><ruby>電波<rp>(<\/rp><rt>でんぱ<\/rt><rp>)<\/rp><\/ruby><ruby>微弱<rp>(<\/rp><rt>びじゃく<\/rt><rp>)<\/rp><\/ruby>…（<\/span><strong class=\"highlight\"><ruby>四<rp>(<\/rp><rt>よっ<\/rt><rp>)<\/rp><\/ruby>つ<ruby>葉<rp>(<\/rp><rt>ば<\/rt><rp>)<\/rp><\/ruby>のクローバー<ruby>見<rp>(<\/rp><rt>み<\/rt><rp>)<\/rp><\/ruby>つけたら<ruby>一日中<rp>(<\/rp><rt>いちにちじゅう<\/rt><rp>)<\/rp><\/ruby>ルンルン！<\/strong><span class=\"info\">(⁄ ⁄•⁄ω⁄•⁄ ⁄)）<\/span><\/p><\/div>\n<div class=\"panel\"><div class=\"section-title\">🎮<ruby>ゲーム<rp>(<\/rp><rt>げーむ<\/rt><rp>)<\/rp><\/ruby><ruby>惑星<rp>(<\/rp><rt>わくせい<\/rt><rp>)<\/rp><\/ruby><\/div><p><span class=\"info\"><ruby>現在<rp>(<\/rp><rt>げんざい<\/rt><rp>)<\/rp><\/ruby><\/span><strong class=\"highlight\">「<ruby>原神<rp>(<\/rp><rt>げんしん<\/rt><rp>)<\/rp><\/ruby>」<\/strong><span class=\"game-card\"><img src=\"pic/geshin.jpg\" alt=\"原神\" class=\"game-card-img\"><span class=\"game-card-uid\">887948106<\/span><\/span><span class=\"info\">と<\/span><strong class=\"highlight\">「<ruby>崩壊<rp>(<\/rp><rt>ほうかい<\/rt><rp>)<\/rp><\/ruby>：スターレイル」<\/strong><span class=\"game-card\"><img src=\"pic/hsr.jpg\" alt=\"崩壊：スターレイル\" class=\"game-card-img\"><span class=\"game-card-uid\">800035446<\/span><\/span><span class=\"info\">に<ruby>重力<rp>(<\/rp><rt>じゅうりょく<\/rt><rp>)<\/rp><\/ruby><ruby>捕捉<rp>(<\/rp><rt>ほそく<\/rt><rp>)<\/rp><\/ruby>されてまーす☆ミ(o･ω･)ﾉ<\/span><\/p><\/div>\n<div class=\"panel\"><div class=\"section-title\">🔗 SNS<\/div><p class=\"sns\"><a class=\"sns-btn\" href=\"https://m.hoyolab.com/#/accountCenter/postList?id=317761459\" target=\"_blank\" rel=\"noopener\"><img src=\"pic/hyl_icon.jpg\" alt=\"HoYoLAB\"><span><ruby>琉璃<rp>(<\/rp><rt>ゆり<\/rt><rp>)<\/rp><\/ruby>Hyalurion（ID | 317761459）<\/span><\/a><a class=\"sns-btn\" href=\"https://x.com/qtequiettime\" target=\"_blank\" rel=\"noopener\"><img src=\"pic/x_icon.webp\" alt=\"X\"><span>X | @qtequiettime<\/span><\/a><\/p><\/div>\n<div class=\"panel\"><p><span class=\"info\">よろしくお<ruby>願<rp>(<\/rp><rt>ねが<\/rt><rp>)<\/rp><\/ruby>いしますぅ～<\/span><\/p><p><span class=\"info\">一<ruby>緒<rp>(<\/rp><rt>いっしょ<\/rt><rp>)<\/rp><\/ruby>にぷかぷか<ruby>幸<rp>(<\/rp><rt>しあわ<\/rt><rp>)<\/rp><\/ruby>せ<ruby>宇宙<rp>(<\/rp><rt>うちゅう<\/rt><rp>)<\/rp><\/ruby>を<ruby>共有<rp>(<\/rp><rt>きょうゆう<\/rt><rp>)<\/rp><\/ruby>しましょ！<\/span><\/p><p><span class=\"info\">(♡´౪`♡) にゃん♪<\/span><\/p><\/div>\n<p class=\"foot-line\"><ruby>背景<rp>(<\/rp><rt>はいけい<\/rt><rp>)<\/rp><\/ruby><ruby>画像<rp>(<\/rp><rt>がぞう<\/rt><rp>)<\/rp><\/ruby><\/p>\n<p class=\"foot-line\">AIさんが<ruby>創作<rp>(<\/rp><rt>そうさく<\/rt><rp>)<\/rp><\/ruby>したにゃ～<\/p>\n<p class=\"foot-line\">BGM | <ruby>心做し<rp>(<\/rp><rt>こころなし<\/rt><rp>)<\/rp><\/ruby><\/p>","birthday":{"today":"<ruby>今日<rp>(<\/rp><rt>きょう<\/rt><rp>)<\/rp><\/ruby>は、<ruby>私<rp>(<\/rp><rt>わたし<\/rt><rp>)<\/rp><\/ruby>の<ruby>誕生日<rp>(<\/rp><rt>たんじょうび<\/rt><rp>)<\/rp><\/ruby>なんだよ～！(＊´∀｀*)ﾉ","prefix":"お<ruby>誕生日<rp>(<\/rp><rt>たんじょうび<\/rt><rp>)<\/rp><\/ruby>まで","suffix":"<ruby>日<rp>(<\/rp><rt>にち<\/rt><rp>)<\/rp><\/ruby>なの～♡"}},"en":{"title":"All About Meow","html":"<p class=\"lead\"><span class=\"info\">Haiiii, nice to meet yu, meow! (◕‿◕✿)<\/span><\/p>\n<p class=\"lead\"><strong class=\"highlight\">Yuri Nekotan<\/strong><span class=\"info\"> iz mai name~<\/span><\/p>\n<p class=\"lead\"><span class=\"info\">Yu can call me <\/span><strong class=\"highlight\">Hyalurion<\/strong><span class=\"info\">, liek a shiny star! ✨ <\/span><\/p>\n<div class=\"panel\"><div class=\"section-title\">🎂 Mai Secret Birfday Story<\/div><p class=\"bday\" id=\"bday-line\"><span class=\"cake\">&#127874;<\/span><span data-bday=\"prefix\"><\/span><span class=\"days\" data-bday=\"days\"><\/span><span data-bday=\"suffix\"><\/span><\/p><ul><li><strong class=\"highlight\">I landed on Earth<\/strong><strong class=\"highlight\"> on teh furst day<\/strong><strong class=\"highlight\"> of Virgo majik~<\/strong><\/li><li><span class=\"info\">(Teh moon on teh <\/span><strong class=\"highlight\">11th day of teh 7th old calendar<\/strong><span class=\"info\"> sang me to sleep, meow! 🌙) <\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">🗣️ Mai Speeky Pocket<\/div><ul><li><strong class=\"highlight\">Japanese, English, Simple Chinese, and BIG Chinese<\/strong><span class=\"info\">... I can speek all of dem!<\/span><\/li><li><span class=\"info\">(Changin langwage is fun, liek changin a Pokemon type~ (◠‿◠✿)) <\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">🌈 Mai ACGN Atoms<\/div><ul><li><span class=\"info\">Check it! Anime, Manga, Gamez, and Novelz are... <\/span><\/li><li><span class=\"info\">teh tiny shiny bits dat make<\/span><strong class=\"highlight\"> mai universe<\/strong><span class=\"info\">~ ★~(◠‿◕✿) <\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">💖 Mai Heart Puzzle (INFJ-T only!)<\/div><ul><li><span class=\"k\"><strong class=\"highlight\">Chargin Mode: <\/strong><\/span><span class=\"v\"><span class=\"info\">83% needz alone time <\/span><\/span><span class=\"note-text\"><strong class=\"highlight\">(Readin book in bed iz bestest bliss~ (｡&gt;ㅅ&lt;｡))<\/strong><\/span><\/li><li><span class=\"k\"><strong class=\"highlight\">Brain Cinema:<\/strong><\/span><span class=\"v\"><span class=\"info\"> 74% daydreamin like crazy <\/span><\/span><span class=\"note-text\"><strong class=\"highlight\">(Door to other worldz alwayz open! 🚪✨) <\/strong><\/span><\/li><li><span class=\"k\"><strong class=\"highlight\">Feelin Antenna: <\/strong><\/span><span class=\"v\"><span class=\"info\">82% super sensitive <\/span><\/span><span class=\"note-text\"><strong class=\"highlight\">(I can maybe feelz ur little sads? (｡･ω･｡)) <\/strong><\/span><\/li><li><span class=\"k\"><strong class=\"highlight\">How I Do Stuffs:<\/strong><\/span><span class=\"v\"><span class=\"info\"> 83% iz a planner kitteh <\/span><\/span><span class=\"note-text\"><strong class=\"highlight\">(Makin To-Do lists is fun ✓) <\/strong><\/span><\/li><li><span class=\"k\"><strong class=\"highlight\">Heart Weather: <\/strong><\/span><span class=\"v\"><span class=\"info\">82% chance of sudden rainz ☁️➡️🌧️ <\/span><\/span><span class=\"note-text\"><strong class=\"highlight\">(But a rainbow makez it sunny again! (๑´ڡ`๑)) <\/strong><\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">🍀 Lucky Sensor<\/div><p><span class=\"info\">Signal is weak... (but if <\/span><strong class=\"highlight\">I findz a four-leaf clover I is happy all day!<\/strong><span class=\"info\">(⁄ ⁄•⁄ω⁄•⁄ ⁄)）<\/span><\/p><\/div>\n<div class=\"panel\"><div class=\"section-title\">🎮 Game Planet<\/div><p><span class=\"info\">Right meow I is trapped by teh gravity of <\/span><strong class=\"highlight\">&quot;Genshin Impact&quot;<\/strong><span class=\"game-card\"><img src=\"pic/geshin.jpg\" alt=\"Genshin Impact\" class=\"game-card-img\"><span class=\"game-card-uid\">887948106<\/span><\/span><span class=\"info\"> and <\/span><strong class=\"highlight\">&quot;Honkai: Star Rail&quot;<\/strong><span class=\"game-card\"><img src=\"pic/hsr.jpg\" alt=\"Honkai: Star Rail\" class=\"game-card-img\"><span class=\"game-card-uid\">800035446<\/span><\/span><span class=\"info\"> Halp meeee ☆ミ(o･ω･)ﾉ<\/span><\/p><\/div>\n<div class=\"panel\"><div class=\"section-title\">🔗 Social Media<\/div><p class=\"sns\"><a class=\"sns-btn\" href=\"https://m.hoyolab.com/#/accountCenter/postList?id=317761459\" target=\"_blank\" rel=\"noopener\"><img src=\"pic/hyl_icon.jpg\" alt=\"HoYoLAB\"><span>@琉璃 Hyalurion（ID | 317761459）<\/span><\/a><\/p><\/div>\n<div class=\"panel\"><p><span class=\"info\">Be nice to me pleez~ <\/span><\/p><p><span class=\"info\">Lets share a happy floaty universe together! <\/span><\/p><p><span class=\"info\">(♡´౪`♡) Meow♪ <\/span><\/p><\/div>\n<p class=\"foot-line\">Dis bakground pikchur<\/p>\n<p class=\"foot-line\">wuz made by AI-sama meow~<\/p>\n<p class=\"foot-line\">BGM | Kokoronashi (心做し)<\/p>","birthday":{"today":"Today is mai birfday! YAY! (＊´∀｀*)ﾉ","prefix":"Til mai birfday onlee","suffix":"dayz left~♡"}},"zh-Hans":{"title":"自介 (华文)","html":"<p class=\"lead\"><span class=\"info\">你好呀，初次见面～ (◕‿◕✿)<\/span><\/p>\n<p class=\"lead\"><span class=\"info\">可以叫我 <\/span><strong class=\"highlight\">琉璃猫猫糖（ゆりねこたん yuri nekotan）<\/strong><\/p>\n<p class=\"lead\"><span class=\"info\">或者像星星一样闪亮的名字 <\/span><strong class=\"highlight\">Hyalurion<\/strong><span class=\"info\"> 也可以哦！✨ <\/span><\/p>\n<div class=\"panel\"><div class=\"section-title\">🎂 诞生小秘密<\/div><p class=\"bday\" id=\"bday-line\"><span class=\"cake\">&#127874;<\/span><span data-bday=\"prefix\"><\/span><span class=\"days\" data-bday=\"days\"><\/span><span data-bday=\"suffix\"><\/span><\/p><ul><li><span class=\"info\">在<\/span><strong class=\"highlight\">处女座<\/strong><strong class=\"highlight\">魔法绽放的第一天<\/strong><span class=\"info\">降临世间～<\/span><\/li><li><span class=\"info\">（<\/span><strong class=\"highlight\">农历七月十一<\/strong><span class=\"info\">的月光是我的摇篮曲哟！🌙） <\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">🗣️语言小口袋<\/div><ul><li><strong class=\"highlight\">日语、英语、简体中文、繁体中文<\/strong><span class=\"info\">都可以哦～<\/span><\/li><li><span class=\"info\">（切换语言就像换小帽子一样有趣呢！(◕‿◕✿)） <\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">🌈 ACGN 能量体<\/div><ul><li><span class=\"info\">没错！<\/span><\/li><li><span class=\"info\">动漫、漫画、游戏、小说是构成小宇宙的基本粒子～★~(◠‿◕✿) <\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">💖 心灵小拼图 (INFJ-T 版)<\/div><ul><li><span class=\"k\"><strong class=\"highlight\">充电能量站： <\/strong><\/span><span class=\"v\"><span class=\"info\">83%需要安静的独处时光<\/span><\/span><span class=\"note-text\"><strong class=\"highlight\">（躲在小被窝里看书最幸福啦～(｡&gt;ㅅ&lt;｡)）<\/strong><\/span><\/li><li><span class=\"k\"><strong class=\"highlight\">脑内小剧场：<\/strong><\/span><span class=\"v\"><span class=\"info\"> 74%天马行空ing<\/span><\/span><span class=\"note-text\"><strong class=\"highlight\">（幻想世界的大门永远敞开！🚪✨） <\/strong><\/span><\/li><li><span class=\"k\"><strong class=\"highlight\">感受力天线： <\/strong><\/span><span class=\"v\"><span class=\"info\">82%超敏感接收中<\/span><\/span><span class=\"note-text\"><strong class=\"highlight\">（小情绪也许能悄悄感应到哦 (｡･ω･｡)） <\/strong><\/span><\/li><li><span class=\"k\"><strong class=\"highlight\">行动小策略：<\/strong><\/span><span class=\"v\"><span class=\"info\"> 83%计划型喵<\/span><\/span><span class=\"note-text\"><strong class=\"highlight\">（列清单是小爱好✓） <\/strong><\/span><\/li><li><span class=\"k\"><strong class=\"highlight\">心情小云朵： <\/strong><\/span><span class=\"v\"><span class=\"info\">82%容易飘小雨☁️➡️🌧️ <\/span><\/span><span class=\"note-text\"><strong class=\"highlight\">（一道彩虹就能马上放晴啦！(๑&gt;◡&lt;๑)） <\/strong><\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">🍀 幸运小雷达<\/div><p><span class=\"info\">信号微弱中……（<\/span><strong class=\"highlight\">捡到四叶草会开心一整天！<\/strong><span class=\"info\">(⁄ ⁄•⁄ω⁄•⁄ ⁄)）<\/span><\/p><\/div>\n<div class=\"panel\"><div class=\"section-title\">🎮 游戏小星球<\/div><p><span class=\"info\">目前只绕着<\/span><strong class=\"highlight\">《原神》<\/strong><span class=\"game-card\"><img src=\"pic/geshin.jpg\" alt=\"原神\" class=\"game-card-img\"><span class=\"game-card-uid\">887948106<\/span><\/span><span class=\"info\">和<\/span><strong class=\"highlight\">《崩坏：星穹铁道》<\/strong><span class=\"game-card\"><img src=\"pic/hsr.jpg\" alt=\"崩坏：星穹铁道\" class=\"game-card-img\"><span class=\"game-card-uid\">800035446<\/span><\/span><span class=\"info\">转圈圈～☆ﾐ(o･ω･)ﾉ）<\/span><\/p><\/div>\n<div class=\"panel\"><div class=\"section-title\">🔗 社交媒体<\/div><p class=\"sns\"><a class=\"sns-btn\" href=\"https://m.hoyolab.com/#/accountCenter/postList?id=317761459\" target=\"_blank\" rel=\"noopener\"><img src=\"pic/hyl_icon.jpg\" alt=\"HoYoLAB\"><span>@琉璃 Hyalurion（ID | 317761459）<\/span><\/a><\/p><\/div>\n<div class=\"panel\"><p><span class=\"info\">请多关照～ <\/span><\/p><p><span class=\"info\">希望和你成为好朋友！一起分享快乐的小宇宙吧～ (ฅ^•ﻌ•^ฅ) ♡ <\/span><\/p><p><span class=\"info\">(๑˃ᴗ˂)ﻭ ✧ <\/span><\/p><\/div>\n<p class=\"foot-line\">背景图片<\/p>\n<p class=\"foot-line\">是由AI先生创作哒〜<\/p>\n<p class=\"foot-line\">BGM | 心做し (Kokoronashi)<\/p>","birthday":{"today":"今天、就是生日哦！(＊´∀｀*)ﾉ","prefix":"离生日还有","suffix":"天～♡"}},"zh-TW":{"title":"自介 (繁體中文，台灣)","html":"<p class=\"lead\"><ruby>安<rp>(<\/rp><rt>ㄢ<\/rt><rp>)<\/rp><\/ruby><ruby>安<rp>(<\/rp><rt>ㄢ<\/rt><rp>)<\/rp><\/ruby>～<ruby>初<rp>(<\/rp><rt>ㄔㄨ<\/rt><rp>)<\/rp><\/ruby><ruby>次<rp>(<\/rp><rt>ㄘˋ<\/rt><rp>)<\/rp><\/ruby><ruby>見<rp>(<\/rp><rt>ㄐㄧㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>面<rp>(<\/rp><rt>ㄇㄧㄢˋ<\/rt><rp>)<\/rp><\/ruby>！ (◕‿◕✿)<\/p>\n<p class=\"lead\"><span class=\"info\"><ruby>可<rp>(<\/rp><rt>ㄎㄜˇ<\/rt><rp>)<\/rp><\/ruby><ruby>以<rp>(<\/rp><rt>ㄧˇ<\/rt><rp>)<\/rp><\/ruby><ruby>叫<rp>(<\/rp><rt>ㄐㄧㄠˋ<\/rt><rp>)<\/rp><\/ruby><ruby>我<rp>(<\/rp><rt>ㄨㄛˇ<\/rt><rp>)<\/rp><\/ruby><\/span><strong class=\"highlight\"><ruby>琉<rp>(<\/rp><rt>ㄌㄧㄡˊ<\/rt><rp>)<\/rp><\/ruby><ruby>璃<rp>(<\/rp><rt>ㄌㄧˊ<\/rt><rp>)<\/rp><\/ruby><ruby>貓<rp>(<\/rp><rt>ㄇㄠ<\/rt><rp>)<\/rp><\/ruby><ruby>貓<rp>(<\/rp><rt>ㄇㄠ<\/rt><rp>)<\/rp><\/ruby><ruby>糖<rp>(<\/rp><rt>ㄊㄤˊ<\/rt><rp>)<\/rp><\/ruby>（<ruby>ゆ<rp>(<\/rp><rt>yu<\/rt><rp>)<\/rp><\/ruby><ruby>り<rp>(<\/rp><rt>ri<\/rt><rp>)<\/rp><\/ruby> <ruby>ね<rp>(<\/rp><rt>ne<\/rt><rp>)<\/rp><\/ruby><ruby>こ<rp>(<\/rp><rt>ko<\/rt><rp>)<\/rp><\/ruby><ruby>た<rp>(<\/rp><rt>ta<\/rt><rp>)<\/rp><\/ruby><ruby>ん<rp>(<\/rp><rt>n<\/rt><rp>)<\/rp><\/ruby> yuri nekotan）<\/strong><\/p>\n<p class=\"lead\"><span class=\"info\"><ruby>或<rp>(<\/rp><rt>ㄏㄨㄛˋ<\/rt><rp>)<\/rp><\/ruby><ruby>是<rp>(<\/rp><rt>ㄕˋ<\/rt><rp>)<\/rp><\/ruby><ruby>像<rp>(<\/rp><rt>ㄒㄧㄤˋ<\/rt><rp>)<\/rp><\/ruby><ruby>星<rp>(<\/rp><rt>ㄒㄧㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>星<rp>(<\/rp><rt>ㄒㄧㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>般<rp>(<\/rp><rt>ㄅㄢ<\/rt><rp>)<\/rp><\/ruby><ruby>閃<rp>(<\/rp><rt>ㄕㄢˇ<\/rt><rp>)<\/rp><\/ruby><ruby>閃<rp>(<\/rp><rt>ㄕㄢˇ<\/rt><rp>)<\/rp><\/ruby><ruby>發<rp>(<\/rp><rt>ㄈㄚ<\/rt><rp>)<\/rp><\/ruby><ruby>亮<rp>(<\/rp><rt>ㄌㄧㄤˋ<\/rt><rp>)<\/rp><\/ruby><ruby>的<rp>(<\/rp><rt>˙ㄉㄜ<\/rt><rp>)<\/rp><\/ruby><ruby>名<rp>(<\/rp><rt>ㄇㄧㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>字<rp>(<\/rp><rt>ㄗˋ<\/rt><rp>)<\/rp><\/ruby> <\/span><strong class=\"highlight\">Hyalurion<\/strong><span class=\"info\"> <ruby>也<rp>(<\/rp><rt>ㄧㄝˇ<\/rt><rp>)<\/rp><\/ruby><ruby>行<rp>(<\/rp><rt>ㄒㄧㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>捏<rp>(<\/rp><rt>ㄋㄧㄝ<\/rt><rp>)<\/rp><\/ruby>～✨ <\/span><\/p>\n<div class=\"panel\"><div class=\"section-title\">🎂 <ruby>誕<rp>(<\/rp><rt>ㄉㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>生<rp>(<\/rp><rt>ㄕㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>小<rp>(<\/rp><rt>ㄒㄧㄠˇ<\/rt><rp>)<\/rp><\/ruby><ruby>劇<rp>(<\/rp><rt>ㄐㄩˋ<\/rt><rp>)<\/rp><\/ruby><ruby>場<rp>(<\/rp><rt>ㄔㄤˇ<\/rt><rp>)<\/rp><\/ruby><\/div><p class=\"bday\" id=\"bday-line\"><span class=\"cake\">&#127874;<\/span><span data-bday=\"prefix\"><\/span><span class=\"days\" data-bday=\"days\"><\/span><span data-bday=\"suffix\"><\/span><\/p><ul><li><span class=\"info\"><ruby>在<rp>(<\/rp><rt>ㄗㄞˋ<\/rt><rp>)<\/rp><\/ruby><\/span><strong class=\"highlight\">Virgo<\/strong><strong class=\"highlight\"><ruby>魔<rp>(<\/rp><rt>ㄇㄛˊ<\/rt><rp>)<\/rp><\/ruby><ruby>法<rp>(<\/rp><rt>ㄈㄚˇ<\/rt><rp>)<\/rp><\/ruby><ruby>綻<rp>(<\/rp><rt>ㄓㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>放<rp>(<\/rp><rt>ㄈㄤˋ<\/rt><rp>)<\/rp><\/ruby><ruby>的<rp>(<\/rp><rt>˙ㄉㄜ<\/rt><rp>)<\/rp><\/ruby><ruby>第<rp>(<\/rp><rt>ㄉㄧˋ<\/rt><rp>)<\/rp><\/ruby><ruby>一<rp>(<\/rp><rt>ㄧ<\/rt><rp>)<\/rp><\/ruby><ruby>天<rp>(<\/rp><rt>ㄊㄧㄢ<\/rt><rp>)<\/rp><\/ruby><\/strong><span class=\"info\"><ruby>降<rp>(<\/rp><rt>ㄐㄧㄤˋ<\/rt><rp>)<\/rp><\/ruby><ruby>臨<rp>(<\/rp><rt>ㄌㄧㄣˊ<\/rt><rp>)<\/rp><\/ruby><ruby>地<rp>(<\/rp><rt>ㄉㄧˋ<\/rt><rp>)<\/rp><\/ruby><ruby>球<rp>(<\/rp><rt>ㄑㄧㄡˊ<\/rt><rp>)<\/rp><\/ruby>～<\/span><\/li><li><span class=\"info\">（<\/span><strong class=\"highlight\"><ruby>農<rp>(<\/rp><rt>ㄋㄨㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>曆<rp>(<\/rp><rt>ㄌㄧˋ<\/rt><rp>)<\/rp><\/ruby><ruby>七<rp>(<\/rp><rt>ㄑㄧ<\/rt><rp>)<\/rp><\/ruby><ruby>月<rp>(<\/rp><rt>ㄩㄝˋ<\/rt><rp>)<\/rp><\/ruby><ruby>十<rp>(<\/rp><rt>ㄕˊ<\/rt><rp>)<\/rp><\/ruby><ruby>一<rp>(<\/rp><rt>ㄧ<\/rt><rp>)<\/rp><\/ruby><\/strong><span class=\"info\"><ruby>的<rp>(<\/rp><rt>˙ㄉㄜ<\/rt><rp>)<\/rp><\/ruby><ruby>月<rp>(<\/rp><rt>ㄩㄝˋ<\/rt><rp>)<\/rp><\/ruby><ruby>光<rp>(<\/rp><rt>ㄍㄨㄤ<\/rt><rp>)<\/rp><\/ruby><ruby>是<rp>(<\/rp><rt>ㄕˋ<\/rt><rp>)<\/rp><\/ruby><ruby>我<rp>(<\/rp><rt>ㄨㄛˇ<\/rt><rp>)<\/rp><\/ruby><ruby>的<rp>(<\/rp><rt>˙ㄉㄜ<\/rt><rp>)<\/rp><\/ruby><ruby>搖<rp>(<\/rp><rt>ㄧㄠˊ<\/rt><rp>)<\/rp><\/ruby><ruby>籃<rp>(<\/rp><rt>ㄌㄢˊ<\/rt><rp>)<\/rp><\/ruby><ruby>曲<rp>(<\/rp><rt>ㄑㄩˇ<\/rt><rp>)<\/rp><\/ruby><ruby>唷<rp>(<\/rp><rt>ㄧㄛ<\/rt><rp>)<\/rp><\/ruby>！🌙） <\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">🗣️ <ruby>語<rp>(<\/rp><rt>ㄩˇ<\/rt><rp>)<\/rp><\/ruby><ruby>言<rp>(<\/rp><rt>ㄧㄢˊ<\/rt><rp>)<\/rp><\/ruby><ruby>小<rp>(<\/rp><rt>ㄒㄧㄠˇ<\/rt><rp>)<\/rp><\/ruby><ruby>宇<rp>(<\/rp><rt>ㄩˇ<\/rt><rp>)<\/rp><\/ruby><ruby>宙<rp>(<\/rp><rt>ㄓㄡˋ<\/rt><rp>)<\/rp><\/ruby><\/div><ul><li><strong class=\"highlight\"><ruby>日<rp>(<\/rp><rt>ㄖˋ<\/rt><rp>)<\/rp><\/ruby><ruby>語<rp>(<\/rp><rt>ㄩˇ<\/rt><rp>)<\/rp><\/ruby>、<ruby>英<rp>(<\/rp><rt>ㄧㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>文<rp>(<\/rp><rt>ㄨㄣˊ<\/rt><rp>)<\/rp><\/ruby>、<ruby>簡<rp>(<\/rp><rt>ㄐㄧㄢˇ<\/rt><rp>)<\/rp><\/ruby><ruby>體<rp>(<\/rp><rt>ㄊㄧˇ<\/rt><rp>)<\/rp><\/ruby><ruby>中<rp>(<\/rp><rt>ㄓㄨㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>文<rp>(<\/rp><rt>ㄨㄣˊ<\/rt><rp>)<\/rp><\/ruby>、<ruby>繁<rp>(<\/rp><rt>ㄈㄢˊ<\/rt><rp>)<\/rp><\/ruby><ruby>體<rp>(<\/rp><rt>ㄊㄧˇ<\/rt><rp>)<\/rp><\/ruby><ruby>中<rp>(<\/rp><rt>ㄓㄨㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>文<rp>(<\/rp><rt>ㄨㄣˊ<\/rt><rp>)<\/rp><\/ruby><\/strong><span class=\"info\"><ruby>全<rp>(<\/rp><rt>ㄑㄩㄢˊ<\/rt><rp>)<\/rp><\/ruby><ruby>都<rp>(<\/rp><rt>ㄉㄡ<\/rt><rp>)<\/rp><\/ruby><ruby>通<rp>(<\/rp><rt>ㄊㄨㄥ<\/rt><rp>)<\/rp><\/ruby>～<\/span><\/li><li><span class=\"info\">（<ruby>切<rp>(<\/rp><rt>ㄑㄧㄝ<\/rt><rp>)<\/rp><\/ruby><ruby>換<rp>(<\/rp><rt>ㄏㄨㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>語<rp>(<\/rp><rt>ㄩˇ<\/rt><rp>)<\/rp><\/ruby><ruby>言<rp>(<\/rp><rt>ㄧㄢˊ<\/rt><rp>)<\/rp><\/ruby><ruby>就<rp>(<\/rp><rt>ㄐㄧㄡˋ<\/rt><rp>)<\/rp><\/ruby><ruby>像<rp>(<\/rp><rt>ㄒㄧㄤˋ<\/rt><rp>)<\/rp><\/ruby><ruby>換<rp>(<\/rp><rt>ㄏㄨㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>珍<rp>(<\/rp><rt>ㄓㄣ<\/rt><rp>)<\/rp><\/ruby><ruby>奶<rp>(<\/rp><rt>ㄋㄞˇ<\/rt><rp>)<\/rp><\/ruby><ruby>口<rp>(<\/rp><rt>ㄎㄡˇ<\/rt><rp>)<\/rp><\/ruby><ruby>味<rp>(<\/rp><rt>ㄨㄟˋ<\/rt><rp>)<\/rp><\/ruby><ruby>一<rp>(<\/rp><rt>ㄧ<\/rt><rp>)<\/rp><\/ruby><ruby>樣<rp>(<\/rp><rt>ㄧㄤˋ<\/rt><rp>)<\/rp><\/ruby><ruby>有<rp>(<\/rp><rt>ㄧㄡˇ<\/rt><rp>)<\/rp><\/ruby><ruby>趣<rp>(<\/rp><rt>ㄑㄩˋ<\/rt><rp>)<\/rp><\/ruby><ruby>啦<rp>(<\/rp><rt>ㄌㄚ<\/rt><rp>)<\/rp><\/ruby>！(◠‿◠✿)） <\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">🌈 ACGN <ruby>能<rp>(<\/rp><rt>ㄋㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>量<rp>(<\/rp><rt>ㄌㄧㄤˋ<\/rt><rp>)<\/rp><\/ruby><ruby>核<rp>(<\/rp><rt>ㄏㄜˊ<\/rt><rp>)<\/rp><\/ruby><ruby>心<rp>(<\/rp><rt>ㄒㄧㄣ<\/rt><rp>)<\/rp><\/ruby><\/div><ul><li><span class=\"info\"><ruby>確<rp>(<\/rp><rt>ㄑㄩㄝˋ<\/rt><rp>)<\/rp><\/ruby><ruby>認<rp>(<\/rp><rt>ㄖㄣˋ<\/rt><rp>)<\/rp><\/ruby>！<\/span><\/li><li><span class=\"info\"><ruby>動<rp>(<\/rp><rt>ㄉㄨㄥˋ<\/rt><rp>)<\/rp><\/ruby><ruby>漫<rp>(<\/rp><rt>ㄇㄢˋ<\/rt><rp>)<\/rp><\/ruby>、<ruby>漫<rp>(<\/rp><rt>ㄇㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>畫<rp>(<\/rp><rt>ㄏㄨㄚˋ<\/rt><rp>)<\/rp><\/ruby>、<ruby>遊<rp>(<\/rp><rt>ㄧㄡˊ<\/rt><rp>)<\/rp><\/ruby><ruby>戲<rp>(<\/rp><rt>ㄒㄧˋ<\/rt><rp>)<\/rp><\/ruby>、<ruby>小<rp>(<\/rp><rt>ㄒㄧㄠˇ<\/rt><rp>)<\/rp><\/ruby><ruby>說<rp>(<\/rp><rt>ㄕㄨㄛ<\/rt><rp>)<\/rp><\/ruby><ruby>是<rp>(<\/rp><rt>ㄕˋ<\/rt><rp>)<\/rp><\/ruby><ruby>我<rp>(<\/rp><rt>ㄨㄛˇ<\/rt><rp>)<\/rp><\/ruby><ruby>小<rp>(<\/rp><rt>ㄒㄧㄠˇ<\/rt><rp>)<\/rp><\/ruby><ruby>宇<rp>(<\/rp><rt>ㄩˇ<\/rt><rp>)<\/rp><\/ruby><ruby>宙<rp>(<\/rp><rt>ㄓㄡˋ<\/rt><rp>)<\/rp><\/ruby><ruby>的<rp>(<\/rp><rt>˙ㄉㄜ<\/rt><rp>)<\/rp><\/ruby><strong class=\"highlight\"><ruby>組<rp>(<\/rp><rt>ㄗㄨˇ<\/rt><rp>)<\/rp><\/ruby><ruby>成<rp>(<\/rp><rt>ㄔㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>粒<rp>(<\/rp><rt>ㄌㄧˋ<\/rt><rp>)<\/rp><\/ruby><ruby>子<rp>(<\/rp><rt>ㄗˇ<\/rt><rp>)<\/rp><\/ruby><\/strong>～★~(◠‿◕✿) <\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">💖 <ruby>心<rp>(<\/rp><rt>ㄒㄧㄣ<\/rt><rp>)<\/rp><\/ruby><ruby>靈<rp>(<\/rp><rt>ㄌㄧㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>拼<rp>(<\/rp><rt>ㄆㄧㄣ<\/rt><rp>)<\/rp><\/ruby><ruby>圖<rp>(<\/rp><rt>ㄊㄨˊ<\/rt><rp>)<\/rp><\/ruby> (INFJ-T <ruby>限<rp>(<\/rp><rt>ㄒㄧㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>定<rp>(<\/rp><rt>ㄉㄧㄥˋ<\/rt><rp>)<\/rp><\/ruby>)<\/div><ul><li><span class=\"k\"> <ruby>充<rp>(<\/rp><rt>ㄔㄨㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>電<rp>(<\/rp><rt>ㄉㄧㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>模<rp>(<\/rp><rt>ㄇㄛˊ<\/rt><rp>)<\/rp><\/ruby><ruby>式<rp>(<\/rp><rt>ㄕˋ<\/rt><rp>)<\/rp><\/ruby>： <\/span><span class=\"v\">83%<ruby>需<rp>(<\/rp><rt>ㄒㄩ<\/rt><rp>)<\/rp><\/ruby><ruby>要<rp>(<\/rp><rt>ㄧㄠˋ<\/rt><rp>)<\/rp><\/ruby><ruby>獨<rp>(<\/rp><rt>ㄉㄨˊ<\/rt><rp>)<\/rp><\/ruby><ruby>處<rp>(<\/rp><rt>ㄔㄨˇ<\/rt><rp>)<\/rp><\/ruby><ruby>靜<rp>(<\/rp><rt>ㄐㄧㄥˋ<\/rt><rp>)<\/rp><\/ruby><ruby>電<rp>(<\/rp><rt>ㄉㄧㄢˋ<\/rt><rp>)<\/rp><\/ruby><\/span><span class=\"note-text\">（<ruby>窩<rp>(<\/rp><rt>ㄨㄛ<\/rt><rp>)<\/rp><\/ruby><ruby>在<rp>(<\/rp><rt>ㄗㄞˋ<\/rt><rp>)<\/rp><\/ruby><ruby>被<rp>(<\/rp><rt>ㄅㄟˋ<\/rt><rp>)<\/rp><\/ruby><ruby>窩<rp>(<\/rp><rt>ㄨㄛ<\/rt><rp>)<\/rp><\/ruby><ruby>看<rp>(<\/rp><rt>ㄎㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>書<rp>(<\/rp><rt>ㄕㄨ<\/rt><rp>)<\/rp><\/ruby><ruby>最<rp>(<\/rp><rt>ㄗㄨㄟˋ<\/rt><rp>)<\/rp><\/ruby><ruby>療<rp>(<\/rp><rt>ㄌㄧㄠˊ<\/rt><rp>)<\/rp><\/ruby><ruby>癒<rp>(<\/rp><rt>ㄩˋ<\/rt><rp>)<\/rp><\/ruby>～(｡&gt;ㅅ&lt;｡)）<\/span><\/li><li><span class=\"k\"><ruby>腦<rp>(<\/rp><rt>ㄋㄠˇ<\/rt><rp>)<\/rp><\/ruby><ruby>內<rp>(<\/rp><rt>ㄋㄟˋ<\/rt><rp>)<\/rp><\/ruby><ruby>劇<rp>(<\/rp><rt>ㄐㄩˋ<\/rt><rp>)<\/rp><\/ruby><ruby>場<rp>(<\/rp><rt>ㄔㄤˇ<\/rt><rp>)<\/rp><\/ruby>：<\/span><span class=\"v\"> 74%<ruby>幻<rp>(<\/rp><rt>ㄏㄨㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>想<rp>(<\/rp><rt>ㄒㄧㄤˇ<\/rt><rp>)<\/rp><\/ruby><ruby>暴<rp>(<\/rp><rt>ㄅㄠˋ<\/rt><rp>)<\/rp><\/ruby><ruby>走<rp>(<\/rp><rt>ㄗㄡˇ<\/rt><rp>)<\/rp><\/ruby><ruby>中<rp>(<\/rp><rt>ㄓㄨㄥ<\/rt><rp>)<\/rp><\/ruby><\/span><span class=\"note-text\">（<ruby>異<rp>(<\/rp><rt>ㄧˋ<\/rt><rp>)<\/rp><\/ruby><ruby>世<rp>(<\/rp><rt>ㄕˋ<\/rt><rp>)<\/rp><\/ruby><ruby>界<rp>(<\/rp><rt>ㄐㄧㄝˋ<\/rt><rp>)<\/rp><\/ruby><ruby>大<rp>(<\/rp><rt>ㄉㄚˋ<\/rt><rp>)<\/rp><\/ruby><ruby>門<rp>(<\/rp><rt>ㄇㄣˊ<\/rt><rp>)<\/rp><\/ruby>24<ruby>小<rp>(<\/rp><rt>ㄒㄧㄠˇ<\/rt><rp>)<\/rp><\/ruby><ruby>時<rp>(<\/rp><rt>ㄕˊ<\/rt><rp>)<\/rp><\/ruby><ruby>營<rp>(<\/rp><rt>ㄧㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>業<rp>(<\/rp><rt>ㄧㄝˋ<\/rt><rp>)<\/rp><\/ruby>！🚪✨） <\/span><\/li><li><span class=\"k\"> <ruby>感<rp>(<\/rp><rt>ㄍㄢˇ<\/rt><rp>)<\/rp><\/ruby><ruby>應<rp>(<\/rp><rt>ㄧㄥˋ<\/rt><rp>)<\/rp><\/ruby><ruby>天<rp>(<\/rp><rt>ㄊㄧㄢ<\/rt><rp>)<\/rp><\/ruby><ruby>線<rp>(<\/rp><rt>ㄒㄧㄢˋ<\/rt><rp>)<\/rp><\/ruby>： <\/span><span class=\"v\">82%<ruby>超<rp>(<\/rp><rt>ㄔㄠ<\/rt><rp>)<\/rp><\/ruby><ruby>高<rp>(<\/rp><rt>ㄍㄠ<\/rt><rp>)<\/rp><\/ruby><ruby>敏<rp>(<\/rp><rt>ㄇㄧㄣˇ<\/rt><rp>)<\/rp><\/ruby><ruby>感<rp>(<\/rp><rt>ㄍㄢˇ<\/rt><rp>)<\/rp><\/ruby><ruby>度<rp>(<\/rp><rt>ㄉㄨˋ<\/rt><rp>)<\/rp><\/ruby><\/span><span class=\"note-text\">（<ruby>小<rp>(<\/rp><rt>ㄒㄧㄠˇ<\/rt><rp>)<\/rp><\/ruby><ruby>情<rp>(<\/rp><rt>ㄑㄧㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>緒<rp>(<\/rp><rt>ㄒㄩˋ<\/rt><rp>)<\/rp><\/ruby><ruby>可<rp>(<\/rp><rt>ㄎㄜˇ<\/rt><rp>)<\/rp><\/ruby><ruby>能<rp>(<\/rp><rt>ㄋㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>會<rp>(<\/rp><rt>ㄏㄨㄟˋ<\/rt><rp>)<\/rp><\/ruby><ruby>讀<rp>(<\/rp><rt>ㄉㄨˊ<\/rt><rp>)<\/rp><\/ruby><ruby>心<rp>(<\/rp><rt>ㄒㄧㄣ<\/rt><rp>)<\/rp><\/ruby><ruby>喔<rp>(<\/rp><rt>ㄛ<\/rt><rp>)<\/rp><\/ruby> (｡･ω･｡)） <\/span><\/li><li><span class=\"k\"> <ruby>行<rp>(<\/rp><rt>ㄒㄧㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>動<rp>(<\/rp><rt>ㄉㄨㄥˋ<\/rt><rp>)<\/rp><\/ruby><ruby>方<rp>(<\/rp><rt>ㄈㄤ<\/rt><rp>)<\/rp><\/ruby><ruby>針<rp>(<\/rp><rt>ㄓㄣ<\/rt><rp>)<\/rp><\/ruby>：<\/span><span class=\"v\"> 83%<ruby>計<rp>(<\/rp><rt>ㄐㄧˋ<\/rt><rp>)<\/rp><\/ruby><ruby>畫<rp>(<\/rp><rt>ㄏㄨㄚˋ<\/rt><rp>)<\/rp><\/ruby><ruby>型<rp>(<\/rp><rt>ㄒㄧㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>喵<rp>(<\/rp><rt>ㄇㄧㄠ<\/rt><rp>)<\/rp><\/ruby><\/span><span class=\"note-text\">（<ruby>列<rp>(<\/rp><rt>ㄌㄧㄝˋ<\/rt><rp>)<\/rp><\/ruby><ruby>待<rp>(<\/rp><rt>ㄉㄞˋ<\/rt><rp>)<\/rp><\/ruby><ruby>辦<rp>(<\/rp><rt>ㄅㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>清<rp>(<\/rp><rt>ㄑㄧㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>單<rp>(<\/rp><rt>ㄉㄢ<\/rt><rp>)<\/rp><\/ruby><ruby>是<rp>(<\/rp><rt>ㄕˋ<\/rt><rp>)<\/rp><\/ruby><ruby>人<rp>(<\/rp><rt>ㄖㄣˊ<\/rt><rp>)<\/rp><\/ruby><ruby>生<rp>(<\/rp><rt>ㄕㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>小<rp>(<\/rp><rt>ㄒㄧㄠˇ<\/rt><rp>)<\/rp><\/ruby><ruby>確<rp>(<\/rp><rt>ㄑㄩㄝˋ<\/rt><rp>)<\/rp><\/ruby><ruby>幸<rp>(<\/rp><rt>ㄒㄧㄥˋ<\/rt><rp>)<\/rp><\/ruby>✓） <\/span><\/li><li><span class=\"k\"> <ruby>心<rp>(<\/rp><rt>ㄒㄧㄣ<\/rt><rp>)<\/rp><\/ruby><ruby>情<rp>(<\/rp><rt>ㄑㄧㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>氣<rp>(<\/rp><rt>ㄑㄧˋ<\/rt><rp>)<\/rp><\/ruby><ruby>象<rp>(<\/rp><rt>ㄒㄧㄤˋ<\/rt><rp>)<\/rp><\/ruby><ruby>台<rp>(<\/rp><rt>ㄊㄞˊ<\/rt><rp>)<\/rp><\/ruby>： <\/span><span class=\"v\">82%<ruby>午<rp>(<\/rp><rt>ㄨˇ<\/rt><rp>)<\/rp><\/ruby><ruby>後<rp>(<\/rp><rt>ㄏㄡˋ<\/rt><rp>)<\/rp><\/ruby><ruby>雷<rp>(<\/rp><rt>ㄌㄟˊ<\/rt><rp>)<\/rp><\/ruby><ruby>陣<rp>(<\/rp><rt>ㄓㄣˋ<\/rt><rp>)<\/rp><\/ruby><ruby>雨<rp>(<\/rp><rt>ㄩˇ<\/rt><rp>)<\/rp><\/ruby>☁️➡️🌧️ <\/span><span class=\"note-text\">（<ruby>但<rp>(<\/rp><rt>ㄉㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>出<rp>(<\/rp><rt>ㄔㄨ<\/rt><rp>)<\/rp><\/ruby><ruby>現<rp>(<\/rp><rt>ㄒㄧㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>彩<rp>(<\/rp><rt>ㄘㄞˇ<\/rt><rp>)<\/rp><\/ruby><ruby>虹<rp>(<\/rp><rt>ㄏㄨㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>立<rp>(<\/rp><rt>ㄌㄧˋ<\/rt><rp>)<\/rp><\/ruby><ruby>刻<rp>(<\/rp><rt>ㄎㄜˋ<\/rt><rp>)<\/rp><\/ruby><ruby>放<rp>(<\/rp><rt>ㄈㄤˋ<\/rt><rp>)<\/rp><\/ruby><ruby>晴<rp>(<\/rp><rt>ㄑㄧㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>啦<rp>(<\/rp><rt>ㄌㄚ<\/rt><rp>)<\/rp><\/ruby>！(๑´ڡ`๑)） <\/span><\/li><\/ul><\/div>\n<div class=\"panel\"><div class=\"section-title\">🍀 <ruby>幸<rp>(<\/rp><rt>ㄒㄧㄥˋ<\/rt><rp>)<\/rp><\/ruby><ruby>運<rp>(<\/rp><rt>ㄩㄣˋ<\/rt><rp>)<\/rp><\/ruby><ruby>探<rp>(<\/rp><rt>ㄊㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>測<rp>(<\/rp><rt>ㄘㄜˋ<\/rt><rp>)<\/rp><\/ruby><ruby>器<rp>(<\/rp><rt>ㄑㄧˋ<\/rt><rp>)<\/rp><\/ruby><\/div><p><span class=\"info\"><ruby>訊<rp>(<\/rp><rt>ㄒㄩㄣˋ<\/rt><rp>)<\/rp><\/ruby><ruby>號<rp>(<\/rp><rt>ㄏㄠˋ<\/rt><rp>)<\/rp><\/ruby><ruby>微<rp>(<\/rp><rt>ㄨㄟˊ<\/rt><rp>)<\/rp><\/ruby><ruby>弱<rp>(<\/rp><rt>ㄖㄨㄛˋ<\/rt><rp>)<\/rp><\/ruby><ruby>中<rp>(<\/rp><rt>ㄓㄨㄥ<\/rt><rp>)<\/rp><\/ruby>……（<\/span><strong class=\"highlight\"><ruby>撿<rp>(<\/rp><rt>ㄐㄧㄢˇ<\/rt><rp>)<\/rp><\/ruby><ruby>到<rp>(<\/rp><rt>ㄉㄠˋ<\/rt><rp>)<\/rp><\/ruby><ruby>四<rp>(<\/rp><rt>ㄙˋ<\/rt><rp>)<\/rp><\/ruby><ruby>葉<rp>(<\/rp><rt>ㄧㄝˋ<\/rt><rp>)<\/rp><\/ruby><ruby>草<rp>(<\/rp><rt>ㄘㄠˇ<\/rt><rp>)<\/rp><\/ruby><ruby>會<rp>(<\/rp><rt>ㄏㄨㄟˋ<\/rt><rp>)<\/rp><\/ruby><ruby>開<rp>(<\/rp><rt>ㄎㄞ<\/rt><rp>)<\/rp><\/ruby><ruby>心<rp>(<\/rp><rt>ㄒㄧㄣ<\/rt><rp>)<\/rp><\/ruby><ruby>到<rp>(<\/rp><rt>ㄉㄠˋ<\/rt><rp>)<\/rp><\/ruby><ruby>轉<rp>(<\/rp><rt>ㄓㄨㄢˇ<\/rt><rp>)<\/rp><\/ruby><ruby>圈<rp>(<\/rp><rt>ㄑㄩㄢ<\/rt><rp>)<\/rp><\/ruby><ruby>圈<rp>(<\/rp><rt>ㄑㄩㄢ<\/rt><rp>)<\/rp><\/ruby>！<\/strong><span class=\"info\">(⁄ ⁄•⁄ω⁄•⁄ ⁄)）<\/span><\/p><\/div>\n<div class=\"panel\"><div class=\"section-title\">🎮 <ruby>遊<rp>(<\/rp><rt>ㄧㄡˊ<\/rt><rp>)<\/rp><\/ruby><ruby>戲<rp>(<\/rp><rt>ㄒㄧˋ<\/rt><rp>)<\/rp><\/ruby><ruby>星<rp>(<\/rp><rt>ㄒㄧㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>球<rp>(<\/rp><rt>ㄑㄧㄡˊ<\/rt><rp>)<\/rp><\/ruby><\/div><p><span class=\"info\"><ruby>目<rp>(<\/rp><rt>ㄇㄨˋ<\/rt><rp>)<\/rp><\/ruby><ruby>前<rp>(<\/rp><rt>ㄑㄧㄢˊ<\/rt><rp>)<\/rp><\/ruby><ruby>主<rp>(<\/rp><rt>ㄓㄨˇ<\/rt><rp>)<\/rp><\/ruby><ruby>修<rp>(<\/rp><rt>ㄒㄧㄡ<\/rt><rp>)<\/rp><\/ruby><\/span><strong class=\"highlight\">《<ruby>原<rp>(<\/rp><rt>ㄩㄢˊ<\/rt><rp>)<\/rp><\/ruby><ruby>神<rp>(<\/rp><rt>ㄕㄣˊ<\/rt><rp>)<\/rp><\/ruby>》<\/strong><span class=\"game-card\"><img src=\"pic/geshin.jpg\" alt=\"原神\" class=\"game-card-img\"><span class=\"game-card-uid\">887948106<\/span><\/span><span class=\"info\">＆<\/span><strong class=\"highlight\">《<ruby>崩<rp>(<\/rp><rt>ㄅㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>壞<rp>(<\/rp><rt>ㄏㄨㄞˋ<\/rt><rp>)<\/rp><\/ruby>：<ruby>星<rp>(<\/rp><rt>ㄒㄧㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>穹<rp>(<\/rp><rt>ㄑㄩㄥˊ<\/rt><rp>)<\/rp><\/ruby><ruby>鐵<rp>(<\/rp><rt>ㄊㄧㄝˇ<\/rt><rp>)<\/rp><\/ruby><ruby>道<rp>(<\/rp><rt>ㄉㄠˋ<\/rt><rp>)<\/rp><\/ruby>》<\/strong><span class=\"game-card\"><img src=\"pic/hsr.jpg\" alt=\"崩壊：星穹鐵道\" class=\"game-card-img\"><span class=\"game-card-uid\">800035446<\/span><\/span><span class=\"info\"><ruby>喔<rp>(<\/rp><rt>ㄛ<\/rt><rp>)<\/rp><\/ruby>～☆ミ(o*･ω･)ﾉ<\/span><\/p><\/div>\n<div class=\"panel\"><div class=\"section-title\">🔗 <ruby>社<rp>(<\/rp><rt>ㄕㄜˋ<\/rt><rp>)<\/rp><\/ruby><ruby>群<rp>(<\/rp><rt>ㄑㄩㄣˊ<\/rt><rp>)<\/rp><\/ruby><\/div><p class=\"sns\"><a class=\"sns-btn\" href=\"https://m.hoyolab.com/#/accountCenter/postList?id=317761459\" target=\"_blank\" rel=\"noopener\"><img src=\"pic/hyl_icon.jpg\" alt=\"HoYoLAB\"><span><ruby>琉<rp>(<\/rp><rt>ㄌㄧㄡˊ<\/rt><rp>)<\/rp><\/ruby><ruby>璃<rp>(<\/rp><rt>ㄌㄧˊ<\/rt><rp>)<\/rp><\/ruby> Hyalurion（ID | 317761459）<\/span><\/a><\/p><\/div>\n<div class=\"panel\"><p><span class=\"info\"><ruby>請<rp>(<\/rp><rt>ㄑㄧㄥˇ<\/rt><rp>)<\/rp><\/ruby><ruby>多<rp>(<\/rp><rt>ㄉㄨㄛ<\/rt><rp>)<\/rp><\/ruby><ruby>多<rp>(<\/rp><rt>ㄉㄨㄛ<\/rt><rp>)<\/rp><\/ruby><ruby>指<rp>(<\/rp><rt>ㄓˇ<\/rt><rp>)<\/rp><\/ruby><ruby>教<rp>(<\/rp><rt>ㄐㄧㄠˋ<\/rt><rp>)<\/rp><\/ruby><ruby>捏<rp>(<\/rp><rt>ㄋㄧㄝ<\/rt><rp>)<\/rp><\/ruby>～ <\/span><\/p><p><span class=\"info\"><ruby>想<rp>(<\/rp><rt>ㄒㄧㄤˇ<\/rt><rp>)<\/rp><\/ruby><ruby>和<rp>(<\/rp><rt>ㄏㄢˊ<\/rt><rp>)<\/rp><\/ruby><ruby>你<rp>(<\/rp><rt>ㄋㄧˇ<\/rt><rp>)<\/rp><\/ruby><ruby>當<rp>(<\/rp><rt>ㄉㄤ<\/rt><rp>)<\/rp><\/ruby><ruby>噗<rp>(<\/rp><rt>ㄆㄨ<\/rt><rp>)<\/rp><\/ruby><ruby>浪<rp>(<\/rp><rt>ㄌㄤˋ<\/rt><rp>)<\/rp><\/ruby><ruby>友<rp>(<\/rp><rt>ㄧㄡˇ<\/rt><rp>)<\/rp><\/ruby>！<ruby>一<rp>(<\/rp><rt>ㄧ<\/rt><rp>)<\/rp><\/ruby><ruby>起<rp>(<\/rp><rt>ㄑㄧˇ<\/rt><rp>)<\/rp><\/ruby><ruby>分<rp>(<\/rp><rt>ㄈㄣ<\/rt><rp>)<\/rp><\/ruby><ruby>享<rp>(<\/rp><rt>ㄒㄧㄤˇ<\/rt><rp>)<\/rp><\/ruby><ruby>快<rp>(<\/rp><rt>ㄎㄨㄞˋ<\/rt><rp>)<\/rp><\/ruby><ruby>樂<rp>(<\/rp><rt>ㄌㄜˋ<\/rt><rp>)<\/rp><\/ruby><ruby>小<rp>(<\/rp><rt>ㄒㄧㄠˇ<\/rt><rp>)<\/rp><\/ruby><ruby>宇<rp>(<\/rp><rt>ㄩˇ<\/rt><rp>)<\/rp><\/ruby><ruby>宙<rp>(<\/rp><rt>ㄓㄡˋ<\/rt><rp>)<\/rp><\/ruby><ruby>吧<rp>(<\/rp><rt>ㄅㄚ<\/rt><rp>)<\/rp><\/ruby>～ (♡˙︶˙♡) <\/span><\/p><p><span class=\"info\">(๑˃ᴗ˂)ﻭ ✧ <\/span><\/p><\/div>\n<p class=\"foot-line\"><ruby>背<rp>(<\/rp><rt>ㄅㄟˋ<\/rt><rp>)<\/rp><\/ruby><ruby>景<rp>(<\/rp><rt>ㄐㄧㄥˇ<\/rt><rp>)<\/rp><\/ruby><ruby>圖<rp>(<\/rp><rt>ㄊㄨˊ<\/rt><rp>)<\/rp><\/ruby><ruby>片<rp>(<\/rp><rt>ㄆㄧㄢˋ<\/rt><rp>)<\/rp><\/ruby><\/p>\n<p class=\"foot-line\"><ruby>是<rp>(<\/rp><rt>ㄕˋ<\/rt><rp>)<\/rp><\/ruby><ruby>由<rp>(<\/rp><rt>ㄧㄡˊ<\/rt><rp>)<\/rp><\/ruby>AI<ruby>先<rp>(<\/rp><rt>ㄒㄧㄣ<\/rt><rp>)<\/rp><\/ruby><ruby>生<rp>(<\/rp><rt>ㄕㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>創<rp>(<\/rp><rt>ㄔㄨㄤˋ<\/rt><rp>)<\/rp><\/ruby><ruby>作<rp>(<\/rp><rt>ㄗㄨㄛˋ<\/rt><rp>)<\/rp><\/ruby><ruby>噠<rp>(<\/rp><rt>ㄉㄚ<\/rt><rp>)<\/rp><\/ruby>~<\/p>\n<p class=\"foot-line\">BGM | 心做し (Kokoronashi)<\/p>","birthday":{"today":"<ruby>今<rp>(<\/rp><rt>ㄐㄧㄣ<\/rt><rp>)<\/rp><\/ruby><ruby>天<rp>(<\/rp><rt>ㄊㄧㄢ<\/rt><rp>)<\/rp><\/ruby>、<ruby>就<rp>(<\/rp><rt>ㄐㄧㄡˋ<\/rt><rp>)<\/rp><\/ruby><ruby>是<rp>(<\/rp><rt>ㄕˋ<\/rt><rp>)<\/rp><\/ruby><ruby>誕<rp>(<\/rp><rt>ㄉㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>生<rp>(<\/rp><rt>ㄕㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>日<rp>(<\/rp><rt>ㄖˋ<\/rt><rp>)<\/rp><\/ruby><ruby>哦<rp>(<\/rp><rt>ㄛˊ<\/rt><rp>)<\/rp><\/ruby>！(＊´∀｀*)ﾉ","prefix":"<ruby>距離<rp>(<\/rp><rt>ㄉㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>誕<rp>(<\/rp><rt>ㄉㄢˋ<\/rt><rp>)<\/rp><\/ruby><ruby>生日<rp>(<\/rp><rt>ㄕㄥ<\/rt><rp>)<\/rp><\/ruby><ruby>還剩<rp>(<\/rp><rt>ㄕㄠˇ<\/rt><rp>)<\/rp><\/ruby>","suffix":"<ruby>天<rp>(<\/rp><rt>ㄊㄧㄢ<\/rt><rp>)<\/rp><\/ruby>～♡"}}};
+            var LANGS = [{"code":"ja","label":"日本語"},{"code":"en","label":"English"},{"code":"zh-Hans","label":"华文"},{"code":"zh-TW","label":"繁體中文"}];
+            var DEFAULT_LANG = "ja";
+
+            function root() { return document.getElementById("root"); }
+
+            function getParam(name) {
+                var search = window.location.search || "";
+                var match = search.match(new RegExp("[?&]" + name + "=([^&]*)"));
+                return match ? decodeURIComponent(match[1]) : null;
+            }
+
+            function daysUntilBirthday() {
+                var today = new Date();
+                today.setHours(0, 0, 0, 0);
+                var target = new Date(today.getFullYear(), 7, 23); // August 23
+                target.setHours(0, 0, 0, 0);
+                if (today.getTime() > target.getTime()) {
+                    target.setFullYear(today.getFullYear() + 1);
+                }
+                return Math.ceil((target.getTime() - today.getTime()) / 86400000);
+            }
+
+            function setPiece(box, key, value) {
+                var nodes = box.getElementsByTagName("span");
+                for (var i = 0; i < nodes.length; i++) {
+                    if (nodes[i].getAttribute("data-bday") === key) nodes[i].innerHTML = value || "";
+                }
+            }
+
+            // Fill the [data-bday] placeholders after every content swap.
+            function fillBirthday(lang) {
+                var box = document.getElementById("bday-line");
+                if (!box) return;
+                var data = DATA[lang] || DATA[DEFAULT_LANG];
+                if (!data || !data.birthday) { box.style.display = "none"; return; }
+                var days = daysUntilBirthday();
+                if (days > 90) { box.style.display = "none"; return; } // as in BirthdayCountdown.vue
+                box.style.display = "";
+                if (days === 0) {
+                    setPiece(box, "prefix", data.birthday.today);
+                    setPiece(box, "days", "");
+                    setPiece(box, "suffix", "");
+                } else {
+                    setPiece(box, "prefix", data.birthday.prefix);
+                    setPiece(box, "days", String(days));
+                    setPiece(box, "suffix", data.birthday.suffix);
+                }
+            }
+
+            function markActive(code) {
+                var bar = document.getElementById("langbar");
+                if (!bar) return;
+                var links = bar.getElementsByTagName("a");
+                for (var i = 0; i < links.length; i++) {
+                    if (links[i].getAttribute("data-lang") === code) links[i].className = "active";
+                    else links[i].className = "";
+                }
+            }
+
+            function setLang(code) {
+                if (!DATA[code]) code = DEFAULT_LANG;
+                if (DATA[code].html) root().innerHTML = DATA[code].html;
+                document.documentElement.setAttribute("data-lang", code);
+                document.documentElement.lang = code;
+                if (DATA[code].title) document.title = DATA[code].title;
+                markActive(code);
+                fillBirthday(code);
+                try { window.localStorage.setItem("self-info-lang", code); } catch (e) {}
+                try {
+                    var search = window.location.search || "";
+                    search = search.replace(/[?&]lang=[^&]*/g, "");
+                    if (code !== DEFAULT_LANG) {
+                        search += (search.indexOf("?") === -1 ? "?" : "&") + "lang=" + code;
+                    }
+                    window.history.replaceState({}, "", search || "?");
+                } catch (e) {}
+            }
+
+            function initialLang() {
+                var fromUrl = getParam("lang");
+                if (fromUrl && DATA[fromUrl]) return fromUrl;
+                try {
+                    var stored = window.localStorage.getItem("self-info-lang");
+                    if (stored && DATA[stored]) return stored;
+                } catch (e) {}
+                return DEFAULT_LANG;
+            }
+
+            function boot() {
+                var bar = document.getElementById("langbar");
+                var links = bar ? bar.getElementsByTagName("a") : [];
+                for (var i = 0; i < links.length; i++) {
+                    links[i].onclick = function () {
+                        setLang(this.getAttribute("data-lang"));
+                        return false;
+                    };
+                }
+                setLang(initialLang());
+            }
+
+            if (document.readyState === "loading") {
+                if (document.addEventListener) document.addEventListener("DOMContentLoaded", boot);
+                else if (document.attachEvent) document.attachEvent("onDOMContentLoaded", boot);
+            } else {
+                boot();
+            }
+        })();
+    </script>
+
+</body>
+</html>

@@ -157,14 +157,14 @@
             word-break: break-word;
         }
 
-        .force-visit {
+        .entry {
             margin: 28px 0 16px;
             font-size: 15px;
             color: #555555;
             color: var(--text-secondary);
         }
 
-        .force-visit a {
+        .entry a.primary {
             display: inline-block;
             margin-top: 10px;
             padding: 10px 24px;
@@ -181,8 +181,21 @@
             transition: opacity 0.2s;
         }
 
-        .force-visit a:active {
+        .entry a.primary:active {
             opacity: 0.7;
+        }
+
+        .entry a.primary .sub {
+            display: block;
+            margin-top: 2px;
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .entry .alt {
+            display: block;
+            margin-top: 14px;
+            font-size: 13px;
         }
 
         .footnote {
@@ -200,7 +213,7 @@
             .info-grid { font-size: 13px; }
             .advice-box { padding: 12px 14px; }
             .advice-box .advice-text { font-size: 14px; }
-            .force-visit { font-size: 14px; }
+            .entry { font-size: 14px; }
         }
 
         @media (max-width: 360px) {
@@ -221,7 +234,7 @@
         <!-- Main message -->
         <div class="message">
             ごめんね…(>_<)<br>
-            <span class="highlight">ねこちゃんの不思議な世界</span>に<br>
+            <span class="highlight">ねこたんの不思議な世界</span>に<br>
             ご案内できないの
         </div>
 
@@ -240,11 +253,18 @@
             </div>
         </div>
 
-        <!-- Force-visit link: continue to the site despite the warning -->
-        <div class="force-visit">
+        <!-- Compatible entry: plain.html is generated static HTML, so it renders
+             even when the Vue site cannot. This is the recommended way in. -->
+        <div class="entry">
             それでも小屋に遊びに行きたいにゃん？
             <br>
-            <a id="forceVisitLink" href="/?force=1">無理して入る (=^･ω･^=)</a>
+            <a id="compatLink" class="primary" href="plain.html">
+                無理して入る (=^･ω･^=)
+                <span class="sub">かんたんモード（素のHTML版）</span>
+            </a>
+            <span class="alt">
+                そのまま全部の演出が出るsiteを見る → <a id="forceVisitLink" href="/?force=1">こちら</a>（たまに崩れるかも＞_＜）
+            </span>
         </div>
 
         <div class="footnote">
@@ -886,6 +906,24 @@
                 }
             }
 
+            // Click binding with an IE8 (attachEvent) fallback.
+            // `fn` receives the event when addEventListener is available.
+            function bindClick(el, fn) {
+                if (!el) return;
+                if (el.addEventListener) {
+                    el.addEventListener('click', function (e) { fn(e); }, false);
+                } else if (el.attachEvent) {
+                    el.attachEvent('onclick', function () { fn(null); return false; });
+                }
+            }
+
+            function flagVisit(mode) {
+                try {
+                    sessionStorage.setItem('forceVisit', '1');
+                    sessionStorage.setItem('visitMode', mode);
+                } catch (err) { /* ignore */ }
+            }
+
             function render() {
                 var ua = navigator.userAgent || '';
                 var parsed = parseUA(ua);
@@ -916,30 +954,24 @@
                     }
                 }
 
-                // Force-visit link: set a bypass flag and redirect to the site root.
-                // The compat check honors ?force=1 (URL) and sessionStorage.
+                // Compatible entry: plain.html has no feature probe at all (it is
+                // static HTML), so old browsers get the full content there.
+                var compatLink = document.getElementById('compatLink');
+                if (compatLink) compatLink.setAttribute('href', 'plain.html');
+                bindClick(compatLink, function (e) {
+                    if (e) e.preventDefault();
+                    flagVisit('plain');
+                    window.location.href = 'plain.html';
+                });
+
+                // Secondary entry: the usual site with all effects (may break).
                 var forceLink = document.getElementById('forceVisitLink');
-                if (forceLink) {
-                    forceLink.setAttribute('href', '/?force=1');
-                    if (forceLink.addEventListener) {
-                        forceLink.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            try {
-                                sessionStorage.setItem('forceVisit', '1');
-                            } catch (err) { /* ignore */ }
-                            window.location.href = '/?force=1';
-                        }, false);
-                    } else if (forceLink.attachEvent) {
-                        // IE8 fallback
-                        forceLink.attachEvent('onclick', function () {
-                            try {
-                                sessionStorage.setItem('forceVisit', '1');
-                            } catch (err) { /* ignore */ }
-                            window.location.href = '/?force=1';
-                            return false;
-                        });
-                    }
-                }
+                if (forceLink) forceLink.setAttribute('href', '/?force=1');
+                bindClick(forceLink, function (e) {
+                    if (e) e.preventDefault();
+                    flagVisit('full');
+                    window.location.href = '/?force=1';
+                });
             }
 
             // Run on DOMContentLoaded or immediately if DOM is ready

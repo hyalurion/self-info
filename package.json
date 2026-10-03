@@ -4,9 +4,11 @@
   "version": "1.4.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build:plain": "node scripts/build-plain.mjs",
+    "dev": "npm run build:plain && vite",
+    "build": "npm run build:plain && vite build",
+    "preview": "vite preview",
+    "prepreview": "npm run build:plain"
   },
   "dependencies": {
     "dompurify": "^3.4.15",
